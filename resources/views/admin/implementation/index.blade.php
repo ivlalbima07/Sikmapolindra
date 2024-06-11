@@ -163,7 +163,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Praktek Kerja Lapangan (PKL) Dosen</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/Pkl_Dosen" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Sertifikasi Kompetensi</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/sertifikasi" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Riset Terapan</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/RisetTerapan" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Penyerapan Lulusan</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/Penyerapan" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Beasiswa/Ikatan Dinas</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/beasiswa" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Sarana</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/Sarana" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -265,7 +265,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white"><i>Joint Research</i></div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/JoinResearch" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Pelatihan Kepada dunia kerja</div>
-                                        <a type="button" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/pelatihan" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>

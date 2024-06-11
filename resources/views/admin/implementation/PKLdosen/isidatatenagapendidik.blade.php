@@ -224,51 +224,52 @@
                     <hr>
                     <p class="text-center">Program Studi Perancangan Manufaktur</p>
                     <hr>
-                    <ul class="nav nav-pills d-flex justify-content-between">
-                        <li class="nav-item row " style="height: 50%">
-                            <span class="col">0</span>
-                            <a class="nav-link active col" id="home-tab" data-bs-toggle="pill" href="#Mahasiswa"
-                                aria-expanded="true">Mahasiswa</a>
+                    <div class="demo-inline-spacing d-flex justify-content-between container-sm">
+                        {{-- <label for=""><span>0</span> Mahasiswa</label>
+                        <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
+                            data-bs-toggle="modal"><i data-feather='users'></i>pilih</button> --}}
+                        <label for=""><span>0</span> Dosen</label>
+                        <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
+                            data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
+                        <label for=""><span>0</span> Instruktur DUDI</label>
+                        <button type="button" class="btn btn-success" data-bs-target="#modalToggle4"
+                            data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
+                    </div>
+                    <hr>
+                    <ul class="nav nav-pills d-flex justify-content-around">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-bs-toggle="pill" href="#Dosen"
+                                aria-expanded="true">Dosen</a>
                         </li>
-                        <li class="nav-item nav-pill-success row">
-                            <span class="col" style="height: 30%">0</span>
-                            <a class="nav-link nav-pill-secondary col" id="profile-tab" data-bs-toggle="pill"
+                        {{-- <li class="nav-item nav-pill-success">
+                            <a class="nav-link nav-pill-secondary" id="profile-tab" data-bs-toggle="pill"
                                 href="#Dosen" aria-expanded="false">Dosen</a>
-                        </li>
-                        <li class="nav-item row">
-                           <span class="col" style="height: 50%">0</span>
-                            <a class="nav-link col" id="about-tab" data-bs-toggle="pill" href="#DUDI"
-                                aria-expanded="false">Instruktur</a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" id="about-tab" data-bs-toggle="pill" href="#DUDI"
+                                aria-expanded="false">Instruktur DUDI</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
+                        <div role="tabpanel" class="tab-pane active" id="Dosen" aria-labelledby="home-tab"
                             aria-expanded="true">
                             <p style="background-color: rgb(249, 192, 192)">
-                                Belum ada data yang dipilih!
+                                Belum ada data Dosen yang dipilih!
                             </p>
-                            <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                            data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
                         </div>
-                        <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
+                        {{-- <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
                             aria-expanded="false">
                             <p style="background-color: rgb(249, 192, 192)">
-                                Belum ada data yang dipilih!
+                                Belum ada data Dosen yang dipilih!
                             </p>
-                            <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
-                            data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
-                        </div>
+                        </div> --}}
                         <div class="tab-pane" id="DUDI" role="tabpanel" aria-labelledby="about-tab"
                             aria-expanded="false">
                             <p style="background-color: rgb(249, 192, 192)">
                                 Belum ada data yang dipilih!
                             </p>
-                             <button type="button" class="btn btn-success" data-bs-target="#modalToggle4"
-                            data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
                         </div>
-
-                    </div>
-                                  <hr>
+                        <hr>
                         <h4 class="mt-2 text-center">Dosen Penanggung Jawab</h4>
                         <ul class="nav nav-pills d-flex justify-content-around">
 
@@ -278,14 +279,14 @@
                             </li>
 
                         </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada pic yang dipilih!
-                                </p>
-                            </div>
+                        <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
+                            aria-expanded="true">
+                            <p style="background-color: rgb(249, 192, 192)">
+                                Belum ada pic yang dipilih!
+                            </p>
                         </div>
+
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -737,18 +738,6 @@
     </div>
 @endsection
 
-<script>
-    document.getElementById('basicSelect').addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        if (selectedOption.classList.contains('dropdown-item')) {
-            const target = selectedOption.getAttribute('href');
-            if (target) {
-                var tab = new bootstrap.Tab(document.querySelector(target));
-                tab.show();
-            }
-        }
-    });
-</script>
 
 @section('scripts')
     <script>

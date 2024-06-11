@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>DATA DUDI PENYERAPAN LULUSAN   </h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>PELATIHAN KEPADA DUNIA KERJA</h4>
 
         <!-- Invoice List Table -->
         <div class="card p-2">

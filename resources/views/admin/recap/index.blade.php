@@ -21,7 +21,7 @@
             <div class="row">
                 <!-- Monthly Campaign State -->
                 <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="card h-100 p-3" style="box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);">
+                    <div class="card h-100 p-3" >
 
                         <h4 style="text-align:center"> Sertifikasi Kompetensi </h4>
                         <hr>
@@ -56,12 +56,9 @@
                         <!--/ Borderless Table -->
                     </div>
                 </div>
-                <div class="col-xl-6 col-md-6 mb-4" style="box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);">
+                <div class="col-xl-6 col-md-6 mb-4" >
                     <div class="card h-100 p-3">
                         <h4 style="text-align:center"> Sertifikasi Kompetensi </h4>
-                        <hr>
-                        <button type="button" class="btn btn-primary"
-                            style="width: 50%; text-align: center; display: block; margin: 0 auto;">Download Rekap</button>
                         <hr>
                         <!-- Borderless Table -->
                         <div class="card">

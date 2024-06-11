@@ -1,115 +1,43 @@
 @extends('admin.app')
 @section('content')
 
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span>INSTRUKTUR/PENDAMPING DUDI</h4>
 
-
- <div class="content-wrapper">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> OPERATOR SATUAN PENDIDIKAN</h4>
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Users List Table -->
-            <div class="card">
-
-                <div class="card-datatable table-responsive p-3">
-
-<!-- Responsive tables start -->
-                <div class="row" id="table-responsive">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Responsive tables</h4>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive across all
-                                    viewports by adding <code class="highlighter-rouge">.table-responsive</code> class on
-                                    <code class="highlighter-rouge">.table</code>. Or, pick a maximum breakpoint with which to have a responsive
-                                    table up to by adding <code class="highlighter-rouge"> .table-responsive{-sm|-md|-lg|-xl}</code>. Read full
-                                    documentation
-                                    <a href="https://getbootstrap.com/docs/4.3/content/tables/#responsive-tables" target="_blank">here.</a>
-                                </p>
-                                <div class="alert alert-info">
-                                    <div class="alert-body">
-                                        <h4 class="text-warning">Vertical clipping/truncation</h4>
-                                        <p>
-                                            Responsive tables make use of <code class="highlighter-rouge">overflow-y: hidden</code>, which clips off
-                                            any content that goes beyond the bottom or top edges of the table. In particular, this can clip off
-                                            dropdown menus and other third-party widgets.
-                                        </p>
-                                    </div>
+        <!-- Invoice List Table -->
+        <div class="card p-2">
+            <div class="card-datatables table-responsive">
+                <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>NO.DOKUMEN</th>
+                            <th>NIB</th>
+                            <th>NAMA DUDI/MITRA</th>
+                            <th>PROGRAM STUDI</th>
+                            <th>Isi Pelaksanaan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="align-top">1</th>
+                            <td class=" align-top">Gusniawan Amd</td>
+                            <td class="align-top">1688105783</td>
+                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
+                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
+                            <td class="align-top">
+                                <div >
+                                    <button type="button" onclick="location.href='/IsiData'" class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
                                 </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="text-nowrap">#</th>
-                                            <th scope="col" class="text-nowrap">Heading 1</th>
-                                            <th scope="col" class="text-nowrap">Heading 2</th>
-                                            <th scope="col" class="text-nowrap">Heading 3</th>
-                                            <th scope="col" class="text-nowrap">Heading 4</th>
-                                            <th scope="col" class="text-nowrap">Heading 5</th>
-                                            <th scope="col" class="text-nowrap">Heading 6</th>
-                                            <th scope="col" class="text-nowrap">Heading 7</th>
-                                            <th scope="col" class="text-nowrap">Heading 8</th>
-                                            <th scope="col" class="text-nowrap">Heading 9</th>
-                                            <th scope="col" class="text-nowrap">Heading 10</th>
-                                            <th scope="col" class="text-nowrap">Heading 11</th>
-                                            <th scope="col" class="text-nowrap">Heading 12</th>
-                                            <th scope="col" class="text-nowrap">Heading 13</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-nowrap">1</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                            <td class="text-nowrap">Table cell</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Responsive tables end -->
-
-
-                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- / Content -->
-
-
-        <div class="content-backdrop fade"></div>
     </div>
+
+@endsection
 
 @section('scripts')
     <script>
@@ -119,7 +47,4 @@
             })
         });
     </script>
-@endsection
-
-
 @endsection
