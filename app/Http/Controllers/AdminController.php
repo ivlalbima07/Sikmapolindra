@@ -17,10 +17,7 @@ class AdminController extends Controller
         return view('admin.dashboard.index');
     }
 
-    public function cooperation()
-    {
-        return view('admin.cooperation.index');
-    }
+
 
     public function implementation()
     {
@@ -32,19 +29,15 @@ class AdminController extends Controller
         return view('admin.companion.index');
     }
 
-    public function operator()
-    {
-        return view('admin.unitoperator.index');
-    }
 
     public function resetpassword()
     {
         return view('admin.reset_password.index');
     }
-    public function DosenTamu()
-    {
-        return view('admin.implementation.dosentamu.index');
-    }
+    // public function DosenTamu()
+    // {
+    //     return view('admin.implementation.dosentamu.index');
+    // }
     public function Pkl_mahasiswa()
     {
         return view('admin.implementation.Pkl_Mahasiswa.index');

@@ -36,45 +36,160 @@
                                 - Riset Terapan</td>
                             <td class="text-center align-top">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="document"><i data-feather='file'></i></button>
-                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="update data nota kesapakatan">
+                                    {{-- tambah document --}}
+                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='/DataDocument'"  title="document"><i data-feather='file'></i></button>
+                                        {{-- update nota kesepakatan --}}
+                                    <button type="button" class="btn btn-info btn-sm"data-bs-toggle="modal"
+                                        data-bs-target="#defaultSize2"title="update data nota kesapakatan">
                                         <i data-feather='folder'></i></button>
                                 </div>
                                 <BR></BR>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Tambah Data"><i
+                                    {{-- tambah data kerjasama --}}
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#defaultSize" title="Tambah Data"><i
                                             data-feather='plus-circle'></i></button>
+                                    {{-- button hapus --}}
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Hapus Data"><i data-feather='trash-2'></i></button>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    {{-- modal tambah kerjasama --}}
+    <div class="modal fade text-start" id="defaultSize" tabindex="-1" aria-labelledby="myModalLabel18"
+        data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+
+                        <h4 class="modal-title" id="myModalLabel18">Form Tambah Item Kerja Sama</h4>
+                         <br>
+                         <p class="text-primary">UNIVERSITAS PENDIDIKAN INDONESIA</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 my-1">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <form action="#" class="invoice-repeater">
+                                    <div data-repeater-list="invoice">
+                                        <div data-repeater-item>
+                                            <div class="row g-3 mb-1">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="basicSelectIdentity">Jenis
+                                                        Identitas</label>
+                                                    <select class="form-select" id="basicSelectIdentity"
+                                                        data-bs-toggle="pill" aria-expanded="true">
+                                                        <option value="" hidden>Pilih Jenis Identitas</option>
+                                                        <option class="dropdown-item">Ktp</option>
+                                                        <option class="dropdown-item">Paspor</option>
+                                                        <option class="dropdown-item">Lainnya</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="basicSelectIdentity">Jenis
+                                                        Identitas</label>
+                                                    <select class="form-select" id="basicSelectIdentity"
+                                                        data-bs-toggle="pill" aria-expanded="true">
+                                                        <option value="" hidden>Pilih Jenis Identitas</option>
+                                                        <option class="dropdown-item">Ktp</option>
+                                                        <option class="dropdown-item">Paspor</option>
+                                                        <option class="dropdown-item">Lainnya</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1"
+                                                        data-repeater-delete type="button">
+                                                        <i data-feather="x" class="me-25"></i>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                                <i data-feather="plus" class="me-25"></i>
+                                                <span>Add New</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+ {{-- modal upload pks --}}
+    <div class="modal fade text-start" id="defaultSize2" tabindex="-1" aria-labelledby="myModalLabel18" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel18">Default Modal</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-1">
+                            <label for="nameBasic" class="form-label">Nama Pks</label>
+                            <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name" />
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-0">
+                            <label for="emailBasic" class="form-label">Nomor PKS*</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="col mb-0">
+                            <label for="emailBasic" class="form-label">Tanggal Pks</label>
+                            <div class="input-group input-group-merge">
+                                <input type="date" class="form-control invoice-edit-input date-picker" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-1">
+                        <div class="col mb-0">
+                            <label for="emailBasic" class="form-label">Tanggal Mulai</label>
+                            <input type="date" class="form-control invoice-edit-input date-picker" />
+                        </div>
+                        <div class="col mb-0">
+                            <label for="emailBasic" class="form-label">Tanggal Selesai</label>
+                            <div class="input-group input-group-merge">
+                                <input type="date" class="form-control invoice-edit-input date-picker" />
+                            </div>
+                        </div>
+                    </div>
+                       <div class="col ">
+                                <label for="nameBasic" class="form-label">Lampiran Bukti</label>
+                                <input class="form-control" type="file" id="formFile" />
+                            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Modal -->
@@ -99,7 +214,7 @@
                     <div class="justify-content-center">
 
                         <span class="text-center">
-                            <a href="">Klik untuk melihat Referensi Data Integrasi</a>
+                            <a href="/tambahDudi">Klik untuk melihat Referensi Data Integrasi</a>
                         </span>
                     </div>
                 </div>

@@ -26,7 +26,7 @@
                             <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
                             <td class="align-top">
                                 <div>
-                                    <button type="button" onclick="location.href='/isiSarana'"
+                                    <button type="button" onclick="location.href='/isiRisetTerapan'"
                                         class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
                                 </div>
                             </td>
