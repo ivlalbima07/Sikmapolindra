@@ -10,4 +10,8 @@ class BeasiswaController extends Controller
     {
         return view('admin.implementation.Beasiswa.index');
     }
+        public function isiBeasiswa()
+    {
+        return view('admin.implementation.Beasiswa.isiBeasiswa');
+    }
 }

@@ -10,4 +10,8 @@ class SertifikasiController extends Controller
     {
         return view('admin.implementation.Sertifikasi.index');
     }
+        public function IsiSertifikasi()
+    {
+        return view('admin.implementation.Sertifikasi.isiSertifikasi');
+    }
 }

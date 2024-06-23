@@ -10,4 +10,8 @@ class LulusanController extends Controller
     {
         return view('admin.implementation.PenyerapanLulusan.index');
     }
+        public function isiPenyerapan()
+    {
+        return view('admin.implementation.PenyerapanLulusan.isiPenyerapan');
+    }
 }

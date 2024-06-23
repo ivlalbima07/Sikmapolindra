@@ -14,45 +14,53 @@ class UserController extends Controller
         return view('admin.unitoperator.index', compact('users'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'phone_number' => 'required',
-            'password' => 'required|min:6|confirmed',
-        ]);
+  public function store(Request $request)
+{
+    // Debugging
+    // dd($request->all());
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'password' => Hash::make($request->password),
-        ]);
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'phone_number' => 'required',
+        'password' => 'required|min:6|confirmed',
+    ]);
 
-        return redirect()->back()->with('success', 'User created successfully.');
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone_number' => $request->phone_number, // Pastikan ini ada
+        'password' => Hash::make($request->password),
+    ]);
+
+    return redirect()->back()->with('success', 'User created successfully.');
+}
+
+
+public function update(Request $request, $id)
+{
+    // Debugging
+    // dd($request->all());
+
+    $user = User::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'phone_number' => 'required',
+        'password' => 'nullable|min:6|confirmed',
+    ]);
+
+    $data = $request->only('name', 'email', 'phone_number');
+    if ($request->password) {
+        $data['password'] = Hash::make($request->password);
     }
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+    $user->update($data);
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone_number' => 'required',
-            'password' => 'nullable|min:6|confirmed',
-        ]);
+    return redirect()->back()->with('success', 'User updated successfully.');
+}
 
-        $data = $request->only('name', 'email', 'phone_number');
-        if ($request->password) {
-            $data['password'] = Hash::make($request->password);
-        }
-
-        $user->update($data);
-
-        return redirect()->back()->with('success', 'User updated successfully.');
-    }
 
     public function destroy($id)
     {

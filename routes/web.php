@@ -1,5 +1,10 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CooperationController;
+use App\Http\Controllers\TambahdudiController;
+use App\Http\Controllers\KriteriaMitraController;
+use App\Http\Controllers\KlasifikasiBakuController;
+use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\DosentamuController;
 use App\Http\Controllers\PklDosenController;
 use App\Http\Controllers\PklMhsController;
@@ -27,10 +32,21 @@ Route::get('/resetpassword', [AdminController::class, 'resetpassword'])->middlew
 Route::middleware('auth')->group(function () {
     Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/cooperation', [AdminController::class, 'cooperation'])->name('cooperation');
     Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
     Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
-  Route::get('/operator', [UserController::class, 'operator'])->name('operator');
+
+    // operator
+
+Route::get('/operator', [UserController::class, 'operator'])->name('operator.index');
+Route::post('/operator/store', [UserController::class, 'store'])->name('operator.store');
+Route::put('/operator/update/{id}', [UserController::class, 'update'])->name('operator.update');
+Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name('operator.destroy');
+
+
+  Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
+  Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
+  Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
+  Route::get('/Kriteria', [KriteriaMitraController::class, 'Kriteria'])->name('Kriteria');
 
     //sub_companion
     Route::get('/DosenTamu', [DosentamuController::class, 'DosenTamu'])->name('DosenTamu');
@@ -46,25 +62,36 @@ Route::middleware('auth')->group(function () {
 
     //sertiikasi
     Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
+    Route::get('/IsiSertifikasi', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
 
     //RisetTerapan
      Route::get('/RisetTerapan', [RisetTerapanController::class, 'RisetTerapan'])->name('RisetTerapan');
+     Route::get('/isiRisetTerapan', [RisetTerapanController::class, 'isiRisetTerapan'])->name('isiRisetTerapan');
 
      //Penyerapan Lulusan
      Route::get('/Penyerapan', [LulusanController::class, 'PenyerapanLulusan'])->name('PenyerapanLulusan');
+     Route::get('/isiPenyerapan', [LulusanController::class, 'isiPenyerapan'])->name('isiPenyerapan');
 
 
      //beasiswa
      Route::get('/beasiswa', [BeasiswaController::class, 'Beasiswa'])->name('Beasiswa');
+     Route::get('/isiBeasiswa', [BeasiswaController::class, 'isiBeasiswa'])->name('isiBeasiswa');
 
      //sarana
      Route::get('/Sarana', [SaranaController::class, 'Sarana'])->name('Sarana');
+     Route::get('/isiSarana', [SaranaController::class, 'isiSarana'])->name('isiSarana');
 
      //join JoinResearch
      Route::get('/JoinResearch', [JoinResearchController::class, 'JoinResearch'])->name('JoinResearch');
+     Route::get('/isiJoinResearch', [JoinResearchController::class, 'isiJoinResearch'])->name('isiJoinResearch');
 
     //pelatihan
      Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
+
+
+     //cooperation
+     Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
+     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
 
 
 

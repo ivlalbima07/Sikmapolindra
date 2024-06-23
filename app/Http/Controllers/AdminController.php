@@ -17,10 +17,7 @@ class AdminController extends Controller
         return view('admin.dashboard.index');
     }
 
-    public function cooperation()
-    {
-        return view('admin.cooperation.index');
-    }
+
 
     public function implementation()
     {

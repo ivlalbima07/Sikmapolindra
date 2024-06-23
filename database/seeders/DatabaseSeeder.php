@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             users_login::class,
        ]);
+
+           $this->call([
+        UsersLoginSeeder::class,
+        // Tambahkan seeder lain di sini
+    ]);
+
     }
 }

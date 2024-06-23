@@ -10,4 +10,8 @@ class RisetTerapanController extends Controller
     {
         return view('admin.implementation.RisetTerapan.index');
     }
+       public function  isiRisetTerapan()
+    {
+        return view('admin.implementation.RisetTerapan.isiRiset');
+    }
 }

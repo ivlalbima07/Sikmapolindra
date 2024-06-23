@@ -10,4 +10,8 @@ class JoinResearchController extends Controller
     {
         return view('admin.implementation.JoinResearch.index');
     }
+        public function isiJoinResearch()
+    {
+        return view('admin.implementation.JoinResearch.isiJoinResearch');
+    }
 }

@@ -21,7 +21,7 @@
             <div class="row">
                 <!-- Monthly Campaign State -->
                 <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="card h-100 p-3" >
+                    <div class="card p-3" >
 
                         <h4 style="text-align:center"> Sertifikasi Kompetensi </h4>
                         <hr>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-md-6 mb-4" >
-                    <div class="card h-100 p-3">
+                    <div class="card p-3">
                         <h4 style="text-align:center"> Sertifikasi Kompetensi </h4>
                         <hr>
                         <!-- Borderless Table -->
@@ -89,8 +89,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <hr>
-                                <h4 style="text-align: center">Jenis Dokumen Penyelarasan</h4>
                             </div>
                         </div>
                         <!--/ Borderless Table -->
@@ -98,19 +96,6 @@
                 </div>
                 <!--/ Monthly Campaign State -->
 
-                <!-- Active Projects -->
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                    </div>
-                </div>
-                <!--/ Active Projects -->
-
-                <!-- Active Projects -->
-                <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                    </div>
-                </div>
-                <!--/ Active Projects -->
 
 
             </div>
