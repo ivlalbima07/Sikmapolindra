@@ -57,10 +57,18 @@
                             <td class="align-top">Perusahaan Nasional Berstandar Tinggi</td>
                             <td class="align-top">Sme@negeri1</td>
                             <td class="align-top">
-                                <div>
-                                    <button type="button" onclick="location.href=''" class="btn btn-success btn-sm"><i
-                                            data-feather='book'></i>Isi Pelaksanaan</button>
-                                </div>
+                               <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#view"
+                                    class="btn btn-warning btn-sm" data-bs-placement="top" title="Update data"
+                                    id="updateButton">
+                                    <i data-feather='inbox'></i>
+                                </button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                    class="btn btn-primary btn-sm" data-bs-placement="top" title="Update data"
+                                    id="updateButton">
+                                    <i data-feather='edit'></i>
+                                </button>
+                            </div>
                             </td>
                         </tr>
                     </tbody>
@@ -158,7 +166,7 @@
                         </div>
                     </div>
                     <div>
-                        <label class="form-label" for="select2-multiple">Multiple</label>
+                        <label class="form-label" for="select2-multiple">Klasifikasi Baku Lapangan Usaha (KBLI)</label>
                         <select class="select2 form-select" id="select2-multiple" multiple>
                             <optgroup label="Alaskan/Hawaiian Time Zone">
                                 <option value="AK">Alaska</option>
@@ -348,6 +356,62 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel16">Tambah Dudi</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+ <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-xl-7 col-12">
+                                            <dl class="row mb-0">
+                                                <dt class="col-sm-4 fw-bolder mb-1">Company Name:</dt>
+                                                <dd class="col-sm-8 mb-1">PIXINVENT</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">Billing Email:</dt>
+                                                <dd class="col-sm-8 mb-1">themeselection@ex.com</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">Tax ID:</dt>
+                                                <dd class="col-sm-8 mb-1">TAX-357378</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">VAT Number:</dt>
+                                                <dd class="col-sm-8 mb-1">SDF754K77</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">Billing Address:</dt>
+                                                <dd class="col-sm-8 mb-1">100 Water Plant Avenue, Building 1303 Wake Island</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="col-xl-5 col-12">
+                                            <dl class="row mb-0">
+                                                <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
+                                                <dd class="col-sm-8 mb-1">+1 (605) 977-32-65</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
+                                                <dd class="col-sm-8 mb-1">Wake Island</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
+                                                <dd class="col-sm-8 mb-1">Capholim</dd>
+
+                                                <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
+                                                <dd class="col-sm-8 mb-1">403114</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        {{-- modal view --}}
+
     @endsection
 
     @section('scripts')
