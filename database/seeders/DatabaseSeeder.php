@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,20 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Pastikan untuk mengomentari atau menghapus pemanggilan factory jika tidak digunakan
         // \App\Models\User::factory(10)->create();
 
+        // Contoh pemanggilan factory dengan custom data
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Pemanggilan seeder yang benar
         $this->call([
-            users_login::class,
-       ]);
-
-           $this->call([
-        UsersLoginSeeder::class,
-        // Tambahkan seeder lain di sini
-    ]);
-
+            UsersLoginSeeder::class,
+            // Tambahkan seeder lain di sini jika ada
+        ]);
     }
 }

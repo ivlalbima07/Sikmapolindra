@@ -44,9 +44,22 @@ Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name
 
 
   Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
-  Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
-  Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
-  Route::get('/Kriteria', [KriteriaMitraController::class, 'Kriteria'])->name('Kriteria');
+Route::resource('kbli', KlasifikasiBakuController::class);
+Route::resource('KlasifikasiBaku', KlasifikasiBakuController::class);
+//   Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
+
+// klasifikasi
+//   Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
+Route::resource('klasifikasi', KlasifikasiController::class);
+
+
+
+
+//   kriteria
+Route::get('/Kriteria', [KriteriaMitraController::class, 'index'])->name('Kriteria');
+Route::post('/Kriteria', [KriteriaMitraController::class, 'store'])->name('Kriteria.store');
+Route::put('/Kriteria/{id}', [KriteriaMitraController::class, 'update'])->name('Kriteria.update');
+Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->name('Kriteria.destroy');
 
     //sub_companion
     Route::get('/DosenTamu', [DosentamuController::class, 'DosenTamu'])->name('DosenTamu');
