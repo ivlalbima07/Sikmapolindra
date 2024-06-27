@@ -57,18 +57,18 @@
                             <td class="align-top">Perusahaan Nasional Berstandar Tinggi</td>
                             <td class="align-top">Sme@negeri1</td>
                             <td class="align-top">
-                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#view"
-                                    class="btn btn-warning btn-sm" data-bs-placement="top" title="Update data"
-                                    id="updateButton">
-                                    <i data-feather='inbox'></i>
-                                </button>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                    class="btn btn-primary btn-sm" data-bs-placement="top" title="Update data"
-                                    id="updateButton">
-                                    <i data-feather='edit'></i>
-                                </button>
-                            </div>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#view"
+                                        class="btn btn-warning btn-sm" data-bs-placement="top" title="Update data"
+                                        id="updateButton">
+                                        <i data-feather='inbox'></i>
+                                    </button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                        class="btn btn-primary btn-sm" data-bs-placement="top" title="Update data"
+                                        id="updateButton">
+                                        <i data-feather='edit'></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -79,7 +79,7 @@
 
 
 
-    <div class="modal fade text-start" id="tambah" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+    <div class="modal fade text-start" id="tambah" aria-labelledby="myModalLabel16" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,39 +118,30 @@
                     </div>
                     <div class="row g-4">
                         <div class="col mb-0">
-                            <label for="nameBasic" class="form-label">Provinsi</label>
-                            <select class="select2 form-select" id="Provinsi">
+                            <label for="province" class="form-label">Provinsi</label>
+                            <select class="select2 form-select" id="province">
                                 <option value="" hidden>Pilih Provinsi</option>
-                                <option>Alaska</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
+                                @foreach ($provinces as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col mb-0">
-                            <label for="nameBasic" class="form-label">Kabupaten/Kota</label>
-                            <select class="select2 form-select" id="Kabupaten/Kota">
+                            <label for="regency" class="form-label">Kabupaten/Kota</label>
+                            <select class="select2 form-select" id="regency">
                                 <option value="" hidden>Pilih Kabupaten</option>
-                                <option>Alaska</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
                             </select>
                         </div>
                         <div class="col mb-0">
-                            <label for="emailBasic" class="form-label">Kecamatan</label>
-                            <select class="select2 form-select" id="Kecamatan">
+                            <label for="district" class="form-label">Kecamatan</label>
+                            <select class="select2 form-select" id="district">
                                 <option value="" hidden>Pilih Kecamatan</option>
-                                <option>Alaska</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
                             </select>
                         </div>
                         <div class="col mb-0">
-                            <label for="nameBasic" class="form-label">Kelurahan</label>
-                            <select class="select2 form-select" id="Kelurahan">
-                                <option value="" hidden>Pilih Kelurahan</option>
-                                <option>Alaska</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
+                            <label for="village" class="form-label">Desa</label>
+                            <select class="select2 form-select" id="village">
+                                <option value="" hidden>Pilih Desa</option>
                             </select>
                         </div>
                     </div>
@@ -177,56 +168,6 @@
                                 <option value="NV">Nevada</option>
                                 <option value="OR">Oregon</option>
                                 <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO" selected>Colorado</option>
-                                <option value="ID">Idaho</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="UT">Utah</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TX">Texas</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="WI">Wisconsin</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL" selected>Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NY">New York</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="OH">Ohio</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WV">West Virginia</option>
                             </optgroup>
                         </select>
                     </div>
@@ -359,7 +300,8 @@
 
     </div>
 
-    <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+    <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -367,43 +309,43 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
- <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-xl-7 col-12">
-                                            <dl class="row mb-0">
-                                                <dt class="col-sm-4 fw-bolder mb-1">Company Name:</dt>
-                                                <dd class="col-sm-8 mb-1">PIXINVENT</dd>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-7 col-12">
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-4 fw-bolder mb-1">Nama</dt>
+                                    <dd class="col-sm-8 mb-1">: SMAS MIMI SURABAYA</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">Billing Email:</dt>
-                                                <dd class="col-sm-8 mb-1">themeselection@ex.com</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">Tipe</dt>
+                                    <dd class="col-sm-8 mb-1">: NIB</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">Tax ID:</dt>
-                                                <dd class="col-sm-8 mb-1">TAX-357378</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">NIB</dt>
+                                    <dd class="col-sm-8 mb-1">: 20566343</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">VAT Number:</dt>
-                                                <dd class="col-sm-8 mb-1">SDF754K77</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">VAT Number:</dt>
+                                    <dd class="col-sm-8 mb-1">SDF754K77</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">Billing Address:</dt>
-                                                <dd class="col-sm-8 mb-1">100 Water Plant Avenue, Building 1303 Wake Island</dd>
-                                            </dl>
-                                        </div>
-                                        <div class="col-xl-5 col-12">
-                                            <dl class="row mb-0">
-                                                <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
-                                                <dd class="col-sm-8 mb-1">+1 (605) 977-32-65</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">Billing Address:</dt>
+                                    <dd class="col-sm-8 mb-1">100 Water Plant Avenue, Building 1303 Wake Island</dd>
+                                </dl>
+                            </div>
+                            <div class="col-xl-5 col-12">
+                                <dl class="row mb-0">
+                                    <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
+                                    <dd class="col-sm-8 mb-1">+1 (605) 977-32-65</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
-                                                <dd class="col-sm-8 mb-1">Wake Island</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
+                                    <dd class="col-sm-8 mb-1">Wake Island</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
-                                                <dd class="col-sm-8 mb-1">Capholim</dd>
+                                    <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
+                                    <dd class="col-sm-8 mb-1">Capholim</dd>
 
-                                                <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
-                                                <dd class="col-sm-8 mb-1">403114</dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
+                                    <dd class="col-sm-8 mb-1">403114</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -411,7 +353,6 @@
 
 
         {{-- modal view --}}
-
     @endsection
 
     @section('scripts')
@@ -420,6 +361,68 @@
                 const table = $('.datatables').DataTable({
 
                 })
+            });
+
+            $(document).ready(function() {
+                $('.select2').select2({
+                    dropdownParent: $('#tambah')
+                });
+
+                $('#province').change(function() {
+                    var provinceID = $(this).val();
+                    if (provinceID) {
+                        $.ajax({
+                            url: '/getRegencies/' + provinceID,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('#regency').empty().append(
+                                    '<option hidden>Pilih Kabupaten</option>');
+                                $.each(data, function(key, value) {
+                                    $('#regency').append('<option value="' + key + '">' +
+                                        value + '</option>');
+                                });
+                            }
+                        });
+                    }
+                });
+
+                $('#regency').change(function() {
+                    var regencyID = $(this).val();
+                    if (regencyID) {
+                        $.ajax({
+                            url: '/getDistricts/' + regencyID,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('#district').empty().append(
+                                    '<option hidden>Pilih Kecamatan</option>');
+                                $.each(data, function(key, value) {
+                                    $('#district').append('<option value="' + key + '">' +
+                                        value + '</option>');
+                                });
+                            }
+                        });
+                    }
+                });
+
+                $('#district').change(function() {
+                    var districtID = $(this).val();
+                    if (districtID) {
+                        $.ajax({
+                            url: '/getVillages/' + districtID,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('#village').empty().append('<option hidden>Pilih Desa</option>');
+                                $.each(data, function(key, value) {
+                                    $('#village').append('<option value="' + key + '">' +
+                                        value + '</option>');
+                                });
+                            }
+                        });
+                    }
+                });
             });
         </script>
     @endsection
