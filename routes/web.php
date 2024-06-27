@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\TambahdudiController;
 use App\Http\Controllers\KriteriaMitraController;
@@ -47,6 +48,12 @@ Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name
 Route::resource('kbli', KlasifikasiBakuController::class);
 Route::resource('KlasifikasiBaku', KlasifikasiBakuController::class);
 //   Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
+
+
+// wilayah
+Route::get('/getRegencies/{province_id}', [WilayahController::class, 'getRegencies']);
+Route::get('/getDistricts/{regency_id}', [WilayahController::class, 'getDistricts']);
+Route::get('/getVillages/{district_id}', [WilayahController::class, 'getVillages']);
 
 // klasifikasi
 //   Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
