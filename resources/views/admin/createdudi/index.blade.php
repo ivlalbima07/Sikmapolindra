@@ -63,7 +63,7 @@
                                         id="updateButton">
                                         <i data-feather='inbox'></i>
                                     </button>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editdudi"
                                         class="btn btn-primary btn-sm" data-bs-placement="top" title="Update data"
                                         id="updateButton">
                                         <i data-feather='edit'></i>
