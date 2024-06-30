@@ -58,7 +58,7 @@ Route::get('/getVillages/{district_id}', [WilayahController::class, 'getVillages
 // klasifikasi
 //   Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
 Route::resource('klasifikasi', KlasifikasiController::class);
-
+Route::get('/get-klasifikasi/{kriteria_id}', [KlasifikasiController::class, 'getKlasifikasiByKriteria']);
 
 
 
