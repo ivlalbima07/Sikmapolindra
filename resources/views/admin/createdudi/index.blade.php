@@ -159,16 +159,9 @@
                     <div>
                         <label class="form-label" for="select2-multiple">Klasifikasi Baku Lapangan Usaha (KBLI)</label>
                         <select class="select2 form-select" id="select2-multiple" multiple>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
+                            @foreach ($kblis as $kbli)
+                                <option value="{{ $kbli->id }}">{{ $kbli->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="my-1">
@@ -181,18 +174,19 @@
                     </div>
                     <div class="my-1">
                         <label class="form-label" for="basicSelect1">Kriteria Mitra</label>
-                        <select name="" id="" class="form-select">
+                        <select name="kriteria" id="basicSelect1" class="form-select">
                             <option value="" hidden>Pilih Kriteria Mitra</option>
-                            <option class="dropdown-item">Nasional</option>
-                            <option class="dropdown-item">Internasional</option>
+                            @foreach ($kriterias as $kriteria)
+                                <option value="{{ $kriteria->id }}">{{ $kriteria->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
+
                     <div class="my-1">
-                        <label class="form-label" for="basicSelect1">Klasifikasi</label>
-                        <select name="" id="" class="form-select">
+                        <label class="form-label" for="basicSelect2">Klasifikasi</label>
+                        <select name="klasifikasi" id="basicSelect2" class="form-select">
                             <option value="" hidden>Pilih Klasifikasi</option>
-                            <option class="dropdown-item">Nasional</option>
-                            <option class="dropdown-item">Internasional</option>
+                            <!-- Options will be populated dynamically -->
                         </select>
                     </div>
                     <hr>
@@ -300,129 +294,277 @@
 
     </div>
 
+    {{-- modal view --}}
     <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel16">Tambah Dudi</h4>
+                    <h4 class="modal-title" id="myModalLabel16">Manajemen Dudi</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-7 col-12">
-                                <dl class="row mb-0">
-                                    <dt class="col-sm-4 fw-bolder mb-1">Nama</dt>
-                                    <dd class="col-sm-8 mb-1">: SMAS MIMI SURABAYA</dd>
+                        <section class="invoice-preview-wrapper">
+                            <div class="row invoice-preview">
+                                <!-- Invoice -->
+                                <div class="">
+                                    <div class="card invoice-preview-card">
+                                        <div class="card-body invoice-padding pb-0">
+                                            <!-- Header starts -->
+                                            <div class="row g-3 invoice-spacing">
+                                                <div class="col">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fw-bolder">
+                                                                    Nama
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>MAXXIMA HERSAM SOLUSI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder">
+                                                                    Tipe
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>NIB</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder">
+                                                                    NIB
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>20566343</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder">
+                                                                    Tanggal Terbit / SK Pendirian
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>12 December 2018</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder"> Alamat</td>
+                                                                <td>:</td>
+                                                                <td style="vertical-align: top;">KOMPLEK REGENCY RUKO NEW
+                                                                    CARIBBEAN BLOK W6 NO.8, 38/, -
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="mt-1">
+                                                        <label class="fw-bolder" for="">Klasifikasi Baku Lapangan
+                                                            Usaha (KBLI):</label>
+                                                        <table>
+                                                            <tr>
+                                                                <td>1.</td>
+                                                                <td>Perdagangan Besar Mobil Bekas</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2.</td>
+                                                                <td>Perdagangan Besar Mesin, Peralatan Dan Perlengkapan
+                                                                    Lainnya</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
 
-                                    <dt class="col-sm-4 fw-bolder mb-1">Tipe</dt>
-                                    <dd class="col-sm-8 mb-1">: NIB</dd>
+                                                </div>
+                                                <div class="col">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="fw-bolder">Email Mitra</td>
+                                                                <td>:</td>
+                                                                <td>hr@maxximasolusi.co.id / herisagung@maxximasolusi.co.id
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="mt-2">
+                                                                <td class="fw-bolder" style="padding: 8px">No. Telp. Mitra
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>082352999200 / 0542-8709047</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder">Kriteria Mitra</td>
+                                                                <td>:</td>
+                                                                <td>Perusahaan Nasional Berstandar Tinggi</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder">Lingkup Kerjasama </td>
+                                                                <td>:</td>
+                                                                <td>Nasional</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder"> Provinsi</td>
+                                                                <td>:</td>
+                                                                <td>prov. kalimantan timur</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder"> Kabupaten/Kota</td>
+                                                                <td>:</td>
+                                                                <td>Kota Balikpapan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder"> Kecamatan</td>
+                                                                <td>:</td>
+                                                                <td>Kec. Balikpapan timur</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bolder"> Kelurahan</td>
+                                                                <td>:</td>
+                                                                <td>Sepinggan baru</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Header ends -->
+                                        </div>
 
-                                    <dt class="col-sm-4 fw-bolder mb-1">NIB</dt>
-                                    <dd class="col-sm-8 mb-1">: 20566343</dd>
+                                        <hr class="invoice-spacing" />
+                                        <h4 class="text-center">Data Penanggung Jawab</h4>
+                                        <hr class="invoice-spacing" />
 
-                                    <dt class="col-sm-4 fw-bolder mb-1">VAT Number:</dt>
-                                    <dd class="col-sm-8 mb-1">SDF754K77</dd>
-
-                                    <dt class="col-sm-4 fw-bolder mb-1">Billing Address:</dt>
-                                    <dd class="col-sm-8 mb-1">100 Water Plant Avenue, Building 1303 Wake Island</dd>
-                                </dl>
+                                        <div class="card-datatables table-responsive">
+                                            <table class=" table ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>NO</th>
+                                                        <th>Nama</th>
+                                                        <th>Email</th>
+                                                        <th>Nomer HP</th>
+                                                        <th>Jenis Kelamin</th>
+                                                        <th>Jenis Identitas</th>
+                                                        <th>Nomor Identitas</th>
+                                                        <th>Kewarganegaraan</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="align-top">1</td>
+                                                        <td class=" align-top">1306220008076</td>
+                                                        <td class=" align-top">NIB</td>
+                                                        <td class=" align-top"> HENRY G. PADAGA</td>
+                                                        <td class=" align-top">Prov. Sulawesi Tengah</td>
+                                                        <td class=" align-top">Kab. Poso</td>
+                                                        <td class=" align-top">Nasional</td>
+                                                        <td class="align-top">Perusahaan Nasional Berstandar Tinggi</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Invoice -->
                             </div>
-                            <div class="col-xl-5 col-12">
-                                <dl class="row mb-0">
-                                    <dt class="col-sm-4 fw-bolder mb-1">Contact:</dt>
-                                    <dd class="col-sm-8 mb-1">+1 (605) 977-32-65</dd>
-
-                                    <dt class="col-sm-4 fw-bolder mb-1">Country:</dt>
-                                    <dd class="col-sm-8 mb-1">Wake Island</dd>
-
-                                    <dt class="col-sm-4 fw-bolder mb-1">State:</dt>
-                                    <dd class="col-sm-8 mb-1">Capholim</dd>
-
-                                    <dt class="col-sm-4 fw-bolder mb-1">Zipcode:</dt>
-                                    <dd class="col-sm-8 mb-1">403114</dd>
-                                </dl>
-                            </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>
         </div>
+    </div>{{-- modal view end --}}
 
 
+    {{-- modal view --}}
+@endsection
 
-        {{-- modal view --}}
-    @endsection
+@section('scripts')
+    <script>
+        $(function() {
+            const table = $('.datatables').DataTable({
 
-    @section('scripts')
-        <script>
-            $(function() {
-                const table = $('.datatables').DataTable({
+            })
+        });
 
-                })
+        $(document).ready(function() {
+            $('.select2').select2({
+                dropdownParent: $('#tambah')
             });
 
-            $(document).ready(function() {
-                $('.select2').select2({
-                    dropdownParent: $('#tambah')
-                });
-
-                $('#province').change(function() {
-                    var provinceID = $(this).val();
-                    if (provinceID) {
-                        $.ajax({
-                            url: '/getRegencies/' + provinceID,
-                            type: "GET",
-                            dataType: "json",
-                            success: function(data) {
-                                $('#regency').empty().append(
-                                    '<option hidden>Pilih Kabupaten</option>');
-                                $.each(data, function(key, value) {
-                                    $('#regency').append('<option value="' + key + '">' +
-                                        value + '</option>');
-                                });
-                            }
-                        });
-                    }
-                });
-
-                $('#regency').change(function() {
-                    var regencyID = $(this).val();
-                    if (regencyID) {
-                        $.ajax({
-                            url: '/getDistricts/' + regencyID,
-                            type: "GET",
-                            dataType: "json",
-                            success: function(data) {
-                                $('#district').empty().append(
-                                    '<option hidden>Pilih Kecamatan</option>');
-                                $.each(data, function(key, value) {
-                                    $('#district').append('<option value="' + key + '">' +
-                                        value + '</option>');
-                                });
-                            }
-                        });
-                    }
-                });
-
-                $('#district').change(function() {
-                    var districtID = $(this).val();
-                    if (districtID) {
-                        $.ajax({
-                            url: '/getVillages/' + districtID,
-                            type: "GET",
-                            dataType: "json",
-                            success: function(data) {
-                                $('#village').empty().append('<option hidden>Pilih Desa</option>');
-                                $.each(data, function(key, value) {
-                                    $('#village').append('<option value="' + key + '">' +
-                                        value + '</option>');
-                                });
-                            }
-                        });
-                    }
-                });
+            $('#province').change(function() {
+                var provinceID = $(this).val();
+                if (provinceID) {
+                    $.ajax({
+                        url: '/getRegencies/' + provinceID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#regency').empty().append(
+                                '<option hidden>Pilih Kabupaten</option>');
+                            $.each(data, function(key, value) {
+                                $('#regency').append('<option value="' + key + '">' +
+                                    value + '</option>');
+                            });
+                        }
+                    });
+                }
             });
-        </script>
-    @endsection
+
+            $('#regency').change(function() {
+                var regencyID = $(this).val();
+                if (regencyID) {
+                    $.ajax({
+                        url: '/getDistricts/' + regencyID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#district').empty().append(
+                                '<option hidden>Pilih Kecamatan</option>');
+                            $.each(data, function(key, value) {
+                                $('#district').append('<option value="' + key + '">' +
+                                    value + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#district').change(function() {
+                var districtID = $(this).val();
+                if (districtID) {
+                    $.ajax({
+                        url: '/getVillages/' + districtID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#village').empty().append('<option hidden>Pilih Desa</option>');
+                            $.each(data, function(key, value) {
+                                $('#village').append('<option value="' + key + '">' +
+                                    value + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+        });
+
+        $(document).ready(function() {
+            $('#basicSelect1').change(function() {
+                var kriteriaId = $(this).val();
+                if (kriteriaId) {
+                    $.ajax({
+                        url: '/get-klasifikasi/' + kriteriaId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#basicSelect2').empty();
+                            $('#basicSelect2').append(
+                                '<option value="" hidden>Pilih Klasifikasi</option>');
+                            $.each(data, function(key, value) {
+                                $('#basicSelect2').append('<option value="' + value.id +
+                                    '">' + value.nama_klasifikasi + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#basicSelect2').empty();
+                    $('#basicSelect2').append('<option value="" hidden>Pilih Klasifikasi</option>');
+                }
+            });
+        });
+    </script>
+@endsection
