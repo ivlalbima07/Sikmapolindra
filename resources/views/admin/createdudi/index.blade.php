@@ -63,10 +63,15 @@
                                         id="updateButton">
                                         <i data-feather='inbox'></i>
                                     </button>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#editdudi"
                                         class="btn btn-primary btn-sm" data-bs-placement="top" title="Update data"
                                         id="updateButton">
                                         <i data-feather='edit'></i>
+                                    </button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                        class="btn btn-danger btn-sm" data-bs-placement="top" title="Update data"
+                                        id="updateButton">
+                                        <i data-feather='trash'></i>
                                     </button>
                                 </div>
                             </td>
@@ -294,6 +299,7 @@
 
     </div>
 
+
     {{-- modal view --}}
     <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16"
         aria-hidden="true">
@@ -424,6 +430,7 @@
                                             <!-- Header ends -->
                                         </div>
 
+
                                         <hr class="invoice-spacing" />
                                         <h4 class="text-center">Data Penanggung Jawab</h4>
                                         <hr class="invoice-spacing" />
@@ -466,7 +473,6 @@
             </div>
         </div>
     </div>{{-- modal view end --}}
-
 
     {{-- modal view --}}
 @endsection
