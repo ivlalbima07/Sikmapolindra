@@ -10,6 +10,7 @@ use App\Models\Province;
 use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TambahdudiController extends Controller
 {
@@ -54,6 +55,7 @@ class TambahdudiController extends Controller
     try {
         // Buat objek Dudi
         $dudi = Dudi::create([
+            'user_id' => Auth::user()->id,
             'nama_rombel' => $request->input('nama_rombel'),
             'nama' => $request->input('nama'),
             'nib' => $request->input('nib'),
@@ -165,6 +167,7 @@ public function update(Request $request, $id)
 
         $dudi = Dudi::findOrFail($id);
         $dudi->update([
+            'user_id' => Auth::user()->id,
             'nama_rombel' => $request->input('nama_rombel'),
             'nama' => $request->input('nama'),
             'nib' => $request->input('nib'),

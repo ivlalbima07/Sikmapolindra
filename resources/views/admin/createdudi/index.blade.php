@@ -62,7 +62,7 @@
                                 <td class="align-top">{{ $dudi->regency->name }}</td>
                                 <td class="align-top">{{ $dudi->kerjasama }}</td>
                                 {{-- @dd($dudi->kriteria) --}}
-                                <td class="align-top">{{ $dudi->kriteria->nama }}</td>
+                                <td class="align-top">{{ $dudi->user->name }}</td>
                                 <td class="align-top">{{ $dudi->nama }}</td>
                                 <td class="align-top">
                                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -178,7 +178,7 @@
                                             <option value="{{ $kbli->id }}">{{ $kbli->nama }}</option>
                                         @endforeach
                                     </select>
-                                </div>                                
+                                </div>                                      
                                 <div class="my-1">
                                     <label class="form-label" for="basicSelect1">Lingkup Kerjasama </label>
                                     <select name="kerjasama" id="" class="form-select">

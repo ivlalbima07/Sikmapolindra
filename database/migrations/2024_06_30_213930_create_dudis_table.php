@@ -28,6 +28,7 @@ return new class extends Migration
             $table->enum('kerjasama', ['internasional', 'nasional']);
             $table->foreignId('kriteria_id')->constrained('kriterias');
             $table->foreignId('klasifikasi_id')->constrained('klasifikasis');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
 
             $table->foreign('province_id')->references('id')->on('provinces');
