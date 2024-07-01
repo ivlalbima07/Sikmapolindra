@@ -9,5 +9,13 @@ class Kbli extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama'];
+    protected $guarded = [];
+    protected $table = 'kblis';
+
+
+    public function dudis()
+    {
+        return $this->belongsToMany(Dudi::class, 'dudi_kbli', 'kbli_id', 'dudi_id');
+    }
+    
 }

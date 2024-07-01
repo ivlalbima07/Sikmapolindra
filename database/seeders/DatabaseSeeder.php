@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         // Pemanggilan seeder yang benar
         $this->call([
             UsersLoginSeeder::class,
+            ImportTempTableSeeder2::class,
+            ImportTempTableSeeder::class,
             // Tambahkan seeder lain di sini jika ada
         ]);
     }

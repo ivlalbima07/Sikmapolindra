@@ -44,7 +44,12 @@ Route::put('/operator/update/{id}', [UserController::class, 'update'])->name('op
 Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name('operator.destroy');
 
 
-  Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
+Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
+Route::post('/tambahDudi/store', [TambahdudiController::class, 'store'])->name('tambahDudi.store');
+Route::get('/tambahDudi/{id}', [TambahdudiController::class, 'show'])->name('tambahDudi.show');
+Route::get('/tambahDudi/{id}/edit', [TambahdudiController::class, 'edit'])->name('tambahDudi.edit');
+Route::put('/tambahDudi/{id}', [TambahdudiController::class, 'update'])->name('tambahDudi.update');
+Route::delete('/tambahDudi/delete/{id}', [TambahdudiController::class, 'destroy'])->name('tambahDudi.destroy');
 Route::resource('kbli', KlasifikasiBakuController::class);
 Route::resource('KlasifikasiBaku', KlasifikasiBakuController::class);
 //   Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
@@ -58,7 +63,7 @@ Route::get('/getVillages/{district_id}', [WilayahController::class, 'getVillages
 // klasifikasi
 //   Route::get('/klasifikasi', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
 Route::resource('klasifikasi', KlasifikasiController::class);
-
+Route::get('/get-klasifikasi/{kriteria_id}', [KlasifikasiController::class, 'getKlasifikasiByKriteria']);
 
 
 

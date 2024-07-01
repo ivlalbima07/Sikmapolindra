@@ -45,4 +45,10 @@ class KlasifikasiController extends Controller
         Klasifikasi::findOrFail($id)->delete();
         return response()->json(['success' => 'Klasifikasi deleted successfully.']);
     }
+    public function getKlasifikasiByKriteria($kriteria_id)
+    {
+        $klasifikasis = Klasifikasi::where('kriteria_id', $kriteria_id)->get(['id', 'nama_klasifikasi']);
+        // dd($klasifikasis);
+        return response()->json($klasifikasis);
+    }
 }
