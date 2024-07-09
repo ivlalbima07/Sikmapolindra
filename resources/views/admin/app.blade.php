@@ -25,7 +25,7 @@
         </a>
     </li>
     <li class="nav-item {{ request()->is('tambahDudi') ? 'active' : '' }}">
-        <a class="d-flex align-items-center" href="{{ url('/tambahDudi') }}">
+        <a class="d-flex align-items-center" href="{{ url('/dudi') }}">
             <i data-feather='folder-plus'></i><span class="menu-title text-truncate" data-i18n="Dashboard">Tambah
                 Dudi</span>
         </a>
@@ -42,7 +42,7 @@
             </li>
             <li class="nav-item {{ request()->is('KlasifikasiBaku') ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ url('/KlasifikasiBaku') }}">
-                    <i data-feather='circle'></i><span class="menu-title text-truncate" data-i18n="Preview">lasifikasi Baku</span>
+                    <i data-feather='circle'></i><span class="menu-title text-truncate" data-i18n="Preview">klasifikasi Baku</span>
                 </a>
             </li>
             <li class="nav-item {{ request()->is('Kriteria') ? 'active' : '' }}">

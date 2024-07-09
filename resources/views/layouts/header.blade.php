@@ -10,7 +10,9 @@
         <meta name="keywords"
             content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="PIXINVENT">
-        <meta name="_token" content="{{ csrf_token() }}" />
+        {{-- <meta name="_token" content="{{ csrf_token() }}" /> --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>{{ $title ?? '' }}</title>
         <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
