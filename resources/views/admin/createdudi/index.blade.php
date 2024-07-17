@@ -47,6 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($dudis as $dudi)
                             <tr>
                                 <td class="align-top">{{ $loop->iteration }}</td>
@@ -76,6 +77,7 @@
                                 </td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
 
@@ -84,8 +86,10 @@
         </div>
     </div>
 
+
     <!-- Modal view -->
     <div class="modal fade text-start" id="viewModal" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -189,6 +193,7 @@
                                             </div>
                                             <!-- Header ends -->
                                         </div>
+
                                         <hr class="invoice-spacing" />
                                         <h4 class="text-center">Data Penanggung Jawab</h4>
                                         <hr class="invoice-spacing" />
@@ -439,6 +444,7 @@
     </div>
 
 
+
     {{-- modal update --}}
 <!-- Modal Update -->
 <div class="modal fade text-start" id="update" aria-labelledby="myModalLabel16" aria-hidden="true">
@@ -633,6 +639,7 @@
         </div>
     </div>
 </div>
+
 
 @endsection
 
