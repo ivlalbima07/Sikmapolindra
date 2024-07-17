@@ -23,7 +23,11 @@ class DatabaseSeeder extends Seeder
         // Pemanggilan seeder yang benar
         $this->call([
             UsersLoginSeeder::class,
+
             // Tambahkan seeder lain di sini jika ada
         ]);
+         $this->call(KriteriaSeeder::class);
+          $this->call(KlasifikasiSeeder::class);
+           $this->call(KblisSeeder::class);
     }
 }

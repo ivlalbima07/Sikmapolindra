@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
     <!-- Reset Password basic -->
     <div class="card mb-0">

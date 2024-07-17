@@ -43,8 +43,24 @@ Route::post('/operator/store', [UserController::class, 'store'])->name('operator
 Route::put('/operator/update/{id}', [UserController::class, 'update'])->name('operator.update');
 Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name('operator.destroy');
 
+// Resource route untuk CRUD operations
+Route::resource('dudi', TambahdudiController::class);
 
-  Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
+// Tambah rute tambahan jika diperlukan
+Route::post('/tambahdudi/store', [TambahdudiController::class, 'store'])->name('tambahdudi.store');
+Route::get('/tambahdudi/{id}', [TambahdudiController::class, 'show'])->name('tambahdudi.show');
+Route::delete('/dudi/{id}', [TambahdudiController::class, 'destroy'])->name('dudi.destroy');
+Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
+Route::get('/get-klasifikasi/{kriteriaId}', [TambahdudiController::class, 'getKlasifikasi']);
+Route::get('/dudi/{id}', [TambahdudiController::class, 'show'])->name('dudi.show');
+
+// Rute untuk edit dan update
+Route::get('/dudi/{id}/edit', [TambahdudiController::class, 'edit'])->name('dudi.edit');
+Route::put('/dudi/{id}', [TambahdudiController::class, 'update'])->name('dudi.update');
+
+Route::get('/dudi/{id}/detail', [TambahdudiController::class, 'detail'])->name('dudi.detail');
+
+
 Route::resource('kbli', KlasifikasiBakuController::class);
 Route::resource('KlasifikasiBaku', KlasifikasiBakuController::class);
 //   Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
