@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
 <div class="card p-2">
     <h4>Kriteria Mitra</h4>

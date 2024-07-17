@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>DATA DUDI BEASISWA/IKATAN DINAS</h4>

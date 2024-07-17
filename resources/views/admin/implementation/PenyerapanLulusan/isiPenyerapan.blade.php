@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
     <style>
         #otherOrganizer {

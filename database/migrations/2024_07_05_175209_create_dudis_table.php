@@ -15,7 +15,7 @@ class CreateDudisTable extends Migration
             $table->date('tanggal_terbit')->nullable();
             $table->string('tipe')->nullable();
             $table->text('alamat')->nullable();
-            $table->char('province_id');
+            $table->char('province_id');        
             $table->char('regency_id');
             $table->char('district_id');
             $table->char('village_id');

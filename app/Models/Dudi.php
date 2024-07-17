@@ -32,6 +32,10 @@ class Dudi extends Model
     {
         return $this->hasMany(PenanggungJawab::class);
     }
+    public function kblis()
+    {
+        return $this->belongsTo(kbli::class, 'klasifikasi_baku');
+    }
 
     // Definisikan relasi ke Kriteria
     public function kriteria()
