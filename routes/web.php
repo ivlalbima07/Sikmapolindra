@@ -92,7 +92,7 @@ Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->na
   Route::get('/IsiDataTenagaPendidik', [PklDosenController::class, 'IsiDatapkldosen'])->name('IsiDatapkldosen');
 
 
-    Route::get('/Pkl_mhs', [AdminController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
+    Route::get('/Pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
     Route::get('/isipelaksanaan', [AdminController::class, 'isipelaksanaan'])->name('isipelaksanaan');
     Route::get('/lihatpelaksanaan', [PklMhsController::class, 'lihat'])->name('lihat');
 
@@ -111,24 +111,30 @@ Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->na
 
      //beasiswa
      Route::get('/beasiswa', [BeasiswaController::class, 'Beasiswa'])->name('Beasiswa');
-     Route::get('/isiBeasiswa', [BeasiswaController::class, 'isiBeasiswa'])->name('isiBeasiswa');
+Route::get('/isi-beasiswa/{id}', [BeasiswaController::class, 'isiBeasiswa'])->name('isi.beasiswa');
 
      //sarana
      Route::get('/Sarana', [SaranaController::class, 'Sarana'])->name('Sarana');
-     Route::get('/isiSarana', [SaranaController::class, 'isiSarana'])->name('isiSarana');
+ Route::get('/isi-sarana/{id}', [SaranaController::class, 'isiSarana'])->name('isi.sarana');
 
      //join JoinResearch
      Route::get('/JoinResearch', [JoinResearchController::class, 'JoinResearch'])->name('JoinResearch');
-     Route::get('/isiJoinResearch', [JoinResearchController::class, 'isiJoinResearch'])->name('isiJoinResearch');
+  Route::get('/isi-join-research/{id}', [JoinResearchController::class, 'isiJoinResearch'])->name('isi.join.research');
 
     //pelatihan
      Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
-
+Route::get('/isi-pelatihan/{id}', [PelatihanController::class, 'isiPelatihan'])->name('isi.pelatihan');
 
      //cooperation
-     Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
-     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
 
+     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
+Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
+
+Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
+Route::post('/cooperation/store', [CooperationController::class, 'store'])->name('cooperation.store');
+Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->name('cooperation.edit');
+Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
+Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
 
 
      Route::resource('users', UserController::class);

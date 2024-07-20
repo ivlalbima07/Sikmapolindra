@@ -38,10 +38,7 @@ class AdminController extends Controller
     // {
     //     return view('admin.implementation.dosentamu.index');
     // }
-    public function Pkl_mahasiswa()
-    {
-        return view('admin.implementation.Pkl_Mahasiswa.index');
-    }
+ 
     public function isipelaksanaan()
     {
         return view('admin.implementation.Pkl_Mahasiswa.isipelaksanaan');

@@ -19,30 +19,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">
-                                <div >
-                                    <button type="button" onclick="location.href=''" class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">
-                                <div >
-                                    <button type="button"  class="btn btn-primary btn-sm"><i data-feather='book'></i>Unggah pks</button>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($datakerjasama as $index => $kerjasama)
+                            @foreach ($kerjasama->itemKerjasama as $item)
+                                <tr>
+                                    <th class="align-top">{{ $index + 1 }}</th>
+                                    <td class="align-top">{{ $kerjasama->nomor_pks }}</td>
+                                    <td class="align-top">{{ $kerjasama->dudi->nib }}</td>
+                                    <td class="align-top">{{ $kerjasama->dudi->nama_perseroan }}</td>
+                                    <td class="align-top">{{ $item->jurusan }}</td>
+                                    <td class="align-top">
+                                        <div>
+                                            <button type="button" onclick="location.href='{{ route('isi.pelatihan', $item->id) }}'" class="btn btn-success btn-sm">
+                                                <i data-feather='book'></i> Isi Pelaksanaan
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -54,9 +48,7 @@
 @section('scripts')
     <script>
         $(function() {
-            const table = $('.datatables').DataTable({
-
-            })
+            const table = $('.datatables').DataTable();
         });
     </script>
 @endsection

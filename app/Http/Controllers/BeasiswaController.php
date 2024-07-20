@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datakerjasama;
+use App\Models\ItemKerjasama;
 use Illuminate\Http\Request;
 
 class BeasiswaController extends Controller
 {
-        public function Beasiswa()
+    public function Beasiswa()
     {
-        return view('admin.implementation.Beasiswa.index');
+        $datakerjasama = Datakerjasama::with(['dudi', 'itemKerjasama' => function ($query) {
+            $query->where('jenis_kerjasama', 'Beasiswa/Ikatan Dinas');
+        }])->get();
+
+        return view('admin.implementation.Beasiswa.index', compact('datakerjasama'));
     }
-        public function isiBeasiswa()
+
+    public function isiBeasiswa($id)
     {
-        return view('admin.implementation.Beasiswa.isiBeasiswa');
+        $itemKerjasama = ItemKerjasama::findOrFail($id);
+
+        return view('admin.implementation.Beasiswa.isiBeasiswa', compact('itemKerjasama'));
     }
 }

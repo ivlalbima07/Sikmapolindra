@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datakerjasama;
 use Illuminate\Http\Request;
 
 class PklDosenController extends Controller
 {
-  public function PklDosen()
+    public function PklDosen()
     {
-        return view('admin.implementation.PKLdosen.index');
+        $datakerjasama = Datakerjasama::with(['dudi', 'itemKerjasama' => function ($query) {
+            $query->where('jenis_kerjasama', 'Praktek Kerja Lapangan (PKL) Dosen');
+        }])->get();
+
+        return view('admin.implementation.PKLdosen.index', compact('datakerjasama'));
     }
 
-    public function IsiDatapkldosen()
+    public function IsiDatapkldosen($id)
     {
-        return view('admin.implementation.PKLdosen.isidatatenagapendidik');
+        $itemKerjasama = ItemKerjasama::findOrFail($id);
+
+        return view('admin.implementation.PKLdosen.isidatatenagapendidik', compact('itemKerjasama'));
     }
 }
