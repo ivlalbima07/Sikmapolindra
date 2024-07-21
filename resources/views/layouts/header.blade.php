@@ -14,8 +14,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ $title ?? '' }}</title>
-        <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
+          <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/logo.png') }}">
+
         <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
             rel="stylesheet">
@@ -178,7 +179,8 @@
                     <li class="nav-item me-auto">
                         <a class="navbar-brand" href="/">
                             <span class="brand-logo">
-                                <img src="app-assets/images/ico/logo.png">
+                                <img src="{{ asset('app-assets/images/ico/logo.png') }}" alt="Logo">
+
                             </span>
                             <h2 class="brand-text">Sikma</h2>
                         </a>

@@ -91,10 +91,11 @@ Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->na
   Route::get('/Pkl_Dosen', [PklDosenController::class, 'PklDosen'])->name('PklDosen');
   Route::get('/IsiDataTenagaPendidik', [PklDosenController::class, 'IsiDatapkldosen'])->name('IsiDatapkldosen');
 
-
+Route::post('/pkl-mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
     Route::get('/Pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
-    Route::get('/isipelaksanaan', [AdminController::class, 'isipelaksanaan'])->name('isipelaksanaan');
-    Route::get('/lihatpelaksanaan', [PklMhsController::class, 'lihat'])->name('lihat');
+    Route::get('/pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('pkl-mhs.index');
+Route::get('/pkl_mhs/isipelaksanaan/{id}', [PklMhsController::class, 'isipelaksanaan'])->name('pkl-mhs.isipelaksanaan');
+Route::post('/pkl_mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
 
     //sertiikasi
     Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');

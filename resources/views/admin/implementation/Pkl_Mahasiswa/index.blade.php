@@ -1,6 +1,5 @@
 @extends('layouts.header')
 @section('content')
-
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> DATA DUDI MAGANG PRAKTEK KERJA LAPANGAN (PKL) PESERTA DIDIK</h4>
 
@@ -29,7 +28,9 @@
                                     <td class="align-top">{{ $item->jurusan }}</td>
                                     <td class="align-top">
                                         <div>
-                                            <button type="button" onclick="location.href='/lihat-pelaksanaan/{{ $item->id }}'" class="btn btn-success btn-sm">
+                                            <button type="button"
+                                                onclick="location.href='{{ route('pkl-mhs.isipelaksanaan', $item->id) }}'"
+                                                class="btn btn-success btn-sm">
                                                 <i data-feather='book'></i> Isi Pelaksanaan
                                             </button>
                                         </div>
@@ -42,7 +43,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')

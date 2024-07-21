@@ -16,8 +16,13 @@ class ItemKerjasama extends Model
     ];
 
 
-     public function datakerjasama()
+    public function pklMhs()
     {
-        return $this->belongsTo(Datakerjasama::class);
+        return $this->hasMany(PklMhs::class, 'item_kerjasama_id');
+    }
+
+    public function datakerjasama()
+    {
+        return $this->belongsTo(Datakerjasama::class, 'kerjasama_id');
     }
 }
