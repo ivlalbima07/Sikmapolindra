@@ -116,11 +116,11 @@ Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'destroy'])->n
 
     //RisetTerapan
      Route::get('/RisetTerapan', [RisetTerapanController::class, 'RisetTerapan'])->name('RisetTerapan');
-     Route::get('/isiRisetTerapan', [RisetTerapanController::class, 'isiRisetTerapan'])->name('isiRisetTerapan');
+     Route::get('/isiRisetTerapan/{id}', [RisetTerapanController::class, 'isiRisetTerapan'])->name('isiRisetTerapan');
 
      //Penyerapan Lulusan
      Route::get('/Penyerapan', [LulusanController::class, 'PenyerapanLulusan'])->name('PenyerapanLulusan');
-     Route::get('/isiPenyerapan', [LulusanController::class, 'isiPenyerapan'])->name('isiPenyerapan');
+     Route::get('/isiPenyerapan/{id}', [LulusanController::class, 'isiPenyerapan'])->name('isiPenyerapan');
 
 
      //beasiswa
