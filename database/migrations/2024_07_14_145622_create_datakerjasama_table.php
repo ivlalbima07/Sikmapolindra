@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('datakerjasama', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dudi_id')->constrained('dudis')->onDelete('cascade');
+            $table->string('nomor_pks')->nullable();
+            $table->date('tanggal_pks')->nullable();
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_selesai')->nullable();
+            $table->string('lampiran_bukti')->nullable();
             $table->timestamps();
         });
     }
