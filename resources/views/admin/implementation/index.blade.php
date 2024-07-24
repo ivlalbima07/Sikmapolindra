@@ -163,7 +163,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Praktek Kerja Lapangan (PKL) Dosen</div>
-                                        <a type="button" href="/Pkl_Dosen" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/pkldosen" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>

@@ -84,12 +84,22 @@ Route::post('/Kriteria', [KriteriaMitraController::class, 'store'])->name('Krite
 Route::put('/Kriteria/{id}', [KriteriaMitraController::class, 'update'])->name('Kriteria.update');
 Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->name('Kriteria.destroy');
 
-    //sub_companion
-    Route::get('/DosenTamu', [DosentamuController::class, 'DosenTamu'])->name('DosenTamu');
-    Route::get('/IsiData', [DosentamuController::class, 'IsiData'])->name('IsiData');
 
-  Route::get('/Pkl_Dosen', [PklDosenController::class, 'PklDosen'])->name('PklDosen');
-  Route::get('/IsiDataTenagaPendidik', [PklDosenController::class, 'IsiDatapkldosen'])->name('IsiDatapkldosen');
+Route::get('/DosenTamu', [DosenTamuController::class, 'DosenTamu'])->name('dosentamu.index');
+Route::get('/IsiData/{id}', [DosenTamuController::class, 'IsiData'])->name('dosentamu.isidata');
+Route::post('/IsiData', [DosenTamuController::class, 'store'])->name('dosentamu.store');
+Route::post('/dosentamu/store', [DosenTamuController::class, 'store'])->name('dosentamu.store');
+Route::get('/show/{id}', [DosenTamuController::class, 'show'])->name('dosentamu.show');
+Route::get('/dosentamu/show/{id}', [DosenTamuController::class, 'show'])->name('dosentamu.show');
+Route::delete('/dosentamu/{id}', [DosenTamuController::class, 'destroy'])->name('dosentamu.destroy');
+
+
+
+ Route::get('/pkldosen', [PklDosenController::class, 'PklDosen'])->name('pkldosen.index');
+Route::get('/IsiDataTenagaPendidik/{id}', [PklDosenController::class, 'IsiDatapkldosen'])->name('pkldosen.isidata');
+Route::get('/pkldosen/{id}', [PklDosenController::class, 'show'])->name('pkldosen.show');
+Route::post('/pkldosen', [PklDosenController::class, 'store'])->name('pkldosen.store');
+Route::delete('/pkldosen/{id}', [PklDosenController::class, 'destroy'])->name('pkldosen.destroy');
 
 Route::post('/pkl-mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
     Route::get('/Pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
@@ -98,8 +108,11 @@ Route::get('/pkl_mhs/isipelaksanaan/{id}', [PklMhsController::class, 'isipelaksa
 Route::post('/pkl_mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
 
     //sertiikasi
-    Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
-    Route::get('/IsiSertifikasi', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
+   // Route: Sertifikasi
+Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
+Route::get('/IsiSertifikasi/{id}', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
+Route::post('/sertifikasi/store', [SertifikasiController::class, 'store'])->name('Sertifikasi.store');
+Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'destroy'])->name('Sertifikasi.destroy');
 
     //RisetTerapan
      Route::get('/RisetTerapan', [RisetTerapanController::class, 'RisetTerapan'])->name('RisetTerapan');

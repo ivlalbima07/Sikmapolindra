@@ -28,7 +28,7 @@
                                     <td class="align-top">{{ $item->jurusan }}</td>
                                     <td class="align-top">
                                         <div>
-                                            <button type="button" onclick="location.href='/isi-sertifikasi/{{ $item->id }}'" class="btn btn-success btn-sm">
+                                            <button type="button" onclick="location.href='/IsiSertifikasi/{{ $item->id }}'" class="btn btn-success btn-sm">
                                                 <i data-feather='book'></i> Isi Pelaksanaan
                                             </button>
                                         </div>
