@@ -487,23 +487,33 @@
                             <label for="alamat" class="form-label">Alamat</label>
                             <textarea id="alamat" name="alamat" class="form-control"></textarea>
                         </div>
-                        <div class="row g-4">
-                            <select class="select2 form-select" id="edit_province" name="province_id">
+                        <div class="col mb-0">
+                            <label for="province" class="form-label">Provinsi</label>
+                            <select class="select2 form-select" id="province" name="province_id">
                                 <option value="" hidden>Pilih Provinsi</option>
                                 @foreach ($provinces as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            <select class="select2 form-select" id="edit_regency" name="regency_id">
+                        </div>
+                        <div class="col mb-0">
+                            <label for="regency" class="form-label">Kabupaten/Kota</label>
+                            <select class="select2 form-select" id="regency" name="regency_id">
                                 <option value="" hidden>Pilih Kabupaten</option>
                             </select>
-                            <select class="select2 form-select" id="edit_district" name="district_id">
+                        </div>
+                        <div class="col mb-0">
+                            <label for="district" class="form-label">Kecamatan</label>
+                            <select class="select2 form-select" id="district" name="district_id">
                                 <option value="" hidden>Pilih Kecamatan</option>
                             </select>
-                            <select class="select2 form-select" id="edit_village" name="village_id">
+                        </div>
+                        <div class="col mb-0">
+                            <label for="village" class="form-label">Desa</label>
+                            <select class="select2 form-select" id="village" name="village_id">
                                 <option value="" hidden>Pilih Desa</option>
-                            </select>                            
-                        </div>                        
+                            </select>
+                        </div>                 
                         <div class="row g-2 my-1">
                             <div class="col mb-0">
                                 <label for="emailMitra" class="form-label">Email Mitra</label>
@@ -783,43 +793,42 @@
                     }
                 });
 
-                // Populate province, regency, district, village
                 $('#editDudiForm select[name="province_id"]').val(data.province_id).trigger('change.select2');
-                $.ajax({
-                    url: `/getRegencies/${data.province_id}`,
-                    method: 'GET',
-                    success: function(regencies) {
-                        $('#editDudiForm select[name="regency_id"]').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
-                        $.each(regencies, function(key, value) {
-                            $('#editDudiForm select[name="regency_id"]').append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        $('#editDudiForm select[name="regency_id"]').val(data.regency_id).trigger('change.select2');
+            $.ajax({
+                url: `/getRegencies/${data.province_id}`,
+                method: 'GET',
+                success: function(regencies) {
+                    $('#editDudiForm select[name="regency_id"]').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
+                    $.each(regencies, function(key, value) {
+                        $('#editDudiForm select[name="regency_id"]').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                    $('#editDudiForm select[name="regency_id"]').val(data.regency_id).trigger('change.select2');
 
-                        $.ajax({
-                            url: `/getDistricts/${data.regency_id}`,
-                            method: 'GET',
-                            success: function(districts) {
-                                $('#editDudiForm select[name="district_id"]').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
-                                $.each(districts, function(key, value) {
-                                    $('#editDudiForm select[name="district_id"]').append('<option value="' + key + '">' + value + '</option>');
-                                });
-                                $('#editDudiForm select[name="district_id"]').val(data.district_id).trigger('change.select2');
+                    $.ajax({
+                        url: `/getDistricts/${data.regency_id}`,
+                        method: 'GET',
+                        success: function(districts) {
+                            $('#editDudiForm select[name="district_id"]').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
+                            $.each(districts, function(key, value) {
+                                $('#editDudiForm select[name="district_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            $('#editDudiForm select[name="district_id"]').val(data.district_id).trigger('change.select2');
 
-                                $.ajax({
-                                    url: `/getVillages/${data.district_id}`,
-                                    method: 'GET',
-                                    success: function(villages) {
-                                        $('#editDudiForm select[name="village_id"]').empty().append('<option value="" hidden>Pilih Desa</option>');
-                                        $.each(villages, function(key, value) {
-                                            $('#editDudiForm select[name="village_id"]').append('<option value="' + key + '">' + value + '</option>');
-                                        });
-                                        $('#editDudiForm select[name="village_id"]').val(data.village_id).trigger('change.select2');
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                            $.ajax({
+                                url: `/getVillages/${data.district_id}`,
+                                method: 'GET',
+                                success: function(villages) {
+                                    $('#editDudiForm select[name="village_id"]').empty().append('<option value="" hidden>Pilih Desa</option>');
+                                    $.each(villages, function(key, value) {
+                                        $('#editDudiForm select[name="village_id"]').append('<option value="' + key + '">' + value + '</option>');
+                                    });
+                                    $('#editDudiForm select[name="village_id"]').val(data.village_id).trigger('change.select2');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
 
                 $('#editDudiForm input[name="email_mitra"]').val(data.email_mitra);
                 $('#editDudiForm input[name="no_telp_mitra"]').val(data.no_telp_mitra);
