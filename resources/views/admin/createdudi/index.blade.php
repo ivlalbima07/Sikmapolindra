@@ -639,7 +639,7 @@
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Dudi added/updated successfully.',
+                            title: response.message,
                             showConfirmButton: false,
                             timer: 1500,
                             customClass: {
