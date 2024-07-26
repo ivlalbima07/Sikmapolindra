@@ -43,13 +43,24 @@ Route::post('/operator/store', [UserController::class, 'store'])->name('operator
 Route::put('/operator/update/{id}', [UserController::class, 'update'])->name('operator.update');
 Route::delete('/operator/delete/{id}', [UserController::class, 'destroy'])->name('operator.destroy');
 
+// Resource route untuk CRUD operations
+Route::resource('dudi', TambahdudiController::class);
 
+// Tambah rute tambahan jika diperlukan
+Route::post('/tambahdudi/store', [TambahdudiController::class, 'store'])->name('tambahdudi.store');
+Route::get('/tambahdudi/{id}', [TambahdudiController::class, 'show'])->name('tambahdudi.show');
+Route::delete('/dudi/{id}', [TambahdudiController::class, 'destroy'])->name('dudi.destroy');
 Route::get('/tambahDudi', [TambahdudiController::class, 'tambahDudi'])->name('tambahDudi');
-Route::post('/tambahDudi/store', [TambahdudiController::class, 'store'])->name('tambahDudi.store');
-Route::get('/tambahDudi/{id}', [TambahdudiController::class, 'show'])->name('tambahDudi.show');
-Route::get('/tambahDudi/{id}/edit', [TambahdudiController::class, 'edit'])->name('tambahDudi.edit');
-Route::put('/tambahDudi/{id}', [TambahdudiController::class, 'update'])->name('tambahDudi.update');
-Route::delete('/tambahDudi/delete/{id}', [TambahdudiController::class, 'destroy'])->name('tambahDudi.destroy');
+Route::get('/get-klasifikasi/{kriteriaId}', [TambahdudiController::class, 'getKlasifikasi']);
+Route::get('/dudi/{id}', [TambahdudiController::class, 'show'])->name('dudi.show');
+
+// Rute untuk edit dan update
+Route::get('/dudi/{id}/edit', [TambahdudiController::class, 'edit'])->name('dudi.edit');
+Route::put('/dudi/{id}', [TambahdudiController::class, 'update'])->name('dudi.update');
+
+Route::get('/dudi/{id}/detail', [TambahdudiController::class, 'detail'])->name('dudi.detail');
+
+
 Route::resource('kbli', KlasifikasiBakuController::class);
 Route::resource('KlasifikasiBaku', KlasifikasiBakuController::class);
 //   Route::get('/KlasifikasiBaku', [KlasifikasiBakuController::class, 'KlasifikasiBaku'])->name('KlasifikasiBaku');
@@ -73,21 +84,35 @@ Route::post('/Kriteria', [KriteriaMitraController::class, 'store'])->name('Krite
 Route::put('/Kriteria/{id}', [KriteriaMitraController::class, 'update'])->name('Kriteria.update');
 Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->name('Kriteria.destroy');
 
-    //sub_companion
-    Route::get('/DosenTamu', [DosentamuController::class, 'DosenTamu'])->name('DosenTamu');
-    Route::get('/IsiData', [DosentamuController::class, 'IsiData'])->name('IsiData');
 
-  Route::get('/Pkl_Dosen', [PklDosenController::class, 'PklDosen'])->name('PklDosen');
-  Route::get('/IsiDataTenagaPendidik', [PklDosenController::class, 'IsiDatapkldosen'])->name('IsiDatapkldosen');
+Route::get('/DosenTamu', [DosenTamuController::class, 'DosenTamu'])->name('dosentamu.index');
+Route::get('/IsiData/{id}', [DosenTamuController::class, 'IsiData'])->name('dosentamu.isidata');
+Route::post('/IsiData', [DosenTamuController::class, 'store'])->name('dosentamu.store');
+Route::post('/dosentamu/store', [DosenTamuController::class, 'store'])->name('dosentamu.store');
+Route::get('/show/{id}', [DosenTamuController::class, 'show'])->name('dosentamu.show');
+Route::get('/dosentamu/show/{id}', [DosenTamuController::class, 'show'])->name('dosentamu.show');
+Route::delete('/dosentamu/{id}', [DosenTamuController::class, 'destroy'])->name('dosentamu.destroy');
 
 
-    Route::get('/Pkl_mhs', [AdminController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
-    Route::get('/isipelaksanaan', [AdminController::class, 'isipelaksanaan'])->name('isipelaksanaan');
-    Route::get('/lihatpelaksanaan', [PklMhsController::class, 'lihat'])->name('lihat');
+
+ Route::get('/pkldosen', [PklDosenController::class, 'PklDosen'])->name('pkldosen.index');
+Route::get('/IsiDataTenagaPendidik/{id}', [PklDosenController::class, 'IsiDatapkldosen'])->name('pkldosen.isidata');
+Route::get('/pkldosen/{id}', [PklDosenController::class, 'show'])->name('pkldosen.show');
+Route::post('/pkldosen', [PklDosenController::class, 'store'])->name('pkldosen.store');
+Route::delete('/pkldosen/{id}', [PklDosenController::class, 'destroy'])->name('pkldosen.destroy');
+
+Route::post('/pkl-mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
+    Route::get('/Pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
+    Route::get('/pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('pkl-mhs.index');
+Route::get('/pkl_mhs/isipelaksanaan/{id}', [PklMhsController::class, 'isipelaksanaan'])->name('pkl-mhs.isipelaksanaan');
+Route::post('/pkl_mhs/store', [PklMhsController::class, 'store'])->name('pkl-mhs.store');
 
     //sertiikasi
-    Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
-    Route::get('/IsiSertifikasi', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
+   // Route: Sertifikasi
+Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
+Route::get('/IsiSertifikasi/{id}', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
+Route::post('/sertifikasi/store', [SertifikasiController::class, 'store'])->name('Sertifikasi.store');
+Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'destroy'])->name('Sertifikasi.destroy');
 
     //RisetTerapan
      Route::get('/RisetTerapan', [RisetTerapanController::class, 'RisetTerapan'])->name('RisetTerapan');
@@ -100,24 +125,30 @@ Route::delete('/Kriteria/{id}', [KriteriaMitraController::class, 'destroy'])->na
 
      //beasiswa
      Route::get('/beasiswa', [BeasiswaController::class, 'Beasiswa'])->name('Beasiswa');
-     Route::get('/isiBeasiswa', [BeasiswaController::class, 'isiBeasiswa'])->name('isiBeasiswa');
+Route::get('/isi-beasiswa/{id}', [BeasiswaController::class, 'isiBeasiswa'])->name('isi.beasiswa');
 
      //sarana
      Route::get('/Sarana', [SaranaController::class, 'Sarana'])->name('Sarana');
-     Route::get('/isiSarana', [SaranaController::class, 'isiSarana'])->name('isiSarana');
+ Route::get('/isi-sarana/{id}', [SaranaController::class, 'isiSarana'])->name('isi.sarana');
 
      //join JoinResearch
      Route::get('/JoinResearch', [JoinResearchController::class, 'JoinResearch'])->name('JoinResearch');
-     Route::get('/isiJoinResearch', [JoinResearchController::class, 'isiJoinResearch'])->name('isiJoinResearch');
+  Route::get('/isi-join-research/{id}', [JoinResearchController::class, 'isiJoinResearch'])->name('isi.join.research');
 
     //pelatihan
      Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
-
+Route::get('/isi-pelatihan/{id}', [PelatihanController::class, 'isiPelatihan'])->name('isi.pelatihan');
 
      //cooperation
-     Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
-     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
 
+     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
+Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
+
+Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
+Route::post('/cooperation/store', [CooperationController::class, 'store'])->name('cooperation.store');
+Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->name('cooperation.edit');
+Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
+Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
 
 
      Route::resource('users', UserController::class);

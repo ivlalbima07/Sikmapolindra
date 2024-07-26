@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 
 
 
@@ -97,7 +97,7 @@
                             <div class="col-xl-4 col-md-6 col-12">
                                 <div class="mb-1">
                                     <label class="form-label" for="basicInput">No Telefon</label>
-                                    <input type="number" class="form-control" id="basicInput"
+                                    <input type="number" class="form-control"
                                         placeholder="0895547624361" />
                                 </div>
                             </div>

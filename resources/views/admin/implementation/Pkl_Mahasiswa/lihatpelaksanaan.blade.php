@@ -1,14 +1,14 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
-
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>DETAIL DATA</h4>
 
         <!-- Invoice List Table -->
         <div class="card p-2">
             <div class="back-button">
-    <button class="btn btn-secondary mb-3" onclick="window.history.back()"> <i data-feather='arrow-left'></i>Kembali</button>
-  </div>
+                <button class="btn btn-secondary mb-3" onclick="window.history.back()"> <i
+                        data-feather='arrow-left'></i>Kembali</button>
+            </div>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -62,109 +62,112 @@
                         aria-expanded="false">Instruktur</a>
                 </li>
             </ul>
-                                <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
-                            aria-expanded="true">
-                                       <div class="card-datatables table-responsive">
-                <div class="d-flex justify-content-end"> <button class="btn btn-success rounded-pill "data-bs-toggle="modal"
-                        data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
-                        <i data-feather='plus-circle'></i> Tambah
-                    </button> </div>
-                <table class="datatables table table-borderles table-striped dt-advanced-search table">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>Nama</th>
-                            <th>Nim</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-                            <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                            data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
-                        </div>
-                        <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
-                            aria-expanded="false">
-                            <div class="d-flex justify-content-end"> <button class="btn btn-success rounded-pill "data-bs-toggle="modal"
-                        data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
-                        <i data-feather='plus-circle'></i> Tambah
-                    </button> </div>
-                <table class="datatables table table-borderles table-striped dt-advanced-search table">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>Nama</th>
-                            <th>Program Studi</th>
-                            <th>Nim</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class=" align-top">Teknik Informatika</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                            <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
-                            data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
-                        </div>
-                        <div class="tab-pane" id="DUDI" role="tabpanel" aria-labelledby="about-tab"
-                            aria-expanded="false">
-                           <div class="d-flex justify-content-end"> <button class="btn btn-success rounded-pill "data-bs-toggle="modal"
-                        data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
-                        <i data-feather='plus-circle'></i> Tambah
-                    </button> </div>
-                <table class="datatables table table-borderles table-striped dt-advanced-search table">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                             <button type="button" class="btn btn-success" data-bs-target="#modalToggle4"
-                            data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
-                        </div>
-
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab" aria-expanded="true">
+                    <div class="card-datatables table-responsive">
+                        <div class="d-flex justify-content-end"> <button
+                                class="btn btn-success rounded-pill "data-bs-toggle="modal" data-bs-target="#modalToggle"
+                                type="submit"><i class="bx bx-plus-circle"></i>
+                                <i data-feather='plus-circle'></i> Tambah
+                            </button> </div>
+                        <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>Nama</th>
+                                    <th>Nim</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="align-top">1</th>
+                                    <td class=" align-top">Gusniawan Amd</td>
+                                    <td class="align-top">1688105783</td>
+                                    <td class="align-top">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="hapus data"><i
+                                                    data-feather='trash-2'></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2" data-bs-toggle="modal"><i
+                            data-feather='users'></i>pilih</button>
+                </div>
+                <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab" aria-expanded="false">
+                    <div class="d-flex justify-content-end"> <button
+                            class="btn btn-success rounded-pill "data-bs-toggle="modal" data-bs-target="#modalToggle"
+                            type="submit"><i class="bx bx-plus-circle"></i>
+                            <i data-feather='plus-circle'></i> Tambah
+                        </button> </div>
+                    <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Nim</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="align-top">1</th>
+                                <td class=" align-top">Gusniawan Amd</td>
+                                <td class=" align-top">Teknik Informatika</td>
+                                <td class="align-top">1688105783</td>
+                                <td class="align-top">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="hapus data"><i
+                                                data-feather='trash-2'></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
+                        data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
+                </div>
+                <div class="tab-pane" id="DUDI" role="tabpanel" aria-labelledby="about-tab" aria-expanded="false">
+                    <div class="d-flex justify-content-end"> <button
+                            class="btn btn-success rounded-pill "data-bs-toggle="modal" data-bs-target="#modalToggle"
+                            type="submit"><i class="bx bx-plus-circle"></i>
+                            <i data-feather='plus-circle'></i> Tambah
+                        </button> </div>
+                    <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>Nama</th>
+                                <th>Jabatan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="align-top">1</th>
+                                <td class=" align-top">Gusniawan Amd</td>
+                                <td class="align-top">1688105783</td>
+                                <td class="align-top">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="hapus data"><i
+                                                data-feather='trash-2'></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-success" data-bs-target="#modalToggle4"
+                        data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
+                </div>
+
+            </div>
 
 
 

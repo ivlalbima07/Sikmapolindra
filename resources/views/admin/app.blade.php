@@ -1,6 +1,4 @@
-@extends('layouts.header')
 
-@section('menu')
     <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
         <a class="d-flex align-items-center" href="{{ url('/dashboard') }}">
             <i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span>
@@ -25,7 +23,7 @@
         </a>
     </li>
     <li class="nav-item {{ request()->is('tambahDudi') ? 'active' : '' }}">
-        <a class="d-flex align-items-center" href="{{ url('/tambahDudi') }}">
+        <a class="d-flex align-items-center" href="{{ url('/dudi') }}">
             <i data-feather='folder-plus'></i><span class="menu-title text-truncate" data-i18n="Dashboard">Tambah
                 Dudi</span>
         </a>
@@ -42,7 +40,7 @@
             </li>
             <li class="nav-item {{ request()->is('KlasifikasiBaku') ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ url('/KlasifikasiBaku') }}">
-                    <i data-feather='circle'></i><span class="menu-title text-truncate" data-i18n="Preview">lasifikasi Baku</span>
+                    <i data-feather='circle'></i><span class="menu-title text-truncate" data-i18n="Preview">klasifikasi Baku</span>
                 </a>
             </li>
             <li class="nav-item {{ request()->is('Kriteria') ? 'active' : '' }}">
@@ -126,4 +124,3 @@
 <li class="navigation-header"><span data-i18n="Lainnya">Lainnya</span><i data-feather="more-horizontal"></i></li>
 <li class="nav-item {{ request()->routeIs('storages.user.edit*') ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('storages.user.edit', Auth::id()) }}"><i data-feather="edit"></i><span class="menu-title text-truncate" data-i18n="Edit Profile">Edit Profile</span></a></li>
 <li class="nav-item"><a class="d-flex align-items-center" href="#" id="logout-app"><i data-feather="log-out"></i><span class="menu-title text-truncate" data-i18n="Logout">Logout</span></a></li> --}}
-@endsection

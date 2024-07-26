@@ -1,8 +1,8 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
-
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span>INSTRUKTUR/PENDAMPING DUDI</h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>Dosen/Tenaga Ahli dari Dunia Kerja (Dosen
+            Tamu)</h4>
 
         <!-- Invoice List Table -->
         <div class="card p-2">
@@ -19,32 +19,38 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">
-                                <div >
-                                    <button type="button" onclick="location.href='/IsiData'" class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($datakerjasama as $index => $kerjasama)
+                            @foreach ($kerjasama->itemKerjasama as $item)
+                                <tr>
+                                    <th class="align-top">{{ $index + 1 }}</th>
+                                    <td class="align-top">{{ $kerjasama->nomor_pks }}</td>
+                                    <td class="align-top">{{ $kerjasama->dudi->nib }}</td>
+                                    <td class="align-top">{{ $kerjasama->dudi->nama_perseroan }}</td>
+                                    <td class="align-top">{{ $item->jurusan }}</td>
+                                    <td class="align-top">
+                                        <div>
+                                            <button type="button"
+                                                onclick="location.href='{{ route('dosentamu.isidata', $item->id) }}'"
+                                                class="btn btn-success btn-sm">
+                                                <i data-feather='book'></i> Isi Pelaksanaan
+                                            </button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
     <script>
         $(function() {
-            const table = $('.datatables').DataTable({
-
-            })
+            const table = $('.datatables').DataTable();
         });
     </script>
 @endsection

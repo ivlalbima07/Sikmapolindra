@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.header')
 @section('content')
     <style>
         .dropdown-item:focus,
@@ -145,7 +145,7 @@
                                 <div class="overlay-dark-2"></div>
                                 <div class="text-isi">
                                     <div class="text-white">Praktek Kerja Lapangan (PKL) Mahasiswa</div>
-                                    <a type="button" href="/Pkl_mhs" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                    <a type="button" href="/pkl_mhs" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                             class="bx bx-right-arrow-alt"></i></a>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                     <div class="overlay-dark-2"></div>
                                     <div class="text-isi">
                                         <div class="text-white">Praktek Kerja Lapangan (PKL) Dosen</div>
-                                        <a type="button" href="/Pkl_Dosen" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
+                                        <a type="button" href="/pkldosen" class="btn btn-sm btn-light mt-2">Isi Pelaksanaan <i
                                                 class="bx bx-right-arrow-alt"></i></a>
                                     </div>
                                 </div>

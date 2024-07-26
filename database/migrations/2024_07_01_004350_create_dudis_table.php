@@ -4,31 +4,28 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateDudisTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        Schema::create('dudis', function (Blueprint $table) {
+         Schema::create('dudis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_rombel');
-            $table->string('nama');
-            $table->string('nib');
-            $table->date('sk_pendirian');
-            $table->string('tipe');
-            $table->string('alamat');
-            $table->char('province_id', 2);
-            $table->char('regency_id', 4);
-            $table->char('district_id', 7);
-            $table->char('village_id', 10);
+            $table->string('nama_perseroan')->nullable();
+            $table->string('nib')->nullable();
+            $table->date('tanggal_terbit')->nullable();
+            $table->string('tipe')->nullable();
+            $table->text('alamat')->nullable();
+            $table->char('province_id');        
+            $table->char('regency_id');
+            $table->char('district_id');
+            $table->char('village_id');
             $table->string('email_mitra')->nullable();
-            $table->string('no_telp_mitra')->nullable();
-            $table->enum('kerjasama', ['internasional', 'nasional']);
+            $table->string('no_mitra')->nullable();
+            $table->json('klasifikasi_baku')->nullable(); // Menyimpan data multiple select sebagai JSON
+            $table->string('lingkupkerjasama')->nullable();
             $table->foreignId('kriteria_id')->constrained('kriterias');
-            $table->foreignId('klasifikasi_id')->constrained('klasifikasis');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('klasifikasi_id')->constrained('klasifikasis');
             $table->timestamps();
 
             $table->foreign('province_id')->references('id')->on('provinces');
@@ -42,4 +39,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('dudis');
     }
-};
+}

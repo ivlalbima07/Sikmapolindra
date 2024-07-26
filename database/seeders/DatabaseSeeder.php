@@ -25,7 +25,11 @@ class DatabaseSeeder extends Seeder
             UsersLoginSeeder::class,
             ImportTempTableSeeder2::class,
             ImportTempTableSeeder::class,
+
             // Tambahkan seeder lain di sini jika ada
         ]);
+         $this->call(KriteriaSeeder::class);
+          $this->call(KlasifikasiSeeder::class);
+           $this->call(KblisSeeder::class);
     }
 }

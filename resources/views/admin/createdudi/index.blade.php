@@ -1,4 +1,5 @@
 @extends('admin.app')
+@extends('layouts.header')
 <style>
     .modal-body {
         max-height: calc(100vh - 200px);
@@ -29,16 +30,15 @@
                         </div>
                     </div>
                     <div class="col-md-3 d-flex justify-content-end align-items-center">
-                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#tambah">Buat
-                            DUDI</button>
-                    </div>
+                        <button type="button" class="btn btn-primary" id="tambahDudi" data-bs-toggle="modal" data-bs-target="#dudiModal">Buat DUDI</button>
+                    </div>                    
                 </div>
             </div>
 
             <div class="card-datatables table-responsive">
                 <table class="table table-borderless table-striped dt-advanced-search table">
                     <thead>
-                        <tr>
+                        <tr>    
                             <th>NO</th>
                             <th>NIB/NPSN</th>
                             <th>Tipe</th>
@@ -53,30 +53,31 @@
                     </thead>
                     <tbody>
                         @foreach($dudis as $index => $dudi)
+                        {{-- @dd($dudi); --}}
                             <tr>
                                 <td class="align-top">{{ $index + 1 }}</td>
                                 <td class="align-top">{{ $dudi->nib }}</td>
                                 <td class="align-top">{{ $dudi->tipe }}</td>
-                                <td class="align-top">{{ $dudi->nama_rombel }}</td>
-                                <td class="align-top">{{ $dudi->province->name }}</td>
-                                <td class="align-top">{{ $dudi->regency->name }}</td>
-                                <td class="align-top">{{ $dudi->kerjasama }}</td>
+                                <td class="align-top">{{ $dudi->nama_perseroan }}</td>
+                                <td class="align-top">{{ $dudi->provinsi->name }}</td>
+                                <td class="align-top">{{ $dudi->kabupaten->name }}</td>
+                                <td class="align-top">{{ $dudi->lingkupkerjasama }}</td>
                                 {{-- @dd($dudi->kriteria) --}}
+                                <td class="align-top">{{ $dudi->kriteria->nama }}</td>
                                 <td class="align-top">{{ $dudi->user->name }}</td>
-                                <td class="align-top">{{ $dudi->nama }}</td>
                                 <td class="align-top">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#view"
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#viewModal"
                                             class="btn btn-warning btn-sm viewButton" data-bs-placement="top" title="View data"
                                             data-id="{{ $dudi->id }}">
                                             <i data-feather='inbox'></i>
                                         </button>
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editdudi"
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#dudiModal"
                                             class="btn btn-primary btn-sm editButton" data-bs-placement="top" title="Edit data" data-id="{{ $dudi->id }}">
                                             <i data-feather="edit"></i>
                                         </button>
                                         <button type="button" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                            class="btn btn-danger btn-sm" data-bs-placement="top" title="Delete data">
+                                            class="btn btn-danger btn-sm " data-bs-placement="top" title="Delete data">
                                             <i data-feather="trash"></i>
                                         </button>
                                     </div>
@@ -89,31 +90,166 @@
         </div>
     </div>
 
-
-
-    <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+    <!-- Modal view -->
+    <div class="modal fade text-start" id="viewModal" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel16">Manajemen Dudi</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <section class="invoice-preview-wrapper">
+                                <div class="row invoice-preview">
+                                    <div class="col-12">
+                                        <div class="card invoice-preview-card">
+                                            <div class="card-body invoice-padding pb-0">
+                                                <div class="row g-3 invoice-spacing">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-borderless">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Nama</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-nama"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Tipe</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-tipe"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">NIB</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-nib"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Tanggal Terbit / SK Pendirian</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-tanggal-terbit"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Alamat</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-alamat"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="mt-1">
+                                                            <label class="fw-bolder">Klasifikasi Baku Lapangan Usaha (KBLI):</label>
+                                                            <table class="table table-bordered" id="dudi-kbli">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No</th>
+                                                                        <th>Nama</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- Data KBLI akan dimuat di sini -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <table class="table table-borderless">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Email Mitra</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-email"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">No. Telp. Mitra</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-telp"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Kriteria Mitra</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-kriteria"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Lingkup Kerjasama</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-lingkup"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Provinsi</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-provinsi"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Kabupaten/Kota</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-kabupaten"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Kecamatan</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-kecamatan"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="fw-bolder">Kelurahan</td>
+                                                                    <td>:</td>
+                                                                    <td id="dudi-kelurahan"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <hr class="invoice-spacing" />
+                                            <h4 class="text-center">Data Penanggung Jawab</h4>
+                                            <hr class="invoice-spacing" />
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama</th>
+                                                            <th>Email</th>
+                                                            <th>Nomor HP</th>
+                                                            <th>Jenis Kelamin</th>
+                                                            <th>Jenis Identitas</th>
+                                                            <th>Nomor Identitas</th>
+                                                            <th>Kewarganegaraan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="penanggung-jawab-list"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="dudiModal" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <form id="dudiForm" method="POST">
                     @csrf
+                    <input type="hidden" id="method" name="_method" value="POST">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel16">Tambah Dudi</h4>
+                        <h4 class="modal-title" id="myModalLabel16">Tambah/Edit Dudi</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="card">
                             <div class="card-body">
                                 <input type="hidden" id="id" name="id">
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="namaRombel" class="form-label">Nama Rombel</label>
-                                        <input type="text" id="namaRombel" name="nama_rombel" class="form-control" placeholder="Enter Name" />
-                                    </div>
-                                </div>
                                 <div class="row g-4">
                                     <div class="col mb-0">
-                                        <label for="nama" class="form-label">Nama</label>
-                                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Enter Name" />
+                                        <label for="nama_perseroan" class="form-label">Nama Perseroan</label>
+                                        <input type="text" id="nama_perseroan" name="nama_perseroan" class="form-control" placeholder="Masukkan Nama Perseroan" required>
                                     </div>
                                     <div class="col mb-0">
                                         <label for="nib" class="form-label">NIB</label>
@@ -121,7 +257,7 @@
                                     </div>
                                     <div class="col mb-0">
                                         <label for="skPendirian" class="form-label">Tanggal Terbit / SK Pendirian</label>
-                                        <input type="date" id="skPendirian" name="sk_pendirian" class="form-control invoice-edit-input date-picker" />
+                                        <input type="date" id="tanggal_terbit" name="tanggal_terbit" class="form-control invoice-edit-input date-picker" />
                                     </div>
                                     <div class="col mb-0">
                                         <label for="tipe" class="form-label">Tipe</label>
@@ -173,7 +309,7 @@
                                 </div>
                                 <div>
                                     <label class="form-label" for="select2-multiple">Klasifikasi Baku Lapangan Usaha (KBLI)</label>
-                                    <select class="select2 form-select" id="select2-multiple" name="kbli[]" multiple>
+                                    <select class="select2 form-select" id="select2-multiple" name="klasifikasi_baku[]" multiple>
                                         @foreach ($kblis as $kbli)
                                             <option value="{{ $kbli->id }}">{{ $kbli->nama }}</option>
                                         @endforeach
@@ -181,7 +317,7 @@
                                 </div>                                      
                                 <div class="my-1">
                                     <label class="form-label" for="basicSelect1">Lingkup Kerjasama </label>
-                                    <select name="kerjasama" id="" class="form-select">
+                                    <select name="lingkupkerjasama" class="form-select">
                                         <option value="" hidden>Pilih Lingkup Kerjasama</option>
                                         <option value="nasional" class="dropdown-item">Nasional</option>
                                         <option value="internasional" class="dropdown-item">Internasional</option>
@@ -231,7 +367,7 @@
                                                                 </div>
                                                                 <div class="col mb-0">
                                                                     <label for="penanggungJawabNoHp" class="form-label">Nomor Hp</label>
-                                                                    <input type="number" id="penanggungJawabNoHp" name="penanggung_jawab[][no_hp]" class="form-control" placeholder="Enter Phone" />
+                                                                    <input type="number" id="penanggungJawabNoHp" name="penanggung_jawab[][nomor_hp]" class="form-control" placeholder="Enter Phone" />
                                                                 </div>
                                                                 <div class="col mb-0">
                                                                     <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
@@ -288,280 +424,7 @@
                                         </div>
                                     </div>
                                     <!-- /Invoice repeater -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>    
-
-
-    {{-- modal view --}}
-    <div class="modal fade text-start" id="view" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel16">Manajemen Dudi</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-body">
-                        <section class="invoice-preview-wrapper">
-                            <div class="row invoice-preview">
-                                <div class="">
-                                    <div class="card invoice-preview-card">
-                                        <div class="card-body invoice-padding pb-0">
-                                            <div class="row g-3 invoice-spacing">
-                                                <div class="col">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="fw-bolder">Nama</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-nama">MAXXIMA HERSAM SOLUSI</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Tipe</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-tipe">NIB</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">NIB</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-nib">20566343</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Tanggal Terbit / SK Pendirian</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-sk">12 December 2018</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Alamat</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-alamat" style="vertical-align: top;">KOMPLEK REGENCY RUKO NEW
-                                                                    CARIBBEAN BLOK W6 NO.8, 38/, -
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <div class="mt-1">
-                                                        <label class="fw-bolder" for="">Klasifikasi Baku Lapangan Usaha (KBLI):</label>
-                                                        <table id="dudi-kbli">
-                                                            <tr>
-                                                                <td>1.</td>
-                                                                <td>Perdagangan Besar Mobil Bekas</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2.</td>
-                                                                <td>Perdagangan Besar Mesin, Peralatan Dan Perlengkapan Lainnya</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="col-1"></div>
-                                                <div class="col">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="fw-bolder">Email Mitra</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-email">hr@maxximasolusi.co.id / herisagung@maxximasolusi.co.id</td>
-                                                            </tr>
-                                                            <tr class="mt-2">
-                                                                <td class="fw-bolder">No. Telp. Mitra</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-telp">082352999200 / 0542-8709047</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Kriteria Mitra</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-kriteria">Perusahaan Nasional Berstandar Tinggi</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Lingkup Kerjasama</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-lingkup">Nasional</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Provinsi</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-provinsi">prov. kalimantan timur</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Kabupaten/Kota</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-kabupaten">Kota Balikpapan</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Kecamatan</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-kecamatan">Kec. Balikpapan timur</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="fw-bolder">Kelurahan</td>
-                                                                <td>:</td>
-                                                                <td id="dudi-kelurahan">Sepinggan baru</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="invoice-spacing" />
-                                        <h4 class="text-center">Data Penanggung Jawab</h4>
-                                        <hr class="invoice-spacing" />
-                                        <div class="card-datatables table-responsive">
-                                            <table class="table ">
-                                                <thead>
-                                                    <tr>
-                                                        <th>NO</th>
-                                                        <th>Nama</th>
-                                                        <th>Email</th>
-                                                        <th>Nomer HP</th>
-                                                        <th>Jenis Kelamin</th>
-                                                        <th>Jenis Identitas</th>
-                                                        <th>Nomor Identitas</th>
-                                                        <th>Kewarganegaraan</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="penanggung-jawab-list">
-                                                    <!-- Data penanggung jawab akan dimasukkan di sini melalui AJAX -->
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>{{-- modal view end --}}
-
-    <div class="modal fade" id="editDudi" tabindex="-1" aria-labelledby="editDudiLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <form id="editDudiForm" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="editDudiLabel">Edit Dudi</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Copy form structure from tambahDudi form here -->
-                        <!-- Remember to add 'value' attributes to prepopulate the data -->
-                        <input type="hidden" id="id" name="id">
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label for="namaRombel" class="form-label">Nama Rombel</label>
-                                <input type="text" id="namaRombel" name="nama_rombel" class="form-control" placeholder="Enter Name" />
-                            </div>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col mb-0">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text" id="nama" name="nama" class="form-control" placeholder="Enter Name" />
-                            </div>
-                            <div class="col mb-0">
-                                <label for="nib" class="form-label">NIB</label>
-                                <input type="number" id="nib" name="nib" class="form-control" placeholder="Enter NIB" />
-                            </div>
-                            <div class="col mb-0">
-                                <label for="skPendirian" class="form-label">Tanggal Terbit / SK Pendirian</label>
-                                <input type="date" id="skPendirian" name="sk_pendirian" class="form-control invoice-edit-input date-picker" />
-                            </div>
-                            <div class="col mb-0">
-                                <label for="tipe" class="form-label">Tipe</label>
-                                <input type="text" id="tipe" name="tipe" class="form-control" placeholder="Enter Type" />
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <textarea id="alamat" name="alamat" class="form-control"></textarea>
-                        </div>
-                        <div class="col mb-0">
-                            <label for="province" class="form-label">Provinsi</label>
-                            <select class="select2 form-select" id="province" name="province_id">
-                                <option value="" hidden>Pilih Provinsi</option>
-                                @foreach ($provinces as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col mb-0">
-                            <label for="regency" class="form-label">Kabupaten/Kota</label>
-                            <select class="select2 form-select" id="regency" name="regency_id">
-                                <option value="" hidden>Pilih Kabupaten</option>
-                            </select>
-                        </div>
-                        <div class="col mb-0">
-                            <label for="district" class="form-label">Kecamatan</label>
-                            <select class="select2 form-select" id="district" name="district_id">
-                                <option value="" hidden>Pilih Kecamatan</option>
-                            </select>
-                        </div>
-                        <div class="col mb-0">
-                            <label for="village" class="form-label">Desa</label>
-                            <select class="select2 form-select" id="village" name="village_id">
-                                <option value="" hidden>Pilih Desa</option>
-                            </select>
-                        </div>                 
-                        <div class="row g-2 my-1">
-                            <div class="col mb-0">
-                                <label for="emailMitra" class="form-label">Email Mitra</label>
-                                <input type="email" id="emailMitra" name="email_mitra" class="form-control" placeholder="Enter Email" />
-                            </div>
-                            <div class="col mb-0">
-                                <label for="telpMitra" class="form-label">No. Telp. Mitra</label>
-                                <input type="number" id="telpMitra" name="no_telp_mitra" class="form-control" placeholder="Enter Phone" />
-                            </div>
-                        </div>
-                        <div>
-                            <label class="form-label" for="select2-multiple">Klasifikasi Baku Lapangan Usaha (KBLI)</label>
-                            <select class="select2 form-select" id="select2-multiple" name="kbli[]" multiple>
-                                @foreach ($kblis as $kbli)
-                                    <option value="{{ $kbli->id }}">{{ $kbli->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>                                
-                        <div class="my-1">
-                            <label class="form-label" for="basicSelect1">Lingkup Kerjasama </label>
-                            <select name="kerjasama" id="" class="form-select">
-                                <option value="" hidden>Pilih Lingkup Kerjasama</option>
-                                <option value="nasional" class="dropdown-item">Nasional</option>
-                                <option value="internasional" class="dropdown-item">Internasional</option>
-                            </select>
-                        </div>
-                        <div class="my-1">
-                            <label class="form-label" for="basicSelect1">Kriteria Mitra</label>
-                            <select name="kriteria_id" id="basicSelect1" class="form-select">
-                                <option value="" hidden>Pilih Kriteria Mitra</option>
-                                @foreach ($kriterias as $kriteria)
-                                    <option value="{{ $kriteria->id }}">{{ $kriteria->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="my-1">
-                            <label class="form-label" for="basicSelect2">Klasifikasi</label>
-                            <select name="klasifikasi_id" id="basicSelect2" class="form-select">
-                                <option value="" hidden>Pilih Klasifikasi</option>
-                                <!-- Options will be populated dynamically -->
-                            </select>
-                        </div>      
-                        <div class="card">
-                            <div class="card-body">
-                                <input type="hidden" id="edit_id" name="id">
-                                <!-- Repeat the form fields as in tambahDudi form -->
-                                <!-- Add value attributes or bind the values using jQuery in AJAX success callback -->
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -573,6 +436,7 @@
             </div>
         </div>
     </div>
+      
     
 
     {{-- modal view --}}
@@ -587,136 +451,165 @@
         });
 
         $(document).ready(function() {
-            $('.select2').select2({
-                dropdownParent: $('#tambah')
+            $('#dudiModal').on('hidden.bs.modal', function () {
+                // Clear all input fields
+                $(this).find('form')[0].reset();
+
+                // Clear Select2 elements
+                $('#select2-multiple').val(null).trigger('change');
+                $('select[name="kriteria_id"]').val(null).trigger('change');
+                $('select[name="klasifikasi_id"]').val(null).trigger('change');
+                $('select[name="lingkupkerjasama"]').val(null).trigger('change');
+
+                // Reset dropdowns for provinsi, kabupaten, kecamatan, desa
+                $('#province').val(null).trigger('change');
+                $('#regency').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
+                $('#district').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
+                $('#village').empty().append('<option value="" hidden>Pilih Desa</option>');
+
+                // Clear Penanggung Jawab repeater list
+                var repeaterList = $('.invoice-repeater [data-repeater-list="penanggung_jawab"]');
+                repeaterList.empty();
+
+                // Reset form action
+                $('#dudiForm').attr('action', '{{ route('dudi.store') }}');
+                $('#method').val('POST');
             });
 
-            $('#province').change(function() {
-                var provinceID = $(this).val();
-                if (provinceID) {
-                    $.ajax({
-                        url: '/getRegencies/' + provinceID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('#regency').empty().append(
-                                '<option hidden>Pilih Kabupaten</option>');
-                            $.each(data, function(key, value) {
-                                $('#regency').append('<option value="' + key + '">' +
-                                    value + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
 
-            $('#regency').change(function() {
-                var regencyID = $(this).val();
-                if (regencyID) {
-                    $.ajax({
-                        url: '/getDistricts/' + regencyID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('#district').empty().append(
-                                '<option hidden>Pilih Kecamatan</option>');
-                            $.each(data, function(key, value) {
-                                $('#district').append('<option value="' + key + '">' +
-                                    value + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
 
-            $('#district').change(function() {
-                var districtID = $(this).val();
-                if (districtID) {
-                    $.ajax({
-                        url: '/getVillages/' + districtID,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('#village').empty().append('<option hidden>Pilih Desa</option>');
-                            $.each(data, function(key, value) {
-                                $('#village').append('<option value="' + key + '">' +
-                                    value + '</option>');
-                            });
-                        }
-                    });
-                }
-            }); 
-
-            $('#basicSelect1').change(function() {
-                var kriteriaId = $(this).val();
-                if (kriteriaId) {
-                    $.ajax({
-                        url: '/get-klasifikasi/' + kriteriaId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#basicSelect2').empty();
-                            $('#basicSelect2').append(
-                                '<option value="" hidden>Pilih Klasifikasi</option>');
-                            $.each(data, function(key, value) {
-                                $('#basicSelect2').append('<option value="' + value.id +
-                                    '">' + value.nama_klasifikasi + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#basicSelect2').empty();
-                    $('#basicSelect2').append('<option value="" hidden>Pilih Klasifikasi</option>');
-                }
-            });
-
-            $('.viewButton').on('click', function() {
+            // Event listener untuk tombol edit
+            $('.editButton').on('click', function() {
                 var id = $(this).data('id');
+                var url = `{{ route('dudi.edit', ':id') }}`.replace(':id', id);
+
                 $.ajax({
-                    url: '/tambahDudi/' + id,
+                    url: url,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
+                        console.log(data);
+                        $('#id').val(data.id);
+                        $('#nama_perseroan').val(data.nama_perseroan);
+                        $('#nib').val(data.nib);
+                        $('#tanggal_terbit').val(data.tanggal_terbit);
+                        $('#tipe').val(data.tipe);
+                        $('#alamat').val(data.alamat);
+                        $('#emailMitra').val(data.email_mitra);
+                        $('#telpMitra').val(data.no_mitra);
 
-                        // console.log(data.penanggung_jawabs);
+                        // Load regency, district, and village based on selected province
+                        $('#province').val(data.provinsi.id).trigger('change');
+                        setTimeout(function() {
+                            $('#regency').val(data.kabupaten.id).trigger('change');
+                            setTimeout(function() {
+                                $('#district').val(data.kecamatan.id).trigger('change');
+                                setTimeout(function() {
+                                    $('#village').val(data.desa.id).trigger('change');
+                                }, 500);
+                            }, 500);
+                        }, 500);
 
-                        $('#dudi-nama').text(data.nama);
-                        $('#dudi-tipe').text(data.tipe);
-                        $('#dudi-nib').text(data.nib);
-                        $('#dudi-sk').text(data.sk_pendirian);
-                        $('#dudi-alamat').text(data.alamat);
-                        $('#dudi-email').text(data.email_mitra);
-                        $('#dudi-telp').text(data.no_telp_mitra);
-                        $('#dudi-kriteria').text(data.nama);
-                        $('#dudi-lingkup').text(data.kerjasama);
-                        $('#dudi-provinsi').text(data.province.name);
-                        $('#dudi-kabupaten').text(data.regency.name);
-                        $('#dudi-kecamatan').text(data.district.name);
-                        $('#dudi-kelurahan').text(data.village.name);
-                        
-                        // Klasifikasi Baku Lapangan Usaha (KBLI)
-                        var kbliContent = '';
-                    $.each(data.kblis, function(index, kbli) {
-                        kbliContent += '<tr><td>' + (index + 1) + '. </td><td>' + kbli.nama + '</td></tr>';
-                    });
-                    $('#dudi-kbli').html(kbliContent);
-
-                        // Data Penanggung Jawab
-                        var pjContent = '';
-                        $.each(data.penanggung_jawabs, function(index, pj) {
-                            console.log();
-                            pjContent += '<tr>';
-                            pjContent += '<td>' + (index + 1) + '</td>';
-                            pjContent += '<td>' + pj.nama + '</td>';
-                            pjContent += '<td>' + pj.email + '</td>';
-                            pjContent += '<td>' + pj.no_hp + '</td>';
-                            pjContent += '<td>' + pj.jenis_kelamin + '</td>';
-                            pjContent += '<td>' + pj.jenis_identitas + '</td>';
-                            pjContent += '<td>' + pj.nomor_identitas + '</td>';
-                            pjContent += '<td>' + pj.kewarganegaraan + '</td>';
-                            pjContent += '</tr>';
+                        // Handle Select2 multiple elements for klasifikasi_baku
+                        var klasifikasiBakuIds = data.klasifikasi_baku.map(function(item) {
+                            return item.id;
                         });
-                        $('#penanggung-jawab-list').html(pjContent);
+                        setTimeout(function() {
+                            $('#select2-multiple').val(klasifikasiBakuIds).trigger('change');
+                        }, 1000);
+
+                        // Set the kriteria and klasifikasi values
+                        $('select[name="kriteria_id"]').val(data.kriteria.id).trigger('change');
+                        setTimeout(function() {
+                            $.ajax({
+                                url: '/get-klasifikasi/' + data.kriteria.id,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(response) {
+                                    $('select[name="klasifikasi_id"]').empty();
+                                    $.each(response, function(key, value) {
+                                        $('select[name="klasifikasi_id"]').append('<option value="' + value.id + '">' + value.nama_klasifikasi + '</option>');
+                                    });
+                                    $('select[name="klasifikasi_id"]').val(data.klasifikasi.id).trigger('change');
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('AJAX Error:', status, error); // Debugging
+                                }
+                            });
+                        }, 1000);
+
+                        $('select[name="lingkupkerjasama"]').val(data.lingkupkerjasama).trigger('change');
+
+                        // Handle penanggung jawabs
+                        var penanggungJawabs = data.penanggung_jawabs;
+                        var repeaterList = $('.invoice-repeater [data-repeater-list="penanggung_jawab"]');
+                        repeaterList.empty(); // Kosongkan daftar repeater
+
+                        penanggungJawabs.forEach(function(pj) {
+                            var newItem = `
+                                <div data-repeater-item>
+                                    <input type="hidden" name="penanggung_jawab[${pj.id}][id]" value="${pj.id}" />
+                                    <div class="row g-4 mb-1">
+                                        <div class="col mb-0">
+                                            <label for="penanggungJawabNama${pj.id}" class="form-label">Nama</label>
+                                            <input type="text" id="penanggungJawabNama${pj.id}" name="penanggung_jawab[${pj.id}][nama]" class="form-control" placeholder="Enter Name" value="${pj.nama}" />
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="penanggungJawabEmail${pj.id}" class="form-label">Email</label>
+                                            <input type="email" id="penanggungJawabEmail${pj.id}" name="penanggung_jawab[${pj.id}][email]" class="form-control" placeholder="Enter Email" value="${pj.email}" />
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="penanggungJawabNoHp${pj.id}" class="form-label">Nomor Hp</label>
+                                            <input type="number" id="penanggungJawabNoHp${pj.id}" name="penanggung_jawab[${pj.id}][nomor_hp]" class="form-control" placeholder="Enter Phone" value="${pj.nomor_hp}" />
+                                        </div>
+                                        <div class="col mb-0">
+                                            <button class="btn btn-outline-danger text-nowrap px-1 deleteButton" type="button">
+                                                <i data-feather="x" class="me-25"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row g-4">
+                                        <div class="col mb-0">
+                                            <label class="form-label" for="penanggungJawabGender${pj.id}">Jenis Kelamin</label>
+                                            <select class="form-select" id="penanggungJawabGender${pj.id}" name="penanggung_jawab[${pj.id}][jenis_kelamin]" data-bs-toggle="pill" aria-expanded="true">
+                                                <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                <option value="laki-laki" ${pj.jenis_kelamin == 'laki-laki' ? 'selected' : ''}>Laki-Laki</option>
+                                                <option value="perempuan" ${pj.jenis_kelamin == 'perempuan' ? 'selected' : ''}>Perempuan</option>
+                                            </select>
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label class="form-label" for="penanggungJawabIdentity${pj.id}">Jenis Identitas</label>
+                                            <select class="form-select" id="penanggungJawabIdentity${pj.id}" name="penanggung_jawab[${pj.id}][jenis_identitas]" data-bs-toggle="pill" aria-expanded="true">
+                                                <option value="" hidden>Pilih Jenis Identitas</option>
+                                                <option value="KTP" ${pj.jenis_identitas == 'KTP' ? 'selected' : ''}>KTP</option>
+                                                <option value="SIM" ${pj.jenis_identitas == 'SIM' ? 'selected' : ''}>SIM</option>
+                                                <option value="Paspor" ${pj.jenis_identitas == 'Paspor' ? 'selected' : ''}>Paspor</option>
+                                            </select>
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label for="penanggungJawabNoIdentitas${pj.id}" class="form-label">Nomor Identitas</label>
+                                            <input type="text" id="penanggungJawabNoIdentitas${pj.id}" name="penanggung_jawab[${pj.id}][nomor_identitas]" class="form-control" placeholder="Enter ID Number" value="${pj.nomor_identitas}" />
+                                        </div>
+                                        <div class="col mb-0">
+                                            <label class="form-label" for="penanggungJawabNationality${pj.id}">Kewarganegaraan</label>
+                                            <select class="form-select" id="penanggungJawabNationality${pj.id}" name="penanggung_jawab[${pj.id}][kewarganegaraan]" data-bs-toggle="pill" aria-expanded="true">
+                                                <option value="" hidden>Pilih Kewarganegaraan</option>
+                                                <option value="WNI" ${pj.kewarganegaraan == 'WNI' ? 'selected' : ''}>WNI</option>
+                                                <option value="WNA" ${pj.kewarganegaraan == 'WNA' ? 'selected' : ''}>WNA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            `;
+                            repeaterList.append(newItem);
+                        });
+
+                        feather.replace(); // Refresh ikon feather
+                        $('#dudiForm').attr('action', `{{ route('dudi.update', ':id') }}`.replace(':id', id)); // URL untuk memperbarui data
+                        $('#method').val('PUT');
+                        $('#dudiModal').modal('show');
                     },
                     error: function() {
                         alert('Failed to fetch data.');
@@ -724,21 +617,29 @@
                 });
             });
 
+            // Event handler for the "Delete" button
+            $(document).on('click', '.deleteButton', function() {
+                $(this).closest('[data-repeater-item]').find('input[type="hidden"]').attr('name', 'penanggung_jawab_delete[]');
+                $(this).closest('[data-repeater-item]').hide();
+            });
+
+
+            // Event listener untuk submit form
             $('#dudiForm').on('submit', function(e) {
                 e.preventDefault(); // Mencegah pengiriman form secara default
 
-                // Ambil data dari form
                 var formData = $(this).serialize();
+                var url = $(this).attr('action');
 
                 $.ajax({
-                    url: "{{ route('tambahDudi.store') }}",
+                    url: url,
                     method: 'POST',
                     data: formData,
                     success: function(response) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Dudi added successfully.',
+                            title: 'Dudi added/updated successfully.',
                             showConfirmButton: false,
                             timer: 1500,
                             customClass: {
@@ -763,204 +664,153 @@
                 });
             });
 
-            $('.editButton').on('click', function() {
-        var id = $(this).data('id');
-
-        $.ajax({
-            url: `/tambahDudi/${id}/edit`,
-            method: 'GET',
-            success: function(data) {
-                $('#edit_id').val(data.id);
-                $('#editDudiForm input[name="nama_rombel"]').val(data.nama_rombel);
-                $('#editDudiForm input[name="nama"]').val(data.nama);
-                $('#editDudiForm input[name="nib"]').val(data.nib);
-                $('#editDudiForm input[name="sk_pendirian"]').val(data.sk_pendirian);
-                $('#editDudiForm input[name="tipe"]').val(data.tipe);
-                $('#editDudiForm textarea[name="alamat"]').val(data.alamat);
-
-                $('#editDudiForm select[name="kriteria_id"]').val(data.kriteria_id).trigger('change');
-
-                // Load klasifikasi options
-                $.ajax({
-                    url: `/get-klasifikasi/${data.kriteria_id}`,
-                    method: 'GET',
-                    success: function(klasifikasiData) {
-                        $('#editDudiForm select[name="klasifikasi_id"]').empty().append('<option value="" hidden>Pilih Klasifikasi</option>');
-                        $.each(klasifikasiData, function(key, value) {
-                            $('#editDudiForm select[name="klasifikasi_id"]').append('<option value="' + value.id + '">' + value.nama_klasifikasi + '</option>');
-                        });
-                        $('#editDudiForm select[name="klasifikasi_id"]').val(data.klasifikasi_id).trigger('change.select2');
-                    }
-                });
-
-                $('#editDudiForm select[name="province_id"]').val(data.province_id).trigger('change.select2');
-            $.ajax({
-                url: `/getRegencies/${data.province_id}`,
-                method: 'GET',
-                success: function(regencies) {
-                    $('#editDudiForm select[name="regency_id"]').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
-                    $.each(regencies, function(key, value) {
-                        $('#editDudiForm select[name="regency_id"]').append('<option value="' + key + '">' + value + '</option>');
-                    });
-                    $('#editDudiForm select[name="regency_id"]').val(data.regency_id).trigger('change.select2');
-
+            // Dropdown dinamis
+            $('#province').change(function() {
+                var provinceID = $(this).val();
+                if (provinceID) {
                     $.ajax({
-                        url: `/getDistricts/${data.regency_id}`,
-                        method: 'GET',
-                        success: function(districts) {
-                            $('#editDudiForm select[name="district_id"]').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
-                            $.each(districts, function(key, value) {
-                                $('#editDudiForm select[name="district_id"]').append('<option value="' + key + '">' + value + '</option>');
-                            });
-                            $('#editDudiForm select[name="district_id"]').val(data.district_id).trigger('change.select2');
-
-                            $.ajax({
-                                url: `/getVillages/${data.district_id}`,
-                                method: 'GET',
-                                success: function(villages) {
-                                    $('#editDudiForm select[name="village_id"]').empty().append('<option value="" hidden>Pilih Desa</option>');
-                                    $.each(villages, function(key, value) {
-                                        $('#editDudiForm select[name="village_id"]').append('<option value="' + key + '">' + value + '</option>');
-                                    });
-                                    $('#editDudiForm select[name="village_id"]').val(data.village_id).trigger('change.select2');
-                                }
+                        url: '/getRegencies/' + provinceID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#regency').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
+                            $.each(data, function(key, value) {
+                                $('#regency').append('<option value="' + key + '">' + value + '</option>');
                             });
                         }
                     });
+                } else {
+                    $('#regency').empty().append('<option value="" hidden>Pilih Kabupaten</option>');
+                    $('#district').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
+                    $('#village').empty().append('<option value="" hidden>Pilih Desa</option>');
                 }
             });
 
-                $('#editDudiForm input[name="email_mitra"]').val(data.email_mitra);
-                $('#editDudiForm input[name="no_telp_mitra"]').val(data.no_telp_mitra);
-                $('#editDudiForm select[name="kerjasama"]').val(data.kerjasama);
-
-                // Handle KBLI
-                var selectedKbli = data.kblis.map(function(kbli) {
-                    return kbli.id;
-                });
-                $('#editDudiForm select[name="kbli[]"]').val(selectedKbli).trigger('change');
-
-                // Handle penanggung jawab
-                if (data.penanggung_jawab && Array.isArray(data.penanggung_jawab)) {
-                    $('.invoice-repeater[data-repeater-list="penanggung_jawab"]').empty();
-                    data.penanggung_jawab.forEach(function(pj, index) {
-                        // Append new field and populate with data
-                        $('.invoice-repeater[data-repeater-list="penanggung_jawab"]').append(
-                            `<div data-repeater-item>
-                                <div class="row g-4 mb-1">
-                                    <div class="col mb-0">
-                                        <label for="penanggungJawabNama" class="form-label">Nama</label>
-                                        <input type="text" id="penanggungJawabNama" name="penanggung_jawab[${index}][nama]" class="form-control" placeholder="Enter Name" value="${pj.nama}" />
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label for="penanggungJawabEmail" class="form-label">Email</label>
-                                        <input type="email" id="penanggungJawabEmail" name="penanggung_jawab[${index}][email]" class="form-control" placeholder="Enter Email" value="${pj.email}" />
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label for="penanggungJawabNoHp" class="form-label">Nomor Hp</label>
-                                        <input type="number" id="penanggungJawabNoHp" name="penanggung_jawab[${index}][no_hp]" class="form-control" placeholder="Enter Phone" value="${pj.no_hp}" />
-                                    </div>
-                                    <div class="col mb-0">
-                                        <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
-                                            <i data-feather="x" class="me-25"></i>
-                                            <span>Delete</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row g-4">
-                                    <div class="col mb-0">
-                                        <label class="form-label" for="penanggungJawabGender">Jenis Kelamin</label>
-                                        <select class="form-select" id="penanggungJawabGender" name="penanggung_jawab[${index}][jenis_kelamin]" data-bs-toggle="pill" aria-expanded="true">
-                                            <option value="" hidden>Pilih Jenis Kelamin</option>
-                                            <option value="laki-laki" ${pj.jenis_kelamin == 'laki-laki' ? 'selected' : ''}>Laki-Laki</option>
-                                            <option value="perempuan" ${pj.jenis_kelamin == 'perempuan' ? 'selected' : ''}>Perempuan</option>
-                                        </select>
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label class="form-label" for="penanggungJawabIdentity">Jenis Identitas</label>
-                                        <select class="form-select" id="penanggungJawabIdentity" name="penanggung_jawab[${index}][jenis_identitas]" data-bs-toggle="pill" aria-expanded="true">
-                                            <option value="" hidden>Pilih Jenis Identitas</option>
-                                            <option value="KTP" ${pj.jenis_identitas == 'KTP' ? 'selected' : ''}>KTP</option>
-                                            <option value="SIM" ${pj.jenis_identitas == 'SIM' ? 'selected' : ''}>SIM</option>
-                                            <option value="Paspor" ${pj.jenis_identitas == 'Paspor' ? 'selected' : ''}>Paspor</option>
-                                        </select>
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label for="penanggungJawabNoIdentitas" class="form-label">Nomor Identitas</label>
-                                        <input type="text" id="penanggungJawabNoIdentitas" name="penanggung_jawab[${index}][nomor_identitas]" class="form-control" placeholder="Enter ID Number" value="${pj.nomor_identitas}" />
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label class="form-label" for="penanggungJawabNationality">Kewarganegaraan</label>
-                                        <select class="form-select" id="penanggungJawabNationality" name="penanggung_jawab[${index}][kewarganegaraan]" data-bs-toggle="pill" aria-expanded="true">
-                                            <option value="" hidden>Pilih Kewarganegaraan</option>
-                                            <option value="WNI" ${pj.kewarganegaraan == 'WNI' ? 'selected' : ''}>WNI</option>
-                                            <option value="WNA" ${pj.kewarganegaraan == 'WNA' ? 'selected' : ''}>WNA</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <hr />
-                            </div>`
-                        );
+            $('#regency').change(function() {
+                var regencyID = $(this).val();
+                if (regencyID) {
+                    $.ajax({
+                        url: '/getDistricts/' + regencyID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#district').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
+                            $.each(data, function(key, value) {
+                                $('#district').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                        }
                     });
+                } else {
+                    $('#district').empty().append('<option value="" hidden>Pilih Kecamatan</option>');
+                    $('#village').empty().append('<option value="" hidden>Pilih Desa</option>');
                 }
+            });
 
-                $('#editdudi').modal('show');
-            },
-            error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: response.responseJSON.message,
-                    customClass: {
-                        confirmButton: 'btn btn-danger'
+            $('#district').change(function() {
+                var districtID = $(this).val();
+                if (districtID) {
+                    $.ajax({
+                        url: '/getVillages/' + districtID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('#village').empty().append('<option value="" hidden>Pilih Desa</option>');
+                            $.each(data, function(key, value) {
+                                $('#village').append('<option value="' + key + '">' + value + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#village').empty().append('<option value="" hidden>Pilih Desa</option>');
+                }
+            });
+
+
+            $('#basicSelect1').change(function() {
+                var kriteriaId = $(this).val();
+                console.log(kriteriaId);
+                if (kriteriaId) {
+                    $.ajax({
+                        url: '/get-klasifikasi/' + kriteriaId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log('Data received:', data); // Debugging
+                            $('#basicSelect2').empty();
+                            $('#basicSelect2').append('<option value="" hidden>Pilih Klasifikasi</option>');
+                            $.each(data, function(key, value) {
+                                $('#basicSelect2').append('<option value="' + value.id + '">' + value.nama_klasifikasi + '</option>');
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error); // Debugging
+                        }
+                    });
+                } else {
+                    $('#basicSelect2').empty();
+                    $('#basicSelect2').append('<option value="" hidden>Pilih Klasifikasi</option>');
+                }
+            });
+
+
+            $('.viewButton').on('click', function() {
+                var id = $(this).data('id');
+                var url = `{{ route('dudi.show', ':id') }}`.replace(':id', id);
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Memeriksa apakah data diterima dengan benar
+                        console.log(data);
+
+                        $('#dudi-nama').text(data.nama_perseroan);
+                        $('#dudi-tipe').text(data.tipe);
+                        $('#dudi-nib').text(data.nib);
+                        $('#dudi-tanggal-terbit').text(data.tanggal_terbit);
+                        $('#dudi-alamat').text(data.alamat);
+                        $('#dudi-email').text(data.email_mitra);
+                        $('#dudi-telp').text(data.no_mitra);
+                        $('#dudi-kriteria').text(data.kriteria ? data.kriteria.nama : '');
+                        $('#dudi-lingkup').text(data.lingkupkerjasama);
+                        $('#dudi-provinsi').text(data.provinsi ? data.provinsi.name : '');
+                        $('#dudi-kabupaten').text(data.kabupaten ? data.kabupaten.name : '');
+                        $('#dudi-kecamatan').text(data.kecamatan ? data.kecamatan.name : '');
+                        $('#dudi-kelurahan').text(data.desa ? data.desa.name : '');
+
+                        // Klasifikasi Baku Lapangan Usaha (KBLI)
+                        var kbliContent = '';
+                        $.each(data.klasifikasi_baku, function(index, kbli) {
+                            kbliContent += '<tr><td>' + (index + 1) + '</td><td>' + kbli.nama + '</td></tr>';
+                        });
+                        $('#dudi-kbli tbody').html(kbliContent);
+
+                        // Data Penanggung Jawab
+                        var pjContent = '';
+                        $.each(data.penanggung_jawabs, function(index, pj) {
+                            pjContent += '<tr>';
+                            pjContent += '<td>' + (index + 1) + '</td>';
+                            pjContent += '<td>' + pj.nama + '</td>';
+                            pjContent += '<td>' + pj.email + '</td>';
+                            pjContent += '<td>' + pj.nomor_hp + '</td>';
+                            pjContent += '<td>' + pj.jenis_kelamin + '</td>';
+                            pjContent += '<td>' + pj.jenis_identitas + '</td>';
+                            pjContent += '<td>' + pj.nomor_identitas + '</td>';
+                            pjContent += '<td>' + pj.kewarganegaraan + '</td>';
+                            pjContent += '</tr>';
+                        });
+                        $('#penanggung-jawab-list').html(pjContent);
+
+                        // Tampilkan modal
+                        $('#viewModal').modal('show');
                     },
-                    buttonsStyling: false
+                    error: function() {
+                        alert('Failed to fetch data.');
+                    }
                 });
-            }
+            });
         });
-    });
-
-    $('#editDudiForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var id = $('#edit_id').val();
-        var formData = $(this).serialize();
-
-        $.ajax({
-            url: `/tambahDudi/${id}`,
-            method: 'PUT',
-            data: formData,
-            success: function(response) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Dudi updated successfully.',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                }).then(() => {
-                    location.reload();
-                });
-            },
-            error: function(response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: response.responseJSON.message,
-                    customClass: {
-                        confirmButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
-                });
-            }
-        });
-    });
-
-        });
-
 
     </script>
 @endsection

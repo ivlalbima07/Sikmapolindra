@@ -42,4 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Definisikan relasi ke Dudi
+    public function dudis()
+    {
+        return $this->hasMany(Dudi::class, 'user_id');
+    }
 }
