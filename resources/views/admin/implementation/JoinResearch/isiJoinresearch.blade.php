@@ -158,54 +158,228 @@
                     <div class="row">
                         <h4 class="mt-2 text-center">Pilih Peserta</h4>
                         <hr>
-                        <p class="text-center">Program Studi Perancangan Manufaktur</p>
+
+                        <h4 class="text-center">Data Mahasiswa</h4>
                         <hr>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-                            <li class="nav-item row " style="height: 50%">
-                                <span class="col">0</span>
-                                <a class="nav-link active col" id="home-tab" data-bs-toggle="pill" href="#Mahasiswa"
-                                    aria-expanded="true">Mahasiswa</a>
-                            </li>
-                            <li class="nav-item nav-pill-success row">
-                                <span class="col" style="height: 30%">0</span>
-                                <a class="nav-link nav-pill-secondary col" id="profile-tab" data-bs-toggle="pill"
-                                    href="#Dosen" aria-expanded="false">Dosen</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                                    data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationmhs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIM</label>
+                                                <input type="text" class="form-control" name="certificationmhs[][nim]"
+                                                    placeholder="Masukan NIM" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][tempat_lahir]"
+                                                    placeholder="Masukan Tempat Lahir">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    name="certificationmhs[][tanggal_lahir]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
+                                                <select name="certificationmhs[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
                             </div>
-                            <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
-                                    data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <hr>
-                        <h4 class="mt-2 text-center">Dosen Penanggung Jawab</h4>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-success" data-bs-target="#modalToggle5"
-                                    data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada pic yang dipilih!
-                                </p>
+                                                <h4 class="text-center">Data Dosen</h4>
+                        <hr>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationdosens">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][nama]" placeholder="Masukan Nama"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIDN</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][nidn]" placeholder="Masukan NIDN"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][tempat_lahir]"
+                                                    placeholder="Masukan Tempat Lahir">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    name="certificationdosens[][tanggal_lahir]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenGender">Jenis Kelamin</label>
+                                                <select name="certificationdosens[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4 class="text-center">Data PENANGGUNG JAWAB</h4>
+                        <hr>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationpjs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIDN</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nidn]" placeholder="Masukan NIDN" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Prodi</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][prodi]" placeholder="Masukan Prodi">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -565,21 +739,21 @@
 
 @section('scripts')
     <script>
- document.getElementById('organizerSelect').addEventListener('change', function() {
-        // Hide all divs
-        document.getElementById('otherOrganizer').classList.add('hidden');
-        document.getElementById('otherOrganizer2').classList.add('hidden');
-        document.getElementById('otherOrganizer3').classList.add('hidden');
+        document.getElementById('organizerSelect').addEventListener('change', function() {
+            // Hide all divs
+            document.getElementById('otherOrganizer').classList.add('hidden');
+            document.getElementById('otherOrganizer2').classList.add('hidden');
+            document.getElementById('otherOrganizer3').classList.add('hidden');
 
-        // Show the div based on selected value
-        if (this.value === "Luar Negeri") {
-            document.getElementById('otherOrganizer').classList.remove('hidden');
-        } else if (this.value === "Anggaran Pendapatan dan Belanja Negara") {
-            document.getElementById('otherOrganizer2').classList.remove('hidden');
-        } else if (this.value === "Sharing Cost") {
-            document.getElementById('otherOrganizer3').classList.remove('hidden');
-        }
-    });
+            // Show the div based on selected value
+            if (this.value === "Luar Negeri") {
+                document.getElementById('otherOrganizer').classList.remove('hidden');
+            } else if (this.value === "Anggaran Pendapatan dan Belanja Negara") {
+                document.getElementById('otherOrganizer2').classList.remove('hidden');
+            } else if (this.value === "Sharing Cost") {
+                document.getElementById('otherOrganizer3').classList.remove('hidden');
+            }
+        });
 
 
         $(function() {

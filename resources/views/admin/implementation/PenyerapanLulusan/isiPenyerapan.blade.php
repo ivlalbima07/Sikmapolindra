@@ -11,8 +11,7 @@
     </style>
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>ISI DATA RISET TERAPAN - RUMAH SAKIT UMUM
-            DAERAH INDRAMAYU</h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>ISI Penyerapan lulusan</h4>
 
         <!-- Invoice List Table -->
         <div class="card p-2">
@@ -94,34 +93,23 @@
                                 <option class="dropdown-item">Tenaga kerja Tidak Tetap</option>
                             </select>
                         </div>
+
                         <div class="col mb-0">
                             <label class="form-label" for="basicSelect1">Gaji </label>
                             <select class="form-select" id="basicSelect1" data-bs-toggle="pill" aria-expanded="true">
                                 <option value="" hidden>Pilih Gaji</option>
-                                <option class="dropdown-item">Tenaga kerja Tetap</option>
-                                <option class="dropdown-item">Tenaga kerja Tidak Tetap</option>
+                                <option value="Dibawah Upah Minimum Provinsi (UMP)">Dibawah Upah Minimum Provinsi (UMP)
+                                </option>
+                                <option value="Diatas Upah Minimum Provinsi (UMP)">Diatas Upah Minimum Provinsi (UMP)
+                                </option>
                             </select>
                         </div>
                     </div>
                     <div class="row g-2 my-1">
                         <div class="col mb-0">
                             <label class="form-label" for="basicSelect1">Jabatan </label>
-                            <select class="form-select" id="basicSelect1" data-bs-toggle="pill" aria-expanded="true">
-                                <option value="" hidden>Pilih Jabatan</option>
-                                <option value="Chief Financial Officer (CFO)">Chief Financial Officer (CFO)</option>
-                                <option value="Chief Information Officer (CIO)">Chief Information Officer (CIO)</option>
-                                <option value="Chief Marketing Officer (CMO)">Chief Marketing Officer (CMO)</option>
-                                <option value="Chief Operations Officer (COO)">Chief Operations Officer (COO)</option>
-                                <option value="Manager Sumber Daya Manusia (HRD)">Manager Sumber Daya Manusia (HRD)
-                                </option>
-                                <option value="Manager Teknologi Informasi (TI)">Manager Teknologi Informasi (TI)</option>
-                                <option value="Manajer Pemasaran">Manajer Pemasaran</option>
-                                <option value="Manajer Produk">Manajer Produk</option>
-                                <option value="Manajer Penjualan">Manajer Penjualan</option>
-                                <option value="Staff">Staff</option>
-                                <option value="Karyawan">Karyawan</option>
+                            <input type="text" class="form-control">
 
-                            </select>
                         </div>
                         <div class="col mb-0">
                             <label for="emailBasic" class="form-label">Tanggal Mulai Berkerja*</label>
@@ -132,41 +120,142 @@
                     <div class="row">
                         <h4 class="mt-2 text-center">Pilih Peserta</h4>
                         <hr>
-                        <p class="text-center">Program Studi Perancangan Manufaktur</p>
+
+                        <h4 class="text-center">Data Mahasiswa</h4>
                         <hr>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-                            <li class="nav-item row " style="height: 50%">
-                                <span class="col">0</span>
-                                <a class="nav-link active col" id="home-tab" data-bs-toggle="pill" href="#Mahasiswa"
-                                    aria-expanded="true">Mahasiswa</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                                    data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationmhs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIM</label>
+                                                <input type="text" class="form-control" name="certificationmhs[][nim]"
+                                                    placeholder="Masukan NIM" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][tempat_lahir]"
+                                                    placeholder="Masukan Tempat Lahir">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    name="certificationmhs[][tanggal_lahir]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
+                                                <select name="certificationmhs[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <hr>
-                        <h4 class="mt-2 text-center">Dosen Penanggung Jawab</h4>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-success" data-bs-target="#modalToggle5"
-                                    data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada pic yang dipilih!
-                                </p>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationpjs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIDN</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nidn]" placeholder="Masukan NIDN" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Prodi</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][prodi]" placeholder="Masukan Prodi">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -176,454 +265,6 @@
                         <section id="toastr-types">
                             <button type="button" id="type-success2222" class="btn btn-outline-success">simpan</button>
                         </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal mahasiswa-->
-        <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Form Tambah Data Mahasiswa</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
-                            <div class="row">
-                                <!-- Invoice repeater -->
-                                <div class="col-12">
-                                    <div class="card">
-
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">Nim</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Tempat
-                                                                        Lahir</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="fp-default">Tanggal
-                                                                        Lahir</label>
-                                                                    <input type="date"
-                                                                        class="form-control invoice-edit-input date-picker" />
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="d-block form-label">Gender</label>
-                                                                    <div class="form-check my-50">
-                                                                        <input type="radio" id="validationRadiojq1"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq1">Male</label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input type="radio" id="validationRadiojq2"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq2">Female</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Invoice repeater -->
-                            </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal dosen-->
-        <div class="modal fade" id="modalToggle3" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Form Tambah Data Dosen</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
-                            <div class="row">
-                                <!-- Invoice repeater -->
-                                <div class="col-12">
-                                    <div class="card">
-
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">NIDN</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Tempat
-                                                                        Lahir</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="fp-default">Tanggal
-                                                                        Lahir</label>
-                                                                    <input type="date"
-                                                                        class="form-control invoice-edit-input date-picker" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="d-block form-label">Jenis Kelamin</label>
-                                                                    <div class="form-check my-50">
-                                                                        <input type="radio" id="validationRadiojq1"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq1">Male</label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input type="radio" id="validationRadiojq2"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq2">Female</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Invoice repeater -->
-                            </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal instruktur dudi-->
-        <div class="modal fade" id="modalToggle4" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Form Tambah Data Instruktur Dudi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
-                            <div class="row">
-                                <!-- Invoice repeater -->
-                                <div class="col-12">
-                                    <div class="card">
-
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">No.ID</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label"
-                                                                        for="itemname">Jabatan</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="fp-default">No.
-                                                                        Telepon</label>
-                                                                    <input type="number"
-                                                                        class="form-control invoice-edit-input date-picker" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Email</label>
-                                                                    <input type="email" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Invoice repeater -->
-                            </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Dosen Penanggung Jawab-->
-        <div class="modal fade" id="modalToggle5" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Modal 5</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
-                            <div class="row">
-                                <!-- Invoice repeater -->
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">NIDN</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Prodi</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Invoice repeater -->
-                            </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
                     </div>
                 </div>
             </div>

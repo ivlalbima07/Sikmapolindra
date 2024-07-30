@@ -73,7 +73,7 @@
     <!-- Modal 1-->
     <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" data-bs-backdrop="static" tabindex="-1"
         style="display: none" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalToggleLabel">Form Tambah Data</h5>
@@ -99,19 +99,7 @@
                     <div class="my-1">
                         <div class="mb-1">
                             <label class="form-label" for="basicSelect1">Bidang Riset </label>
-                            <select class="form-select" id="basicSelect1" data-bs-toggle="pill" aria-expanded="true">
-                                <option value="" hidden>Pilih bidang riset</option>
-                                <option class="dropdown-item">Pangan</option>
-                                <option class="dropdown-item">Kesehatan</option>
-                                <option class="dropdown-item">Energi</option>
-                                <option class="dropdown-item">Pertahanan dan Keamanan</option>
-                                <option class="dropdown-item">Teknologi Informasi dan Komunikasi</option>
-                                <option class="dropdown-item">Kemaritiman</option>
-                                <option class="dropdown-item">Kebencanaan</option>
-                                <option class="dropdown-item">Transportasi</option>
-                                <option class="dropdown-item">Material Maju</option>
-                                <option class="dropdown-item">Sosial Humaniora, Pendidikan Seni, dan Budaya</option>
-                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="my-1">
@@ -121,138 +109,47 @@
                     <div class="my-1">
                         <div class=" mb-0">
                             <label class="form-label" for="select2-multiple">Luaran</label>
-                                            <select class="select2 form-select" id="select2-multiple" multiple>
-                                                <optgroup label="">
-                                                    <option value="AK">Publikasi Ilmiah Jurnal Internasional</option>
-                                                    <option value="AK">Publikasi Ilmiah Jurnal Nasional Terakreditasi</option>
-                                                    <option value="HI">Prosiding</option>
-                                                    <option value="HI">Buku Hasil Penelitian ber-ISBN</option>
-                                                    <option value="HI">Book Chapter</option>
-                                                    <option value="HI">Metode</option>
-                                                    <option value="HI">Blue Print</option>
-                                                    <option value="HI">Sistem</option>
-                                                    <option value="HI">Modal</option>
-                                                    <option value="HI">Naskah Kebijakan</option>
-                                                    <option value="HI">Teknologi Tepat Guna (TTG)</option>
-                                                    <option value="HI">Paten</option>
-                                                    <option value="HI">Prototipe R&D</option>
-                                                    <option value="HI">Prototipe laik Industri</option>
-                                                    <option value="HI"></option>
-                                                    <option value="HI"></option>
-                                                </optgroup>
-                                            </select>
+                            <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="my-1">
                         <div class="mb-1">
                             <label class="form-label" for="basicSelect1">Tahun Pembiayaan</label>
-                            <select name="" id="" class="form-select">
-                                <option value="" hidden>Pilih Tahun Pembiayaan</option>
-                                <option class="dropdown-item">2021</option>
-                                <option class="dropdown-item">2022</option>
-                                <option class="dropdown-item">2023</option>
-                            </select>
-
+                            <input type="text" class="form-control">
                         </div>
                     </div>
 
                     <div class="card-body">
                         <label for=""> Sumber Biaya </label>
                         <hr>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="pill" href="#home"
-                                    aria-expanded="true">Dunia Kerja</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile"
-                                    aria-expanded="false">Satuan Pendidikan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile2"
-                                    aria-expanded="false">P. Daerah</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile3"
-                                    aria-expanded="false">P. pusat</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="about-tab" data-bs-toggle="pill" href="#about"
-                                    aria-expanded="false">Cost sharing</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <hr>
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <label class="mb-1" for=""> Nominal Biaya dari Dunia Kerja</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
+                        <div class="card body p-2">
+                            <label class="mb-1" for=""> Nominal Biaya dari Dunia Kerja</label>
+                            <div class="input-group input-group-merge mb-2">
+                                <span class="input-group-text">RP.</span>
+                                <input type="number" class="form-control" placeholder="100"
+                                    aria-label="Amount (to the nearest dollar)" name="biaya_dari_dunia_kerja" />
+                                <span class="input-group-text">.00</span>
                             </div>
-                            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <label class="mb-1" for=""> Nominal Biaya dari Satuan Pendidikan</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
+                            <label class="mb-1" for=""> Nominal Biaya dari Satuan Pendidikan</label>
+                            <div class="input-group input-group-merge mb-2">
+                                <span class="input-group-text">RP.</span>
+                                <input type="number" class="form-control" placeholder="100"
+                                    aria-label="Amount (to the nearest dollar)" name="biaya_dari_satuan_pendidikan" />
+                                <span class="input-group-text">.00</span>
                             </div>
-                            <div class="tab-pane" id="profile2" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Daerah</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
+                            <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Daerah</label>
+                            <div class="input-group input-group-merge mb-2">
+                                <span class="input-group-text">RP.</span>
+                                <input type="number" class="form-control" placeholder="100"
+                                    aria-label="Amount (to the nearest dollar)" name="biaya_dari_pemerintah_daerah" />
+                                <span class="input-group-text">.00</span>
                             </div>
-                            <div class="tab-pane" id="profile3" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Pusat</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab"
-                                aria-expanded="false">
-                                <label class="mb-1" for=""> Nominal Biaya dari Satuan Pendidikan</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
-                                <label class="mb-1" for=""> Nominal Biaya dari DUDI</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
-                                <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Daerah</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
-                                <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Pusat</label>
-                                <div class="input-group input-group-merge mb-2">
-                                    <span class="input-group-text">RP.</span>
-                                    <input type="text" class="form-control" placeholder="100"
-                                        aria-label="Amount (to the nearest dollar)" />
-                                    <span class="input-group-text">.00</span>
-                                </div>
+                            <label class="mb-1" for=""> Nominal Biaya dari Pemerintah Pusat</label>
+                            <div class="input-group input-group-merge mb-2">
+                                <span class="input-group-text">RP.</span>
+                                <input type="number" class="form-control" placeholder="100"
+                                    aria-label="Amount (to the nearest dollar)" name="biaya_dari_pemerintah_pusat" />
+                                <span class="input-group-text">.00</span>
                             </div>
                         </div>
                     </div>
@@ -260,56 +157,229 @@
                     <div class="row">
                         <h4 class="mt-2 text-center">Pilih Peserta</h4>
                         <hr>
-                        <p class="text-center">Program Studi Perancangan Manufaktur</p>
+                        <h4 class="text-center">Data Mahasiswa</h4>
                         <hr>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-                            <li class="nav-item row " style="height: 50%">
-                                <span class="col">0</span>
-                                <a class="nav-link active col" id="home-tab" data-bs-toggle="pill" href="#Mahasiswa"
-                                    aria-expanded="true">Mahasiswa</a>
-                            </li>
-                            <li class="nav-item nav-pill-success row">
-                                <span class="col" style="height: 30%">0</span>
-                                <a class="nav-link nav-pill-secondary col" id="profile-tab" data-bs-toggle="pill"
-                                    href="#Dosen" aria-expanded="false">Dosen</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                                    data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationmhs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIM</label>
+                                                <input type="text" class="form-control" name="certificationmhs[][nim]"
+                                                    placeholder="Masukan NIM" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationmhs[][tempat_lahir]"
+                                                    placeholder="Masukan Tempat Lahir">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    name="certificationmhs[][tanggal_lahir]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
+                                                <select name="certificationmhs[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
                             </div>
-                            <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
-                                    data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        <h4 class="text-center">Data Dosen</h4>
                         <hr>
-                        <h4 class="mt-2 text-center">Dosen Penanggung Jawab</h4>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-success" data-bs-target="#modalToggle5"
-                                    data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada pic yang dipilih!
-                                </p>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationdosens">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][nama]" placeholder="Masukan Nama"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIDN</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][nidn]" placeholder="Masukan NIDN"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Tempat Lahir</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationdosens[][tempat_lahir]"
+                                                    placeholder="Masukan Tempat Lahir">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Tanggal Lahir</label>
+                                                <input type="date" class="form-control"
+                                                    name="certificationdosens[][tanggal_lahir]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenGender">Jenis Kelamin</label>
+                                                <select name="certificationdosens[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        <h4 class="text-center">Penanggung Jawab</h4>
+                        <hr>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="certificationpjs">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Nama</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nama]" placeholder="Masukan Nama" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemcost">NIDN</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][nidn]" placeholder="Masukan NIDN" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1"
+                                                    data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="itemname">Prodi</label>
+                                                <input type="text" class="form-control"
+                                                    name="certificationpjs[][prodi]" placeholder="Masukan Prodi">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                     </div>
                     <div class="modal-footer">
