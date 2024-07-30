@@ -28,8 +28,8 @@
                                     <td class="align-top">{{ $item->jurusan }}</td>
                                     <td class="align-top">
                                        
-                                            <div >
-                                    <button type="button" onclick="location.href='/isiPenyerapan'" class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
+                                <div>
+                                    <button type="button" onclick="location.href='/Penyerapan/isiPenyerapan/{{ $item->id }}'" class="btn btn-success btn-sm"><i data-feather='book'></i>Isi Pelaksanaan</button>
                                 </div>
 
                                     </td>

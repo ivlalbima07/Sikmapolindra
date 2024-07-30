@@ -16,15 +16,16 @@
         <!-- Invoice List Table -->
         <div class="card p-2">
             <div class="card-datatables table-responsive">
-                <div class="d-flex justify-content-end"> <button class="btn btn-success rounded-pill "data-bs-toggle="modal"
-                        data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#modalToggle" type="button">
+                        <i class="bx bx-plus-circle"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                        </svg> Tambah
-                    </button> </div>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg>
+                        Tambah
+                    </button>
+                </div>
                 <table class="datatables table table-borderles table-striped dt-advanced-search table">
                     <thead>
                         <tr>
@@ -32,527 +33,328 @@
                             <th>Nama Joint Research</th>
                             <th>Durasi</th>
                             <th>Jumlah Partisipan Peserta</th>
-                            <th>Jumlah Partisipan Dosen Biaya</th>
-                            <th>Biaya</th>
+                            <th>Jumlah Partisipan Dosen</th>
+                            <th>Nominal Biaya Luar Negeri</th>
+                            <th>Nominal Biaya APBN</th>
                             <th>Jumlah Total Biaya</th>
-                            <th>Dokumen Bidang Riset</th>
+                            <th>Dokumen</th>
+                            <th>Bidang Riset</th>
                             <th>Produk Riset</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($joinResets as $index => $joinReset)
                         <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
+                            <th class="align-top">{{ $index + 1 }}</th>
+                            <td class="align-top">{{ $joinReset->nama_joint_research }}</td>
+                            <td class="align-top">{{ \Carbon\Carbon::parse($joinReset->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($joinReset->tanggal_selesai)) }} hari</td>
+                            <td class="align-top">{{ $joinReset->mahasiswa }}</td>
+                            <td class="align-top">{{ $joinReset->dosen }}</td>
+                            <td class="align-top">{{ $joinReset->nominal_biaya_luar_negeri }}</td>
+                            <td class="align-top">{{ $joinReset->nominal_biaya_apbn }}</td>
+                            <td class="align-top">
+                                {{ $joinReset->nominal_biaya_luar_negeri + $joinReset->nominal_biaya_apbn }}
+                            </td>
+                            <td class="align-top">{{ $joinReset->dokumen }}</td>
+                            <td class="align-top">{{ $joinReset->bidang_riset }}</td>
+                            <td class="align-top">{{ $joinReset->produk_riset }}</td>
                             <td class="align-top">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Update data"><i data-feather='edit'></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Update data">
+                                        <i data-feather='edit'></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus data">
+                                        <i data-feather='trash-2'></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+             
     </div>
 
 
 
 
-    <!-- Modal 1-->
-    <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" data-bs-backdrop="static" tabindex="-1"
-        style="display: none" aria-hidden="true">
+    <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalToggleLabel">Form Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
-                    <div class="my-1">
-                        <label for="label-form">Nama Joint Research* </label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-0">
-                            <label for="emailBasic" class="form-label">Tanggal Mulai</label>
-                            <input type="date" class="form-control invoice-edit-input date-picker" />
-                        </div>
-                        <div class="col mb-0">
-                            <label for="emailBasic" class="form-label">Tanggal Selesai</label>
-                            <div class="input-group input-group-merge">
-                                <input type="date" class="form-control invoice-edit-input date-picker" />
+                <div class="modal-body">
+                    <form action="{{ route('isi.join.research.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <!-- Nama Joint Research -->
+                            <div class="col mb-3">
+                                <label for="nama_joint_research" class="form-label">Nama Joint Research</label>
+                                <input type="text" class="form-control" id="nama_joint_research" name="nama_joint_research" required>
+                            </div>
+                            <!-- Tanggal Mulai dan Tanggal Selesai -->
+                            <div class="row g-2 mb-3">
+                                <div class="col mb-0">
+                                    <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+                                    <input type="date" name="tanggal_mulai" class="form-control" required>
+                                </div>
+                                <div class="col mb-0">
+                                    <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
+                                    <input type="date" name="tanggal_selesai" class="form-control" required>
+                                </div>
+                            </div>
+                            <!-- Bidang Riset -->
+                            <div class="col mb-3">
+                                <label for="bidang_riset" class="form-label">Bidang Riset</label>
+                                <select class="form-select" id="bidang_riset" name="bidang_riset" required>
+                                    <option value="" hidden>Pilih bidang riset</option>
+                                    <option value="Pangan">Pangan</option>
+                                    <option value="Kesehatan">Kesehatan</option>
+                                    <option value="Energi">Energi</option>
+                                    <option value="Pertahanan dan Keamanan">Pertahanan dan Keamanan</option>
+                                    <option value="Teknologi Informasi dan Komunikasi">Teknologi Informasi dan Komunikasi</option>
+                                    <option value="Kemaritiman">Kemaritiman</option>
+                                    <option value="Kebencanaan">Kebencanaan</option>
+                                    <option value="Transportasi">Transportasi</option>
+                                    <option value="Material Maju">Material Maju</option>
+                                    <option value="Sosial Humaniora, Pendidikan Seni, dan Budaya">Sosial Humaniora, Pendidikan Seni, dan Budaya</option>
+                                </select>
+                            </div>
+                            <!-- Produk Riset -->
+                            <div class="col mb-3">
+                                <label for="produk_riset" class="form-label">Produk Riset</label>
+                                <input type="text" class="form-control" id="produk_riset" name="produk_riset">
+                            </div>
+                            <!-- Dokumen -->
+                            <div class="col mb-3">
+                                <label for="dokumen" class="form-label">Dokumen</label>
+                                <input class="form-control" type="file" id="dokumen" name="dokumen" />
+                            </div>
+                            <!-- Sumber Biaya -->
+                            <div class="col mb-3">
+                                <label for="sumber_biaya" class="form-label">Sumber Biaya</label>
+                                <select class="form-select" id="sumber_biaya" name="sumber_biaya" onchange="showHideNominalInputs()" required>
+                                    <option value="" hidden>Pilih</option>
+                                    <option value="Luar Negeri">Luar Negeri</option>
+                                    <option value="APBN">Anggaran Pendapatan dan Belanja Negara</option>
+                                    <option value="Sharing Cost">Sharing Cost</option>
+                                </select>
+                            </div>
+                            <div class="col mb-3 hidden" id="nominal_biaya_luar_negeri_wrapper">
+                                <label for="nominal_biaya_luar_negeri" class="form-label">Nominal Biaya dari Luar Negeri</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">RP.</span>
+                                    <input type="number" class="form-control" id="nominal_biaya_luar_negeri" name="nominal_biaya_luar_negeri" placeholder="100">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                            <div class="col mb-3 hidden" id="nominal_biaya_apbn_wrapper">
+                                <label for="nominal_biaya_apbn" class="form-label">Nominal Biaya dari APBN</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">RP.</span>
+                                    <input type="number" class="form-control" id="nominal_biaya_apbn" name="nominal_biaya_apbn" placeholder="100">
+                                    <span class="input-group-text">.00</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row g-2 my-1">
-                        <div class="col mb-0">
-                            <label class="form-label" for="basicSelect1">Bidang Riset </label>
-                            <select class="form-select" id="basicSelect1" data-bs-toggle="pill" aria-expanded="true">
-                                <option value="" hidden>Pilih bidang riset</option>
-                                <option class="dropdown-item">Pangan</option>
-                                <option class="dropdown-item">Kesehatan</option>
-                                <option class="dropdown-item">Energi</option>
-                                <option class="dropdown-item">Pertahanan dan Keamanan</option>
-                                <option class="dropdown-item">Teknologi Informasi dan Komunikasi</option>
-                                <option class="dropdown-item">Kemaritiman</option>
-                                <option class="dropdown-item">Kebencanaan</option>
-                                <option class="dropdown-item">Transportasi</option>
-                                <option class="dropdown-item">Material Maju</option>
-                                <option class="dropdown-item">Sosial Humaniora, Pendidikan Seni, dan Budaya</option>
-                            </select>
-                        </div>
-                        <div class="col mb-0">
-                            <label for="label-form">Produk Riset </label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row g-2 my-1">
-                        <div class="col mb-0">
-                            <label for="nameBasic" class="form-label">Dokumen</label>
-                            <input class="form-control" type="file" id="formFile" />
-                        </div>
-                        <div class="col mb-0">
-                            <label class="form-label" for="basicSelect">Produk Riset </label>
-                            <select class="form-select" id="organizerSelect" data-bs-toggle="pill" aria-expanded="true">
-                                <option value="" hidden>Pilih</option>
-                                <option value="Luar Negeri">Luar Negeri</option>
-                                <option value="Anggaran Pendapatan dan Belanja Negara">Anggaran Pendapatan dan Belanja
-                                    Negara</option>
-                                <option value="Sharing Cost">Sharing Cost</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-1 hidden" id="otherOrganizer">
-                        <label for="label-form">Nominal Biaya dari Luar Negeri</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="hidden" id="otherOrganizer2">
-                        <label for="label-form">Nominal Biaya dari APBN</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="hidden" id="otherOrganizer3">
-                        <div class="my-1">
-                            <label for="label-form">Nominal Biaya dari Luar Negeri</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div>
-                            <label for="label-form">Nominal Biaya dari APBN</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <hr>
-                    <div class="row">
-                        <h4 class="mt-2 text-center">Pilih Peserta</h4>
+                        <!-- Mahasiswa Join Reset -->
+                        <h4 class="mt-2 text-center">Mahasiswa</h4>
                         <hr>
-                        <p class="text-center">Program Studi Perancangan Manufaktur</p>
-                        <hr>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-                            <li class="nav-item row " style="height: 50%">
-                                <span class="col">0</span>
-                                <a class="nav-link active col" id="home-tab" data-bs-toggle="pill" href="#Mahasiswa"
-                                    aria-expanded="true">Mahasiswa</a>
-                            </li>
-                            <li class="nav-item nav-pill-success row">
-                                <span class="col" style="height: 30%">0</span>
-                                <a class="nav-link nav-pill-secondary col" id="profile-tab" data-bs-toggle="pill"
-                                    href="#Dosen" aria-expanded="false">Dosen</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-primary" data-bs-target="#modalToggle2"
-                                    data-bs-toggle="modal"><i data-feather='users'></i>pilih</button>
-                            </div>
-                            <div class="tab-pane" id="Dosen" role="tabpanel" aria-labelledby="profile-tab"
-                                aria-expanded="false">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada data yang dipilih!
-                                </p>
-                                <button type="button" class="btn btn-secondary" data-bs-target="#modalToggle3"
-                                    data-bs-toggle="modal"><i data-feather='user-plus'></i>pilih</button>
-                            </div>
-                        </div>
-                        <hr>
-                        <h4 class="mt-2 text-center">Dosen Penanggung Jawab</h4>
-                        <ul class="nav nav-pills d-flex justify-content-around">
-
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-success" data-bs-target="#modalToggle5"
-                                    data-bs-toggle="modal"><i data-feather='briefcase'></i>pilih</button>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                aria-expanded="true">
-                                <p style="background-color: rgb(249, 192, 192)">
-                                    Belum ada pic yang dipilih!
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <section id="toastr-types">
-                            <button type="button" id="type-success2222" class="btn btn-outline-success">simpan</button>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal mahasiswa-->
-        <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Form Tambah Data Mahasiswa</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
-                            <div class="row">
-                                <!-- Invoice repeater -->
-                                <div class="col-12">
-                                    <div class="card">
-
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">Nim</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Tempat
-                                                                        Lahir</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="fp-default">Tanggal
-                                                                        Lahir</label>
-                                                                    <input type="date"
-                                                                        class="form-control invoice-edit-input date-picker" />
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="d-block form-label">Gender</label>
-                                                                    <div class="form-check my-50">
-                                                                        <input type="radio" id="validationRadiojq1"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq1">Male</label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input type="radio" id="validationRadiojq2"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq2">Female</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="mahasiswa_join_reset">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaNama">Nama</label>
+                                                <input type="text" name="mahasiswa_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaNim">NIM</label>
+                                                <input type="text" name="mahasiswa_join_reset[][nim]" class="form-control" placeholder="32" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaTempatLahir">Tempat Lahir</label>
+                                                <input type="text" name="mahasiswa_join_reset[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaTanggalLahir">Tanggal Lahir</label>
+                                                <input type="date" name="mahasiswa_join_reset[][tanggal_lahir]" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50"></div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
+                                                <select name="mahasiswa_join_reset[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12"></div>
+                                        <div class="col-md-2 col-12 mb-50"></div>
+                                    </div>
+                                    <hr />
                                 </div>
-                                <!-- /Invoice repeater -->
                             </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal dosen-->
-        <div class="modal fade" id="modalToggle3" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Form Tambah Data Dosen</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
                             <div class="row">
-                                <!-- Invoice repeater -->
                                 <div class="col-12">
-                                    <div class="card">
-
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">NIDN</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Tempat
-                                                                        Lahir</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="fp-default">Tanggal
-                                                                        Lahir</label>
-                                                                    <input type="date"
-                                                                        class="form-control invoice-edit-input date-picker" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="d-block form-label">Jenis Kelamin</label>
-                                                                    <div class="form-check my-50">
-                                                                        <input type="radio" id="validationRadiojq1"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq1">Male</label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input type="radio" id="validationRadiojq2"
-                                                                            name="validationRadiojq"
-                                                                            class="form-check-input" />
-                                                                        <label class="form-check-label"
-                                                                            for="validationRadiojq2">Female</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dosen Join Reset -->
+                        <h4 class="mt-2 text-center">Dosen</h4>
+                        <hr>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="dosen_join_reset">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenNama">Nama</label>
+                                                <input type="text" name="dosen_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenNidn">NIDN</label>
+                                                <input type="text" name="dosen_join_reset[][nidn]" class="form-control" placeholder="32" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenTempatLahir">Tempat Lahir</label>
+                                                <input type="text" name="dosen_join_reset[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenTanggalLahir">Tanggal Lahir</label>
+                                                <input type="date" name="dosen_join_reset[][tanggal_lahir]" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50"></div>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="dosenGender">Jenis Kelamin</label>
+                                                <select name="dosen_join_reset[][jenis_kelamin]" class="form-select">
+                                                    <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                    <option value="Laki-Laki">Laki-Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12"></div>
+                                        <div class="col-md-2 col-12 mb-50"></div>
+                                    </div>
+                                    <hr />
                                 </div>
-                                <!-- /Invoice repeater -->
                             </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Dosen Penanggung Jawab-->
-        <div class="modal fade" id="modalToggle5" aria-hidden="true" aria-labelledby="modalToggleLabel2"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalToggleLabel2">Modal 5</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <section class="form-control-repeater">
                             <div class="row">
-                                <!-- Invoice repeater -->
                                 <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="#" class="invoice-repeater">
-                                                <div data-repeater-list="invoice">
-                                                    <div data-repeater-item>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Nama</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemcost">NIDN</label>
-                                                                    <input type="number" class="form-control"
-                                                                        id="itemcost" aria-describedby="itemcost"
-                                                                        placeholder="32" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                                        data-repeater-delete type="button">
-                                                                        <i data-feather="x" class="me-25"></i>
-                                                                        <span>Delete</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row d-flex align-items-end">
-                                                            <div class="col-md-5 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="itemname">Prodi</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="itemname" aria-describedby="itemname"
-                                                                        placeholder="Masukan Nama" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-12">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 mb-50">
-                                                                <div class="mb-1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <button class="btn btn-icon btn-primary" type="button"
-                                                            data-repeater-create>
-                                                            <i data-feather="plus" class="me-25"></i>
-                                                            <span>Add New</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Penanggung Jawab Join Reset -->
+                        <h4 class="mt-2 text-center">Penanggung Jawab</h4>
+                        <hr>
+                        <div class="card-body invoice-repeater">
+                            <div data-repeater-list="penanggung_jawab_join_reset">
+                                <div data-repeater-item>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="penanggungJawabNama">Nama</label>
+                                                <input type="text" name="penanggung_jawab_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="penanggungJawabNidn">NIDN</label>
+                                                <input type="text" name="penanggung_jawab_join_reset[][nidn]" class="form-control" placeholder="32" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="mb-1">
+                                                <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                                                    <i data-feather="x" class="me-25"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-md-5 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="penanggungJawabProdi">Prodi</label>
+                                                <input type="text" name="penanggung_jawab_join_reset[][prodi]" class="form-control" placeholder="Masukan Prodi" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-12"></div>
+                                        <div class="col-md-2 col-12 mb-50"></div>
+                                    </div>
+                                    <hr />
                                 </div>
-                                <!-- /Invoice repeater -->
                             </div>
-                        </section>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-bs-dismiss="modal">Back to first</button>
-                    </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -565,21 +367,27 @@
 
 @section('scripts')
     <script>
- document.getElementById('organizerSelect').addEventListener('change', function() {
-        // Hide all divs
-        document.getElementById('otherOrganizer').classList.add('hidden');
-        document.getElementById('otherOrganizer2').classList.add('hidden');
-        document.getElementById('otherOrganizer3').classList.add('hidden');
+ function showHideNominalInputs() {
+    var sumberBiaya = document.getElementById("sumber_biaya").value;
+    var luarNegeriWrapper = document.getElementById("nominal_biaya_luar_negeri_wrapper");
+    var apbnWrapper = document.getElementById("nominal_biaya_apbn_wrapper");
+    var luarNegeriInput = document.getElementById("nominal_biaya_luar_negeri");
+    var apbnInput = document.getElementById("nominal_biaya_apbn");
 
-        // Show the div based on selected value
-        if (this.value === "Luar Negeri") {
-            document.getElementById('otherOrganizer').classList.remove('hidden');
-        } else if (this.value === "Anggaran Pendapatan dan Belanja Negara") {
-            document.getElementById('otherOrganizer2').classList.remove('hidden');
-        } else if (this.value === "Sharing Cost") {
-            document.getElementById('otherOrganizer3').classList.remove('hidden');
-        }
-    });
+    luarNegeriWrapper.classList.add('hidden');
+    apbnWrapper.classList.add('hidden');
+    luarNegeriInput.value = '';
+    apbnInput.value = '';
+
+    if (sumberBiaya === 'Luar Negeri') {
+        luarNegeriWrapper.classList.remove('hidden');
+    } else if (sumberBiaya === 'APBN') {
+        apbnWrapper.classList.remove('hidden');
+    } else if (sumberBiaya === 'Sharing Cost') {
+        luarNegeriWrapper.classList.remove('hidden');
+        apbnWrapper.classList.remove('hidden');
+    }
+}
 
 
         $(function() {

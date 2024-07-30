@@ -2,6 +2,14 @@
 
 @section('title', 'Instruktur/Pendamping DUDI')
 
+<style>
+    .card-body {
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+</style>
+
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span> INSTRUKTUR/PENDAMPING DUDI</h4>
@@ -9,13 +17,12 @@
         <!-- Invoice List Table -->
         <div class="card p-2">
             <div class="card-datatables table-responsive">
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end mb-2">
                     <button class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#tambah">
-                        <i class="bx bx-plus-circle"></i>
-                        Tambah
+                        <i class="bx bx-plus-circle"></i> Tambah
                     </button>
                 </div>
-                <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                <table class="datatables table table-borderless table-striped dt-advanced-search table">
                     <thead>
                         <tr>
                             <th>NO</th>
@@ -33,37 +40,40 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $index => $item)
-                            <tr>
-                                <td class="align-top">{{ $index + 1 }}</td>
-                                <td class="align-top">{{ $item->nama_rombongan }}</td>
-                                <td class="align-top">{{ $item->pendamping_industri ?? 'Tidak Ada' }}</td>
-                                <td class="align-top">{{ $item->tanggal_mulai }}</td>
-                                <td class="align-top">{{ $item->tanggal_selesai }}</td>
-                                <td class="align-top">{{ $item->mahasiswa_count }} Mahasiswa</td>
-                                <td class="align-top">{{ $item->dosen_count }} Dosen</td>
-                                <td class="align-top">{{ $item->instruktur_count }} Instruktur</td>
-                                <td class="align-top">Rp. {{ number_format($item->jumlah_biaya_total, 0, ',', '.') }}</td>
-                                <td class="align-top">
-                                    @if ($item->foto_dokumen)
-                                        <a href="{{ asset('uploads/' . $item->foto_dokumen) }}"
-                                            class="btn btn-primary btn-sm" target="_blank">
-                                            <i data-feather="file"></i> PDF
-                                        </a>
-                                    @else
-                                        -
-                                    @endif
-                                </td>
-                                <td class="align-top">
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Update data"><i data-feather="edit"></i></button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="hapus data"><i data-feather="trash-2"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="align-top">{{ $index + 1 }}</td>
+                            <td class="align-top">{{ $item->nama_rombongan }}</td>
+                            <td class="align-top">{{ $item->pendamping_industri ?? 'Tidak Ada' }}</td>
+                            <td class="align-top">{{ $item->tanggal_mulai }}</td>
+                            <td class="align-top">{{ $item->tanggal_selesai }}</td>
+                            <td class="align-top">{{ $item->mahasiswa_count }} Mahasiswa</td>
+                            <td class="align-top">{{ $item->dosen_count }} Dosen</td>
+                            <td class="align-top">{{ $item->instruktur_count }} Instruktur</td>
+                            <td class="align-top">Rp. {{ number_format($item->jumlah_biaya_total, 0, ',', '.') }}</td>
+                            <td class="align-top">
+                                @if ($item->foto_dokumen)
+                                <a href="{{ asset('uploads/' . $item->foto_dokumen) }}" class="btn btn-primary btn-sm" target="_blank">
+                                    <i data-feather="file"></i> PDF
+                                </a>
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td class="align-top">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ route('pkl-mhs.edit', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
+                                        <i data-feather="edit"></i>
+                                    </a>
+                                    <a href="{{ route('pkl-mhs.show', $item->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
+                                        <i data-feather="eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $item->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete data">
+                                        <i data-feather="trash-2"></i>
+                                    </a>
+                                </div>
+                            </td>                            
+                        </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -105,65 +115,59 @@
                                 <label for="fotoDokumen" class="form-label">Foto/Dokumen (.pdf/.jpg/.png/.jpeg)</label>
                                 <input class="form-control" type="file" id="fotoDokumen" name="foto_dokumen" />
                             </div>
-                            <!-- Biaya Per Mahasiswa -->
-                            <div class="col mb-0">
-                                <label class="form-label" for="biayaPerMahasiswa">Biaya Per Mahasiswa</label>
-                                <input type="number" class="form-control" name="biaya_per_mahasiswa"
-                                    placeholder="10,000" />
-                            </div>
-                            <!-- Sumber Biaya -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home" aria-labelledby="home-tab"
-                                    aria-expanded="true">
+                            <div class="card-body">
+                                <label for="">Sumber Biaya</label>
+                                <hr>
+                                <div class="col mb-3">
+                                    <label class="form-label" for="biayaPerMahasiswa">Biaya Per Mahasiswa</label>
+                                    <input type="number" class="form-control" name="biaya_per_mahasiswa" placeholder="10,000" />
+                                </div>
+                                
+                                <div class="col mb-3">
                                     <label class="mb-1" for="biayaDuniaKerja">Nominal Biaya dari Dunia Kerja</label>
                                     <div class="input-group input-group-merge mb-2">
                                         <span class="input-group-text">RP.</span>
-                                        <input type="number" class="form-control" name="biaya_dunia_kerja"
-                                            placeholder="100" />
+                                        <input type="number" class="form-control" name="biaya_dunia_kerja" placeholder="100" />
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab"
-                                    aria-expanded="false">
+                            
+                                <div class="col mb-3">
                                     <label class="mb-1" for="biayaSatuanPendidikan">Nominal Biaya dari Satuan Pendidikan</label>
                                     <div class="input-group input-group-merge mb-2">
                                         <span class="input-group-text">RP.</span>
-                                        <input type="number" class="form-control" name="biaya_satuan_pendidikan"
-                                            placeholder="100" />
+                                        <input type="number" class="form-control" name="biaya_satuan_pendidikan" placeholder="100" />
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="profile2" role="tabpanel" aria-labelledby="profile-tab"
-                                    aria-expanded="false">
+                            
+                                <div class="col mb-3">
                                     <label class="mb-1" for="biayaPemerintahDaerah">Nominal Biaya dari Pemerintah Daerah</label>
                                     <div class="input-group input-group-merge mb-2">
                                         <span class="input-group-text">RP.</span>
-                                        <input type="number" class="form-control" name="biaya_pemerintah_daerah"
-                                            placeholder="100" />
+                                        <input type="number" class="form-control" name="biaya_pemerintah_daerah" placeholder="100" />
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="profile3" role="tabpanel" aria-labelledby="profile-tab"
-                                    aria-expanded="false">
+                            
+                                <div class="col mb-3">
                                     <label class="mb-1" for="biayaPemerintahPusat">Nominal Biaya dari Pemerintah Pusat</label>
                                     <div class="input-group input-group-merge mb-2">
                                         <span class="input-group-text">RP.</span>
-                                        <input type="number" class="form-control" name="biaya_pemerintah_pusat"
-                                            placeholder="100" />
+                                        <input type="number" class="form-control" name="biaya_pemerintah_pusat" placeholder="100" />
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab"
-                                    aria-expanded="false">
+                            
+                                <div class="col mb-3">
                                     <label class="mb-1" for="biayaCostSharing">Nominal Biaya dari Cost Sharing</label>
                                     <div class="input-group input-group-merge mb-2">
                                         <span class="input-group-text">RP.</span>
-                                        <input type="number" class="form-control" name="biaya_cost_sharing"
-                                            placeholder="100" />
+                                        <input type="number" class="form-control" name="biaya_cost_sharing" placeholder="100" />
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                 
                             <!-- Mahasiswa -->
                             <h4 class="mt-2 text-center">Mahasiswa</h4>
                             <hr>
@@ -452,5 +456,65 @@
                 // konfigurasi tambahan jika diperlukan
             });
         });
+
+        $(document).ready(function() {
+    // CSRF token for AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Event listener for delete button
+        $('.btn-delete').on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = `{{ route('pkl-mhs.destroy', ':id') }}`.replace(':id', id);
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-danger',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                customClass: {
+                                    confirmButton: 'btn btn-success'
+                                },
+                                buttonsStyling: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Failed to delete the data.',
+                                customClass: {
+                                    confirmButton: 'btn btn-danger'
+                                },
+                                buttonsStyling: false
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
     </script>
 @endsection

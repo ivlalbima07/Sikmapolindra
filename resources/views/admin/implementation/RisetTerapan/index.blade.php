@@ -20,6 +20,8 @@
                     <tbody>
                         @foreach ($datakerjasama as $index => $kerjasama)
                             @foreach ($kerjasama->itemKerjasama as $item)
+
+                            {{-- @dd($kerjasama); --}}
                                 <tr>
                                     <th class="align-top">{{ $index + 1 }}</th>
                                     <td class="align-top">{{ $kerjasama->nomor_pks }}</td>
@@ -28,7 +30,7 @@
                                     <td class="align-top">{{ $item->jurusan }}</td>
                                     <td class="align-top">
                                         <div>
-                                            <button type="button" onclick="location.href='/isi-riset-terapan/{{ $item->id }}'" class="btn btn-success btn-sm">
+                                            <button type="button" onclick="location.href='/RisetTerapan/isiRisetTerapan/{{ $item->id }}'" class="btn btn-success btn-sm">
                                                 <i data-feather='book'></i> Isi Pelaksanaan
                                             </button>
                                         </div>

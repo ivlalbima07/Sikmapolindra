@@ -34,6 +34,20 @@ public function isipelaksanaan($id)
     ]);
 }
 
+public function show($id)
+{
+    $pklMhs = PklMhs::with([
+        'mahasiswa',
+        'dosen',
+        'itemKerjasama',
+        'instruktur',
+        'dosenPenanggungJawab'
+    ])->findOrFail($id);
+
+    return view('admin.implementation.Pkl_Mahasiswa.view', compact('pklMhs'));
+}
+
+
 
     public function store(Request $request)
     {
