@@ -21,9 +21,15 @@ class SaranaController extends Controller
 
     public function isiSarana($id)
     {
-        $itemKerjasama = ItemKerjasama::findOrFail($id);
+        $SaranaPrasarana = SaranaPrasarana::with('penanggungJawab')->get();
 
-        return view('admin.implementation.Sarana.isiSarana',);
+        $itemKerjasama = ItemKerjasama::with('pklMhs')->findOrFail($id);
+
+        return view('admin.implementation.Sarana.isiSarana',[
+            'itemKerjasama' => $itemKerjasama,
+            'SaranaPrasarana' => $SaranaPrasarana,
+            'itemKerjasamaId' => $itemKerjasama->id
+        ]);
     }
 
     public function store(Request $request)
@@ -44,6 +50,7 @@ class SaranaController extends Controller
                 'penanggung_jawab_sarana_prasarana.*.nama' => 'required|string|max:255',
                 'penanggung_jawab_sarana_prasarana.*.nidn' => 'required|string|max:255',
                 'penanggung_jawab_sarana_prasarana.*.prodi' => 'required|string|max:255',
+                'item_kerjasama_id' => 'required|exists:item_kerjasama,id',
             ]);
 
             $saranaPrasaranaData = [
@@ -58,6 +65,7 @@ class SaranaController extends Controller
                 'nominal_biaya_satuan_pendidikan' => $validatedData['nominal_biaya_satuan_pendidikan'],
                 'nominal_biaya_pemerintah_daerah' => $validatedData['nominal_biaya_pemerintah_daerah'],
                 'nominal_biaya_pemerintah_pusat' => $validatedData['nominal_biaya_pemerintah_pusat'],
+                'item_kerjasama_id' => $validatedData['item_kerjasama_id'],
             ];
 
             $saranaPrasarana = SaranaPrasarana::create($saranaPrasaranaData);

@@ -20,6 +20,7 @@
                     <tbody>
                         @foreach ($datakerjasama as $index => $kerjasama)
                             @foreach ($kerjasama->itemKerjasama as $item)
+                            {{-- @dd($item) --}}
                                 <tr>
                                     <th class="align-top">{{ $index + 1 }}</th>
                                     <td class="align-top">{{ $kerjasama->nomor_pks }}</td>

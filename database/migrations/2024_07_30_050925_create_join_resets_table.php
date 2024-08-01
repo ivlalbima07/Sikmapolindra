@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('join_resets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('item_kerjasama_id')->constrained('item_kerjasama')->onDelete('cascade');
             $table->string('nama_joint_research');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');

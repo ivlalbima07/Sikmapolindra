@@ -19,7 +19,10 @@ class PklMhsController extends Controller
             $query->where('jenis_kerjasama', 'Praktek Kerja Lapangan (PKL) Mahasiswa');
         }])->get();
 
+        dd($datakerjasama);
         return view('admin.implementation.Pkl_Mahasiswa.index', compact('datakerjasama'));
+
+
     }
 
 public function isipelaksanaan($id)

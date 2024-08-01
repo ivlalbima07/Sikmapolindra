@@ -18,30 +18,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datakerjasama as $index => $kerjasama)
-                            @foreach ($kerjasama->itemKerjasama as $item)
-
-                            {{-- @dd($kerjasama); --}}
-                                <tr>
-                                    <th class="align-top">{{ $index + 1 }}</th>
-                                    <td class="align-top">{{ $kerjasama->nomor_pks }}</td>
-                                    <td class="align-top">{{ $kerjasama->dudi->nib }}</td>
-                                    <td class="align-top">{{ $kerjasama->dudi->nama_perseroan }}</td>
-                                    <td class="align-top">{{ $item->jurusan }}</td>
-                                    <td class="align-top">
-                                        <div>
-                                            <button type="button" onclick="location.href='/RisetTerapan/isiRisetTerapan/{{ $item->id }}'" class="btn btn-success btn-sm">
-                                                <i data-feather='book'></i> Isi Pelaksanaan
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                        @foreach ($datakerjasama as $kerjasama)
+                        {{-- @dd($kerjasama) --}}
+                            @foreach ($kerjasama->itemKerjasama as $index => $item)
+                                @if ($item->jenis_kerjasama == 'Riset Terapan')
+                                    <tr>
+                                        <th class="align-top">{{ $loop->parent->iteration }}</th>
+                                        <td class="align-top">{{ $kerjasama->nomor_pks }}</td>
+                                        <td class="align-top">{{ $kerjasama->dudi->nib }}</td>
+                                        <td class="align-top">{{ $kerjasama->dudi->nama_perseroan }}</td>
+                                        <td class="align-top">{{ $item->jurusan }}</td>
+                                        <td class="align-top">
+                                            <div>
+                                                <button type="button" onclick="location.href='/RisetTerapan/isiRisetTerapan/{{ $item->id }}'" class="btn btn-success btn-sm">
+                                                    <i data-feather='book'></i> Isi Pelaksanaan
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>                    
     </div>
 @endsection
 

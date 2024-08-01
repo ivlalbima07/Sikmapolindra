@@ -25,8 +25,13 @@ class LulusanController extends Controller
     {
         $penyerapan = Penyerapan::with('mahasiswa', 'dosen', 'penanggungJawab')->get();
 
+        $itemKerjasama = ItemKerjasama::findOrFail($id);
 
-        return view('admin.implementation.PenyerapanLulusan.isiPenyerapan', compact('penyerapan'));
+        return view('admin.implementation.PenyerapanLulusan.isiPenyerapan', [
+            'itemKerjasama' => $itemKerjasama,
+            'penyerapan' => $penyerapan,
+            'itemKerjasamaId' => $itemKerjasama->id
+        ]);
     }
 
     public function store(Request $request)
@@ -52,6 +57,7 @@ class LulusanController extends Controller
                 'penyerapan_penanggung_jawab.*.nama' => 'required|string|max:255',
                 'penyerapan_penanggung_jawab.*.nidn' => 'required|string|max:255',
                 'penyerapan_penanggung_jawab.*.prodi' => 'required|string|max:255',
+                'item_kerjasama_id' => 'required|exists:item_kerjasama,id',
             ]);
 
             $penyerapanData = [
@@ -61,6 +67,7 @@ class LulusanController extends Controller
                 'gaji' => $validatedData['gaji'],
                 'jabatan' => $validatedData['jabatan'],
                 'tanggal_mulai_kerja' => $validatedData['tanggal_mulai_kerja'],
+                'item_kerjasama_id' => $validatedData['item_kerjasama_id'],
             ];
 
             $penyerapan = Penyerapan::create($penyerapanData);

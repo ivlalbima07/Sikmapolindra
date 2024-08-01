@@ -9,11 +9,9 @@ class Research extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'judul_riset', 'tanggal_mulai', 'tanggal_selesai', 'bidang_riset', 'nama_peserta_lain',
-        'luaran', 'tahun_pembiayaan', 'nominal_biaya_dunia_kerja', 'nominal_biaya_satuan_pendidikan',
-        'nominal_biaya_pemerintah_daerah', 'nominal_biaya_pemerintah_pusat'
-    ];
+    protected $table = 'research';
+
+    protected $guarded = [];
 
     public function mahasiswa()
     {

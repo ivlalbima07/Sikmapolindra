@@ -79,8 +79,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('isiPenyerapan.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="joinResearchForm" action="{{ route('isiPenyerapan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                         <div class="modal-body">
                             <!-- Tanggal Mulai dan Tanggal Selesai -->
                             <div class="row g-2 mb-3">
@@ -337,63 +338,6 @@
     </div>    
 @endsection
 
-{{-- lainya penyelenggara --}}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('basicSelect1').addEventListener('change', function() {
-            var otherOrganizerDiv = document.getElementById('otherOrganizer');
-            if (this.value === 'lainnya') {
-                otherOrganizerDiv.style.display = 'block';
-            } else {
-                otherOrganizerDiv.style.display = 'none';
-            }
-        });
-
-        document.getElementById('basicSelect2').addEventListener('change', function() {
-            var otherOrganizerDiv2 = document.getElementById('otherOrganizer2');
-            if (this.value === 'lainnya2') {
-                otherOrganizerDiv2.style.display = 'block';
-            } else {
-                otherOrganizerDiv2.style.display = 'none';
-            }
-        });
-    });
-
-    // Confirm Text
-    if (confirmText.length) {
-        confirmText.on('click', function() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                customClass: {
-                    confirmButton: 'btn btn-primary',
-                    cancelButton: 'btn btn-outline-danger ms-1'
-                },
-                buttonsStyling: false
-            }).then(function(result) {
-                if (result.value) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted!',
-                        text: 'Your file has been deleted.',
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        }
-                    });
-                }
-            });
-        });
-    }
-</script>
-
-
-
-
-
 @section('scripts')
     <script>
         $(function() {
@@ -401,5 +345,50 @@
 
             })
         });
+
+        document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        let form = this;
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Success',
+                    text: data.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Close the modal
+                    $('#modalToggle').modal('hide');
+                    // Optionally, refresh the page or redirect
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while saving data.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
     </script>
 @endsection

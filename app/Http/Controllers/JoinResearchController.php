@@ -26,9 +26,13 @@ class JoinResearchController extends Controller
         $joinResets = JoinReset::withCount(['mahasiswa', 'dosen', 'penanggungJawab'])->get();
 
         // Calculate durations and participants counts
-        
+        $itemKerjasama = ItemKerjasama::with('pklMhs')->findOrFail($id);
 
-        return view('admin.implementation.JoinResearch.isiJoinResearch', compact('joinResets'));
+        return view('admin.implementation.JoinResearch.isiJoinResearch',[
+            'itemKerjasama' => $itemKerjasama,
+            'joinResets' => $joinResets,
+            'itemKerjasamaId' => $itemKerjasama->id
+        ]);
     }
 
     public function store(Request $request)
@@ -57,6 +61,7 @@ class JoinResearchController extends Controller
             'penanggung_jawab.*.nama' => 'required|string|max:255',
             'penanggung_jawab.*.nidn' => 'required|string|max:255',
             'penanggung_jawab.*.prodi' => 'required|string|max:255',
+            'item_kerjasama_id' => 'required|exists:item_kerjasama,id',
         ]);
 
         // Initialize the data array
@@ -67,6 +72,7 @@ class JoinResearchController extends Controller
             'bidang_riset' => $validatedData['bidang_riset'],
             'produk_riset' => $validatedData['produk_riset'],
             'sumber_biaya' => $validatedData['sumber_biaya'],
+            'item_kerjasama_id' => $validatedData['item_kerjasama_id'],
         ];
 
         // Handle file upload
@@ -99,7 +105,7 @@ class JoinResearchController extends Controller
         if ($request->has('mahasiswa')) {
             foreach ($request->mahasiswa as $mahasiswa) {
                 MahasiswaJoinReset::create([
-                    'joinreset_id' => $joinreset->id,
+                    'join_reset_id' => $joinreset->id,
                     'nama' => $mahasiswa['nama'],
                     'nim' => $mahasiswa['nim'],
                     'tempat_lahir' => $mahasiswa['tempat_lahir'],
@@ -113,7 +119,7 @@ class JoinResearchController extends Controller
         if ($request->has('dosen')) {
             foreach ($request->dosen as $dosen) {
                 DosenJoinReset::create([
-                    'joinreset_id' => $joinreset->id,
+                    'join_reset_id' => $joinreset->id,
                     'nama' => $dosen['nama'],
                     'nidn' => $dosen['nidn'],
                     'tempat_lahir' => $dosen['tempat_lahir'],
@@ -127,7 +133,7 @@ class JoinResearchController extends Controller
         if ($request->has('penanggung_jawab')) {
             foreach ($request->penanggung_jawab as $penanggungJawab) {
                 PenanggungJawabJoinReset::create([
-                    'joinreset_id' => $joinreset->id,
+                    'join_reset_id' => $joinreset->id,
                     'nama' => $penanggungJawab['nama'],
                     'nidn' => $penanggungJawab['nidn'],
                     'prodi' => $penanggungJawab['prodi'],

@@ -79,7 +79,7 @@
                 <form id="dosenTamuForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="formMethod" name="_method" value="POST">
-                    <input type="hidden" name="i    tem_kerjasama_id" value="{{ $itemKerjasamaId }}">
+                    <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Dosen dari DUDI</label>

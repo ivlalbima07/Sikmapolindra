@@ -92,8 +92,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('isiRisetTerapan.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="joinResearchForm" action="{{ route('isiRisetTerapan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                         <div class="modal-body">
                             <!-- Judul Riset -->
                             <div class="col mb-3">
@@ -409,6 +410,49 @@
 @section('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    
-    </script>
+    document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        let form = this;
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Success',
+                    text: data.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Close the modal
+                    $('#modalToggle').modal('hide');
+                    // Optionally, refresh the page or redirect
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while saving data.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });    
+</script>
 @endsection

@@ -21,6 +21,6 @@ class PelatihanController extends Controller
     {
         $itemKerjasama = ItemKerjasama::findOrFail($id);
 
-        return view('admin.implementation.Pelatihan.isiPelatihan', compact('itemKerjasama'));
+        return view('admin.implementation.pelatihan.isiPelatihan', compact('itemKerjasama'));
     }
 }

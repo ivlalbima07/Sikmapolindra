@@ -49,8 +49,8 @@
                             <th class="align-top">{{ $index + 1 }}</th>
                             <td class="align-top">{{ $joinReset->nama_joint_research }}</td>
                             <td class="align-top">{{ \Carbon\Carbon::parse($joinReset->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($joinReset->tanggal_selesai)) }} hari</td>
-                            <td class="align-top">{{ $joinReset->mahasiswa }}</td>
-                            <td class="align-top">{{ $joinReset->dosen }}</td>
+                            <td class="align-top">{{ $joinReset->mahasiswa_count }}</td> <!-- Menampilkan jumlah mahasiswa -->
+                        <td class="align-top">{{ $joinReset->dosen_count }}</td> <!-- Menampilkan jumlah dosen -->
                             <td class="align-top">{{ $joinReset->nominal_biaya_luar_negeri }}</td>
                             <td class="align-top">{{ $joinReset->nominal_biaya_apbn }}</td>
                             <td class="align-top">
@@ -89,8 +89,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('isi.join.research.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="joinResearchForm" action="{{ route('isi.join.research.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        {{-- @dd($itemKerjasamaId) --}}
+                        <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                         <div class="modal-body">
                             <!-- Nama Joint Research -->
                             <div class="col mb-3">
@@ -166,19 +168,19 @@
                         <h4 class="mt-2 text-center">Mahasiswa</h4>
                         <hr>
                         <div class="card-body invoice-repeater">
-                            <div data-repeater-list="mahasiswa_join_reset">
+                            <div data-repeater-list="mahasiswa">
                                 <div data-repeater-item>
                                     <div class="row d-flex align-items-end">
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="mahasiswaNama">Nama</label>
-                                                <input type="text" name="mahasiswa_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                                <input type="text" name="mahasiswa[][nama]" class="form-control" placeholder="Masukan Nama" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="mahasiswaNim">NIM</label>
-                                                <input type="text" name="mahasiswa_join_reset[][nim]" class="form-control" placeholder="32" />
+                                                <input type="text" name="mahasiswa[][nim]" class="form-control" placeholder="32" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-12 mb-50">
@@ -194,13 +196,13 @@
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="mahasiswaTempatLahir">Tempat Lahir</label>
-                                                <input type="text" name="mahasiswa_join_reset[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
+                                                <input type="text" name="mahasiswa[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="mahasiswaTanggalLahir">Tanggal Lahir</label>
-                                                <input type="date" name="mahasiswa_join_reset[][tanggal_lahir]" class="form-control" />
+                                                <input type="date" name="mahasiswa[][tanggal_lahir]" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-12 mb-50"></div>
@@ -209,7 +211,7 @@
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
-                                                <select name="mahasiswa_join_reset[][jenis_kelamin]" class="form-select">
+                                                <select name="mahasiswa[][jenis_kelamin]" class="form-select">
                                                     <option value="" hidden>Pilih Jenis Kelamin</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -235,19 +237,19 @@
                         <h4 class="mt-2 text-center">Dosen</h4>
                         <hr>
                         <div class="card-body invoice-repeater">
-                            <div data-repeater-list="dosen_join_reset">
+                            <div data-repeater-list="dosen">
                                 <div data-repeater-item>
                                     <div class="row d-flex align-items-end">
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="dosenNama">Nama</label>
-                                                <input type="text" name="dosen_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                                <input type="text" name="dosen[][nama]" class="form-control" placeholder="Masukan Nama" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="dosenNidn">NIDN</label>
-                                                <input type="text" name="dosen_join_reset[][nidn]" class="form-control" placeholder="32" />
+                                                <input type="text" name="dosen[][nidn]" class="form-control" placeholder="32" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-12 mb-50">
@@ -263,13 +265,13 @@
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="dosenTempatLahir">Tempat Lahir</label>
-                                                <input type="text" name="dosen_join_reset[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
+                                                <input type="text" name="dosen[][tempat_lahir]" class="form-control" placeholder="Masukan Nama" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="dosenTanggalLahir">Tanggal Lahir</label>
-                                                <input type="date" name="dosen_join_reset[][tanggal_lahir]" class="form-control" />
+                                                <input type="date" name="dosen[][tanggal_lahir]" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-12 mb-50"></div>
@@ -278,7 +280,7 @@
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="dosenGender">Jenis Kelamin</label>
-                                                <select name="dosen_join_reset[][jenis_kelamin]" class="form-select">
+                                                <select name="dosen[][jenis_kelamin]" class="form-select">
                                                     <option value="" hidden>Pilih Jenis Kelamin</option>
                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
@@ -304,19 +306,19 @@
                         <h4 class="mt-2 text-center">Penanggung Jawab</h4>
                         <hr>
                         <div class="card-body invoice-repeater">
-                            <div data-repeater-list="penanggung_jawab_join_reset">
+                            <div data-repeater-list="penanggung_jawab">
                                 <div data-repeater-item>
                                     <div class="row d-flex align-items-end">
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="penanggungJawabNama">Nama</label>
-                                                <input type="text" name="penanggung_jawab_join_reset[][nama]" class="form-control" placeholder="Masukan Nama" />
+                                                <input type="text" name="penanggung_jawab[][nama]" class="form-control" placeholder="Masukan Nama" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="penanggungJawabNidn">NIDN</label>
-                                                <input type="text" name="penanggung_jawab_join_reset[][nidn]" class="form-control" placeholder="32" />
+                                                <input type="text" name="penanggung_jawab[][nidn]" class="form-control" placeholder="32" />
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-12 mb-50">
@@ -332,7 +334,7 @@
                                         <div class="col-md-5 col-12">
                                             <div class="mb-1">
                                                 <label class="form-label" for="penanggungJawabProdi">Prodi</label>
-                                                <input type="text" name="penanggung_jawab_join_reset[][prodi]" class="form-control" placeholder="Masukan Prodi" />
+                                                <input type="text" name="penanggung_jawab[][prodi]" class="form-control" placeholder="Masukan Prodi" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-12"></div>
@@ -388,6 +390,51 @@
         apbnWrapper.classList.remove('hidden');
     }
 }
+
+document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        let form = this;
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Success',
+                    text: data.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Close the modal
+                    $('#modalToggle').modal('hide');
+                    // Optionally, refresh the page or redirect
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while saving data.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
 
 
         $(function() {

@@ -8,14 +8,14 @@
         <div class="card p-2">
             <div class="card-datatables table-responsive">
                 <div class="d-flex justify-content-end"> <button class="btn btn-success rounded-pill "data-bs-toggle="modal"
-                        data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-plus-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                        </svg> Tambah
-                    </button> </div>
+                    data-bs-target="#modalToggle" type="submit"><i class="bx bx-plus-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg> Tambah
+                </button> </div>
                 <table class="datatables table table-borderles table-striped dt-advanced-search table">
                     <thead>
                         <tr>
@@ -29,26 +29,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="align-top">1</th>
-                            <td class=" align-top">Gusniawan Amd</td>
-                            <td class="align-top">1688105783</td>
-                            <td class="align-top">PT. AIR DAN UDARA INDONESIA</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">D3 - Teknik Pendingin dan Tata Udara</td>
-                            <td class="align-top">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Update data"><i data-feather='edit'></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($SaranaPrasarana as $index => $sarana)
+                            <tr>
+                                <th class="align-top">{{ $index + 1 }}</th>
+                                <td class="align-top">{{ $sarana->jenis }}</td>
+                                <td class="align-top">{{ $sarana->nama_alat }}</td>
+                                <td class="align-top">{{ $sarana->spesifikasi }}</td>
+                                <td class="align-top">{{ $sarana->jumlah }}</td>
+                                <td class="align-top">{{ number_format($sarana->nominal_biaya_dudi, 2, ',', '.') }}</td>
+                                <td class="align-top">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Update data"><i data-feather='edit'></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="hapus data"><i data-feather='trash-2'></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>        
     </div>
 
 
@@ -62,8 +64,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('isi-sarana.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="joinResearchForm" action="{{ route('isi-sarana.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                         <div class="modal-body">
                             <!-- Nama/Keterangan -->
                             <div class="col mb-3">
@@ -208,12 +211,6 @@
     
 @endsection
 
-
-
-
-
-
-
 @section('scripts')
     <script>
         $(function() {
@@ -221,5 +218,51 @@
 
             })
         });
+
+
+        document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+        let form = this;
+        let formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Success',
+                    text: data.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Close the modal
+                    $('#modalToggle').modal('hide');
+                    // Optionally, refresh the page or redirect
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: data.error,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while saving data.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
     </script>
 @endsection

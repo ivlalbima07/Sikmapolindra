@@ -24,7 +24,13 @@ class BeasiswaController extends Controller
     {
         $beasiswa = Beasiswa::with('mahasiswa', 'penanggungJawab')->get();
 
-        return view('admin.implementation.Beasiswa.isiBeasiswa', compact('beasiswa'));
+        $itemKerjasama = ItemKerjasama::findOrFail($id);
+
+        return view('admin.implementation.Beasiswa.isiBeasiswa',[
+            'itemKerjasama' => $itemKerjasama,
+            'beasiswa' => $beasiswa,
+            'itemKerjasamaId' => $itemKerjasama->id
+        ]);
     }
 
     public function store(Request $request)
@@ -47,6 +53,7 @@ class BeasiswaController extends Controller
             'penanggungjawab_mahasiswa.*.nama' => 'required|string|max:255',
             'penanggungjawab_mahasiswa.*.nidn' => 'required|string|max:255',
             'penanggungjawab_mahasiswa.*.prodi' => 'required|string|max:255',
+            'item_kerjasama_id' => 'required|exists:item_kerjasama,id',
         ]);
 
         $beasiswaData = [
@@ -58,6 +65,7 @@ class BeasiswaController extends Controller
             'nominal_biaya_satuan_pendidikan' => $validatedData['nominal_biaya_satuan_pendidikan'] ?? 0,
             'nominal_biaya_pemerintah_daerah' => $validatedData['nominal_biaya_pemerintah_daerah'] ?? 0,
             'nominal_biaya_pemerintah_pusat' => $validatedData['nominal_biaya_pemerintah_pusat'] ?? 0,
+            'item_kerjasama_id' => $validatedData['item_kerjasama_id'],
         ];
 
         $beasiswa = Beasiswa::create($beasiswaData);
