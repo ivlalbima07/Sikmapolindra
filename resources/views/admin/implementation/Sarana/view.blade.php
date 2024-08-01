@@ -13,17 +13,17 @@
                                             <tr>
                                                 <td class="fw-bolder p-2">Nama Dosen dari DUDI</td>
                                                 <td class="p-2">:</td>
-                                                <td class="p-2">{{ $dosenTamu->nama }}</td>
+                                                <td class="p-2">nama </td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bolder p-2">Tanggal Mulai</td>
                                                 <td class="p-2">:</td>
-                                                <td class="p-2">{{ $dosenTamu->tanggal_mulai }}</td>
+                                                <td class="p-2">tanggal_mulai </td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bolder p-2">Tanggal Selesai</td>
                                                 <td class="p-2">:</td>
-                                                <td class="p-2">{{ $dosenTamu->tanggal_selesai }}</td>
+                                                <td class="p-2">tanggal_selesai </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -36,22 +36,22 @@
                                             <tr>
                                                 <td class="fw-bolder"> Nominal Biaya dari Dunia Kerja</td>
                                                 <td>:</td>
-                                                <td>{{ $dosenTamu->nominal_biaya_dunia_kerja}}</td>
+                                                <td>nominal_biaya_dunia_kerja</td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bolder">Nominal Biaya dari Satuan Pendidikan</td>
                                                 <td>:</td>
-                                                <td>{{ $dosenTamu->nominal_biaya_satuan_pendidikan }}</td>
+                                                <td>nominal_biaya_satuan_pendidikan </td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bolder">Nominal Biaya dari Pemerintah Daerah</td>
                                                 <td>:</td>
-                                                <td>{{ $dosenTamu->nominal_biaya_pemerintah_daerah }}</td>
+                                                <td>nominal_biaya_pemerintah_daerah </td>
                                             </tr>
                                             <tr>
                                                 <td class="fw-bolder">Nominal Biaya dari Pemerintah Pusat</td>
                                                 <td>:</td>
-                                                <td>{{ $dosenTamu->nominal_biaya_pemerintah_pusat }}</td>
+                                                <td>nominal_biaya_pemerintah_pusat </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -76,7 +76,8 @@
                                 <div role="tabpanel" class="tab-pane active" id="Mahasiswa" aria-labelledby="home-tab"
                                     aria-expanded="true">
                                     <div class="card-datatables table-responsive">
-                                        <table class="datatables table table-borderles table-striped dt-advanced-search table">
+                                        <table
+                                            class="datatables table table-borderles table-striped dt-advanced-search table">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -87,23 +88,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($dosenTamu->mataKuliah as $mataKuliah)
+
                                                 <tr>
-                                                    <th class="align-top">{{ $loop->iteration }}</th>
-                                                    <td class="align-top">{{ $mataKuliah->nama }}</td>
-                                                    <td class="align-top">{{ $mataKuliah->jumlah_jpl }}</td>
-                                                    <td class="align-top">{{ $mataKuliah->honorarium_per_jam }}</td>
+                                                    <th class="align-top">iteration </th>
+                                                    <td class="align-top"> nama </td>
+                                                    <td class="align-top"> jumlah_jpl </td>
+                                                    <td class="align-top"> honorarium_per_jam </td>
                                                     <td class="align-top">
-                                                        @if($mataKuliah->foto_dokumen)
-                                                        <a href="{{ asset('uploads/' . $mataKuliah->foto_dokumen) }}" class="btn btn-primary btn-sm" target="_blank">
+
+                                                        <a href=" asset('uploads/' . foto_dokumen) "
+                                                            class="btn btn-primary btn-sm" target="_blank">
                                                             <i data-feather="file"></i> Lihat Dokumen
                                                         </a>
-                                                        @else
-                                                        -
-                                                        @endif
+
                                                     </td>
                                                 </tr>
-                                                @endforeach
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -120,14 +120,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($dosenTamu->dosenPenanggungJawab as $dosenPJ)
+
                                             <tr>
-                                                <th class="align-top">{{ $loop->iteration }}</th>
-                                                <td class="align-top">{{ $dosenPJ->nama }}</td>
-                                                <td class="align-top">{{ $dosenPJ->nidn }}</td>
-                                                <td class="align-top">{{ $dosenPJ->prodi }}</td>
+                                                <th class="align-top"> $loop->iteration </th>
+                                                <td class="align-top"> $dosenPJ->nama </td>
+                                                <td class="align-top"> $dosenPJ->nidn </td>
+                                                <td class="align-top"> $dosenPJ->prodi </td>
                                             </tr>
-                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
