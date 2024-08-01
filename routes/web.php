@@ -19,6 +19,7 @@ use App\Http\Controllers\pelatihanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanionController;
 
 // Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -34,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
-    Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
+    // Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
 
     // operator
 
@@ -150,6 +151,11 @@ Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->na
 Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
 Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
 
+//companion
+Route::resource('companions', CompanionController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('companion', CompanionController::class);
+});
 
      Route::resource('users', UserController::class);
      });
