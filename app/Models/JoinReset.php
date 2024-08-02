@@ -27,4 +27,9 @@ class JoinReset extends Model
     {
         return $this->hasMany(PenanggungJawabJoinReset::class, 'join_reset_id');
     }
+
+    public function itemKerjasama()
+    {
+        return $this->belongsTo(ItemKerjasama::class, 'item_kerjasama_id');
+    }
 }

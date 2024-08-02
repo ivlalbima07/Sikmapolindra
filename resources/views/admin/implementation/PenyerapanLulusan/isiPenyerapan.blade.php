@@ -50,12 +50,12 @@
                                 <td class="align-top">{{ $item->tanggal_mulai_kerja }}</td>
                                 <td class="align-top">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Update data">
-                                            <i data-feather='edit'></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus data">
-                                            <i data-feather='trash-2'></i>
-                                        </button>
+                                        <a href="{{ route('isiPenyerapan.show', $item->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $item->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete data">
+                                            <i data-feather="trash-2"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -346,6 +346,12 @@
             })
         });
 
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
         document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
         let form = this;
@@ -388,6 +394,71 @@
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
+        });
+    });
+
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var url = `{{ route('isiPenyerapan.destroy', ':id') }}`.replace(':id', id);
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-secondary'
+            },
+            buttonsStyling: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: response.success,
+                                customClass: {
+                                    confirmButton: 'btn btn-success'
+                                },
+                                buttonsStyling: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Failed to delete the data.',
+                                customClass: {
+                                    confirmButton: 'btn btn-danger'
+                                },
+                                buttonsStyling: false
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: xhr.responseJSON.error || 'Failed to delete the data.',
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                });
+            }
         });
     });
     </script>

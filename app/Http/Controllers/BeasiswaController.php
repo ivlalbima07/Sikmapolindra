@@ -33,6 +33,13 @@ class BeasiswaController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $beasiswa = Beasiswa::with(['mahasiswa', 'penanggungJawab', 'itemKerjasama'])->findOrFail($id);
+
+        return view('admin.implementation.Beasiswa.view', compact('beasiswa'));
+    }
+
     public function store(Request $request)
 {
     try {
@@ -99,5 +106,24 @@ class BeasiswaController extends Controller
         return response()->json(['error' => $e->getMessage()]);
     }
 }
+
+public function destroy($id)
+    {
+
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $beasiswa = Beasiswa::findOrFail($id);
+            $itemKerjasamaId = $beasiswa->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $beasiswa->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
+        }
+    }
 
 }

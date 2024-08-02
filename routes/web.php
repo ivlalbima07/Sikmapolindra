@@ -111,43 +111,53 @@ Route::delete('/pkl_mhs/isipelaksanaan/{id}', [PklMhsController::class, 'destroy
     //sertiikasi
    // Route: Sertifikasi
 Route::get('/sertifikasi', [SertifikasiController::class, 'Sertifikasi'])->name('Sertifikasi');
-Route::get('/IsiSertifikasi/{id}', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
-Route::post('/sertifikasi/store', [SertifikasiController::class, 'store'])->name('Sertifikasi.store');
-Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'destroy'])->name('Sertifikasi.destroy');
+Route::get('/sertifikasi/IsiSertifikasi/{id}', [SertifikasiController::class, 'IsiSertifikasi'])->name('IsiSertifikasi');
+Route::post('/sertifikasi/IsiSertifikasi/store', [SertifikasiController::class, 'store'])->name('Sertifikasi.store');
+Route::get('/sertifikasi/IsiSertifikasi/show/{id}', [SertifikasiController::class, 'show'])->name('Sertifikasi.show');
+Route::delete('/sertifikasi/IsiSertifikasi/{id}', [SertifikasiController::class, 'destroy'])->name('Sertifikasi.destroy');
 
 //RisetTerapan
 Route::get('/RisetTerapan', [RisetTerapanController::class, 'RisetTerapan'])->name('RisetTerapan');
 Route::get('/RisetTerapan/isiRisetTerapan/{id}', [RisetTerapanController::class, 'isiRisetTerapan'])->name('isiRisetTerapan');
 Route::post('/RisetTerapan/isiRisetTerapan/store', [RisetTerapanController::class, 'store'])->name('isiRisetTerapan.store');
+Route::get('/RisetTerapan/isiRisetTerapan/show/{id}', [RisetTerapanController::class, 'show'])->name('isiRisetTerapan.show');
+Route::delete('/RisetTerapan/isiRisetTerapan/{id}', [RisetTerapanController::class, 'destroy'])->name('isiRisetTerapan.destroy');
 
 //Penyerapan Lulusan
 Route::get('/Penyerapan', [LulusanController::class, 'PenyerapanLulusan'])->name('PenyerapanLulusan');
 Route::get('/Penyerapan/isiPenyerapan/{id}', [LulusanController::class, 'isiPenyerapan'])->name('isiPenyerapan');
 Route::post('/Penyerapan/isiPenyerapan/store', [LulusanController::class, 'store'])->name('isiPenyerapan.store');
-
+Route::get('/Penyerapan/isiPenyerapan/show/{id}', [LulusanController::class, 'show'])->name('isiPenyerapan.show');
+Route::delete('/Penyerapan/isiPenyerapan/{id}', [LulusanController::class, 'destroy'])->name('isiPenyerapan.destroy');
 
      //beasiswa
 Route::get('/beasiswa', [BeasiswaController::class, 'Beasiswa'])->name('Beasiswa');
 Route::get('/beasiswa/isi-beasiswa/{id}', [BeasiswaController::class, 'isiBeasiswa'])->name('isi.beasiswa');
 Route::post('/beasiswa/isi-beasiswa/store', [BeasiswaController::class, 'store'])->name('isi-beasiswa.store');
+Route::get('/beasiswa/isi-beasiswa/show/{id}', [BeasiswaController::class, 'show'])->name('isi-beasiswa.show');
+Route::delete('/beasiswa/isi-beasiswa/{id}', [BeasiswaController::class, 'destroy'])->name('isi-beasiswa.destroy');
 
      //sarana
 Route::get('/Sarana', [SaranaController::class, 'Sarana'])->name('Sarana');
 Route::get('/Sarana/isi-sarana/{id}', [SaranaController::class, 'isiSarana'])->name('isi.sarana');
 Route::post('/Sarana/isi-sarana/store', [SaranaController::class, 'store'])->name('isi-sarana.store');
+Route::get('/Sarana/isi-sarana/show/{id}', [SaranaController::class, 'show'])->name('isi-sarana.show');
+Route::delete('/Sarana/isi-sarana/{id}', [SaranaController::class, 'destroy'])->name('isi-sarana.destroy');
 
      //join JoinResearch
 Route::get('/JoinResearch', [JoinResearchController::class, 'JoinResearch'])->name('JoinResearch');
-Route::get('/JoinResearch/isi-join-research/{id}', [JoinResearchController::class, 'isiJoinResearch'])->name('isi.join.research');
-Route::post('/JoinResearch/isi-join-research/store', [JoinResearchController::class, 'store'])->name('isi.join.research.store');
+Route::get('/JoinResearch/isi-join-research/{id}', [JoinResearchController::class, 'isiJoinResearch'])->name('isi-join-research.research');
+Route::post('/JoinResearch/isi-join-research/store', [JoinResearchController::class, 'store'])->name('isi-join-research.store');
+Route::get('/JoinResearch/isi-join-research/show/{id}', [JoinResearchController::class, 'show'])->name('isi-join-research.show');
+Route::delete('/JoinResearch/isi-join-research/{id}', [JoinResearchController::class, 'destroy'])->name('isi-join-research.destroy');
 
     //pelatihan
-     Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
+Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
 Route::get('/isi-pelatihan/{id}', [PelatihanController::class, 'isiPelatihan'])->name('isi.pelatihan');
 
      //cooperation
 
-     Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
+Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
 Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
 
 Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
@@ -157,5 +167,5 @@ Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name(
 Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
 
 
-     Route::resource('users', UserController::class);
-     });
+Route::resource('users', UserController::class);
+});

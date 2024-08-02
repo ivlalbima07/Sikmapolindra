@@ -27,4 +27,9 @@ class Penyerapan extends Model
     {
         return $this->hasMany(PenyerapanPenanggungJawab::class);
     }
+
+    public function itemKerjasama()
+    {
+        return $this->belongsTo(ItemKerjasama::class, 'item_kerjasama_id');
+    }
 }

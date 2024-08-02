@@ -35,6 +35,13 @@ class RisetTerapanController extends Controller
 
     }
 
+    public function show($id)
+    {
+        $research = Research::with(['mahasiswa', 'dosen', 'penanggungJawab', 'itemKerjasama'])->findOrFail($id);
+
+        return view('admin.implementation.RisetTerapan.view', compact('research'));
+    }
+
     public function store(Request $request)
     {
         try {
@@ -136,7 +143,24 @@ class RisetTerapanController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
 
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $risetTerapan = Research::findOrFail($id);
+            $itemKerjasamaId = $risetTerapan->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $risetTerapan->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
+        }
+    }
 
 
 }

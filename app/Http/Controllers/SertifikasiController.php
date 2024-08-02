@@ -129,10 +129,20 @@ class SertifikasiController extends Controller
 
     public function destroy($id)
     {
-        $certification = Certification::findOrFail($id);
-        $itemKerjasamaId = $certification->item_kerjasama_id;
-        $certification->delete();
 
-        return redirect()->route('IsiSertifikasi', ['id' => $itemKerjasamaId])->with('success', 'Data berhasil dihapus.');
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $certification = Certification::findOrFail($id);
+            $itemKerjasamaId = $certification->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $certification->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
+        }
     }
 }

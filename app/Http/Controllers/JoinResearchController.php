@@ -35,6 +35,13 @@ class JoinResearchController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $joinResearch = JoinReset::with(['mahasiswa','dosen', 'penanggungJawab', 'itemKerjasama'])->findOrFail($id);
+
+        return view('admin.implementation.JoinResearch.view', compact('joinResearch'));
+    }
+
     public function store(Request $request)
 {
     try {
@@ -146,5 +153,24 @@ class JoinResearchController extends Controller
         return response()->json(['error' => $e->getMessage()]);
     }
 }
+
+public function destroy($id)
+    {
+
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $joinResearch = JoinReset::findOrFail($id);
+            $itemKerjasamaId = $joinResearch->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $joinResearch->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
+        }
+    }
 
 }

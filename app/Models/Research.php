@@ -27,4 +27,9 @@ class Research extends Model
     {
         return $this->hasMany(RisetPenanggungJawab::class);
     }
+
+    public function itemKerjasama()
+    {
+        return $this->belongsTo(ItemKerjasama::class, 'item_kerjasama_id');
+    }
 }

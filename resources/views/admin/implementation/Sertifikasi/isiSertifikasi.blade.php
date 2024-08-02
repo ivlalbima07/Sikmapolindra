@@ -48,16 +48,14 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Update data">
-                                        <i data-feather='edit'></i>
-                                    </button>
-                                    <form action="{{ route('Sertifikasi.destroy', $certification->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Hapus data">
-                                            <i data-feather='trash-2'></i>
-                                        </button>
-                                    </form>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{{ route('Sertifikasi.show', $certification->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $certification->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete data">
+                                            <i data-feather="trash-2"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -369,6 +367,12 @@
         const table = $('.datatables').DataTable();
     });
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     document.getElementById('joinResearchForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
         let form = this;
@@ -413,5 +417,71 @@
             });
         });
     });
+
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var url = `{{ route('Sertifikasi.destroy', ':id') }}`.replace(':id', id);
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-secondary'
+            },
+            buttonsStyling: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted!',
+                                text: response.success,
+                                customClass: {
+                                    confirmButton: 'btn btn-success'
+                                },
+                                buttonsStyling: false
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Failed to delete the data.',
+                                customClass: {
+                                    confirmButton: 'btn btn-danger'
+                                },
+                                buttonsStyling: false
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: xhr.responseJSON.error || 'Failed to delete the data.',
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                });
+            }
+        });
+    });
+    
 </script>
 @endsection

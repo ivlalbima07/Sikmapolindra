@@ -16,4 +16,9 @@ class SaranaPrasarana extends Model
     {
         return $this->hasMany(PenanggungJawabSaranaPrasarana::class);
     }
+
+    public function itemKerjasama()
+    {
+        return $this->belongsTo(ItemKerjasama::class, 'item_kerjasama_id');
+    }
 }

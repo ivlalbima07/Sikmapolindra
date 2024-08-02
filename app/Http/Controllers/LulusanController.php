@@ -34,6 +34,13 @@ class LulusanController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $penyerapan = Penyerapan::with(['mahasiswa', 'dosen', 'penanggungJawab', 'itemKerjasama'])->findOrFail($id);
+
+        return view('admin.implementation.PenyerapanLulusan.view', compact('penyerapan'));
+    }
+
     public function store(Request $request)
     {
         try {
@@ -112,6 +119,25 @@ class LulusanController extends Controller
             return response()->json(['success' => 'Data penyerapan berhasil disimpan.']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy($id)
+    {
+
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $penyerapan = Penyerapan::findOrFail($id);
+            $itemKerjasamaId = $penyerapan->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $penyerapan->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
         }
     }
 }

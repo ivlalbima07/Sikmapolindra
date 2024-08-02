@@ -32,6 +32,13 @@ class SaranaController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $item = SaranaPrasarana::with(['penanggungJawab', 'itemKerjasama'])->findOrFail($id);
+
+        return view('admin.implementation.Sarana.view', compact('item'));
+    }
+
     public function store(Request $request)
     {
         try {
@@ -84,6 +91,25 @@ class SaranaController extends Controller
             return response()->json(['success' => 'Data sarana dan prasarana berhasil disimpan.']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy($id)
+    {
+
+        try {
+            // Cari data PKL Dosen berdasarkan ID
+            $saranaPrasarana = SaranaPrasarana::findOrFail($id);
+            $itemKerjasamaId = $saranaPrasarana->item_kerjasama_id;
+    
+            // Hapus data PKL Dosen
+            $saranaPrasarana->delete();
+    
+            // Mengembalikan respon JSON untuk sukses
+            return response()->json(['success' => 'Data berhasil dihapus.', 'item_kerjasama_id' => $itemKerjasamaId], 200);
+        } catch (\Exception $e) {
+            // Mengembalikan respon JSON untuk error
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage()], 500);
         }
     }
 }
