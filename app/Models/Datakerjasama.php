@@ -21,7 +21,7 @@ class Datakerjasama extends Model
 
     public function dudi()
     {
-        return $this->belongsTo(Dudi::class);
+        return $this->belongsTo(Dudi::class,  'dudi_id');
     }
  public function itemKerjasama()
     {

@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
-    Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
+//     Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
 
     // operator
 
@@ -155,17 +155,22 @@ Route::delete('/JoinResearch/isi-join-research/{id}', [JoinResearchController::c
 Route::get('/pelatihan', [pelatihanController::class, 'pelatihan'])->name('pelatihan');
 Route::get('/isi-pelatihan/{id}', [PelatihanController::class, 'isiPelatihan'])->name('isi.pelatihan');
 
-     //cooperation
+ //cooperation
 
-Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
-Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
-
-Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
-Route::post('/cooperation/store', [CooperationController::class, 'store'])->name('cooperation.store');
-Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->name('cooperation.edit');
-Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
-Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
-
-
+ Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
+ Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
+ 
+ Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
+ Route::post('/cooperation/store', [CooperationController::class, 'store'])->name('cooperation.store');
+ Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->name('cooperation.edit');
+ Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
+ Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
+ 
+ //companion
+ Route::resource('companions', CompanionController::class);
+ Route::prefix('admin')->name('admin.')->group(function () {
+Route::resource('companion', CompanionController::class);
+ });
+ 
 Route::resource('users', UserController::class);
 });

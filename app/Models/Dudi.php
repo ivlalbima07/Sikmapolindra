@@ -34,6 +34,11 @@ class Dudi extends Model
         return $this->hasMany(PenanggungJawab::class);
     }
 
+    public function dataKerjasama()
+    {
+        return $this->hasMany(Datakerjasama::class, 'dudi_id');
+    }
+
     // Definisikan relasi ke Kbli
     public function kblis()
     {
