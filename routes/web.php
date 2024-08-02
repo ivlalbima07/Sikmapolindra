@@ -27,8 +27,21 @@ Route::get('/', [AuthController::class, 'showLoginForm'])->middleware('guest')->
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('loginForm');
 Route::post('/loginProses', [AuthController::class, 'login'])->middleware('guest')->name('ceklogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/forgotpassword', [AuthController::class, 'forgotpassword'])->middleware('guest')->name('forgotpassword');
-Route::get('/resetpassword', [AdminController::class, 'resetpassword'])->middleware('guest')->name('resetpassword');
+
+
+Route::get('/forgot-password', function (){
+    return view('auth.forgotpassword');
+})->name('forgot-password');
+
+Route::post('/forgot-password', [AuthController::class, 'mailSend'])->name('password.email');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::get('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+Route::get('/email', function (){
+    return view('email.email');
+})->name('reset-password');
 
 Route::middleware('auth')->group(function () {
     Route::get('/recap', [AdminController::class, 'recap'])->name('recap');

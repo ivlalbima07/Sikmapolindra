@@ -1,5 +1,8 @@
 @extends('layouts.auth')
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- BEGIN: Body-->
 
     <!-- BEGIN: Content-->
@@ -28,8 +31,15 @@
                                     @csrf
                                     <div class="mb-1">
                                         @if(session('error'))
-                                            <div class="alert alert-danger">
-                                                <b>Opps!</b> {{session('error')}}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <strong>Opps!</strong> {{ session('error') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                        @if(session('success'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Success!</strong> {{ session('success') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>
                                         @endif
                                         <label class="form-label" for="email">Email</label>
@@ -40,7 +50,7 @@
                                     <div class="mb-1">
                                         <div class="d-flex justify-content-between">
                                             <label class="form-label" for="password">Password</label><a
-                                                href="/forgotpassword"><small>Forgot Password?</small></a>
+                                                href="{{ route('forgot-password') }}"><small>Forgot Password?</small></a>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
                                             <input class="form-control form-control-merge" id="password"
@@ -58,16 +68,6 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100" tabindex="4">Sign in</button>
                                 </form>
-                                <p class="text-center mt-2"><span>New on our platform?</span><a
-                                        href="auth-register-cover.html"><span>&nbsp;Create an account</span></a></p>
-                                <div class="divider my-2">
-                                    <div class="divider-text">or</div>
-                                </div>
-                                <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-facebook"
-                                        href="#"><i data-feather="facebook"></i></a><a class="btn btn-twitter white"
-                                        href="#"><i data-feather="twitter"></i></a><a class="btn btn-google"
-                                        href="#"><i data-feather="mail"></i></a><a class="btn btn-github"
-                                        href="#"><i data-feather="github"></i></a></div>
                             </div>
                         </div>
                         <!-- /Login-->
@@ -78,3 +78,4 @@
     </div>
     <!-- END: Body-->
 @endsection
+

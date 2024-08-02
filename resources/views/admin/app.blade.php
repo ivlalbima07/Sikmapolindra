@@ -1,6 +1,6 @@
 
     <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
-        <a class="d-flex align-items-center" href="{{ url('/dashboard/chart') }}">
+        <a class="d-flex align-items-center" href="{{ url('/dashboard') }}">
             <i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span>
         </a>
     </li>
