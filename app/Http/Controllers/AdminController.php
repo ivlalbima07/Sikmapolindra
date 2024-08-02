@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dudi;
-use App\Models\ItemKerjasama;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use App\Models\ItemKerjasama;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
@@ -59,9 +61,32 @@ class AdminController extends Controller
         return view('admin.recap.index', compact('data'));
     }
 
+    public function showChart($page = 1)
+    {
+        $perPage = 10; // jumlah item per halaman
+        $currentMonth = Carbon::now()->format('F Y');
+        $kriteriaData = Kriteria::withCount('dudis')->paginate($perPage, ['*'], 'page', $page);
+
+        $categories = $kriteriaData->pluck('nama')->toArray();
+        $series = $kriteriaData->pluck('dudis_count')->toArray();
+
+        return view('admin.dashboard.index', compact('categories', 'series', 'currentMonth', 'kriteriaData'));
+    }
+
     public function dashboard()
     {
-        return view('admin.dashboard.index');
+        $kriterians = Kriteria::withCount('dudis')->get();
+    
+    $data = [];
+    foreach ($kriterians as $kriterian) {
+        $data[] = [
+            'kriterian' => $kriterian->nama, // asumsikan 'nama' adalah kolom nama di tabel kriterian
+            'jumlah_dudis' => $kriterian->dudis_count,
+        ];
+    }
+    
+
+        return view('admin.dashboard.index', compact('data'));
     }
 
 

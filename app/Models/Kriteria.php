@@ -10,4 +10,9 @@ class Kriteria extends Model
     use HasFactory;
 
     protected $fillable = ['nama'];
+
+    public function dudis()
+    {
+        return $this->hasMany(Dudi::class, 'kriteria_id');
+    }
 }

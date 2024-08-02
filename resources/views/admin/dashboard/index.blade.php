@@ -1,4 +1,13 @@
 @extends('layouts.header')
+<style>
+    .chart-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+    #chart {
+        width: 100%;
+    }
+</style>
 @section('content')
     <div class="content-header row">
         <div class="content-header-left col-md-9 col-12 mb-2">
@@ -24,7 +33,7 @@
             <div class="card">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h3 class="fw-bolder mb-75">9</h3>
+                        <h3 class="fw-bolder mb-75">4,567</h3>
                         <span>Jumlah Item Kerja Sama</span>
                     </div>
                     <div class="avatar bg-light-danger p-50">
@@ -39,7 +48,7 @@
             <div class="card">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h3 class="fw-bolder mb-75">8</h3>
+                        <h3 class="fw-bolder mb-75">19,860</h3>
                         <span>Jumlah Program Studi Kerjasama</span>
                     </div>
                     <div class="avatar bg-light-success p-50">
@@ -53,9 +62,6 @@
         <div class="col-lg-3 col-sm-6">
         </div>
     </div>
-
-
-
     <div class="row match-height">
     </div>
     <div class="content-body">
@@ -65,10 +71,16 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-block">
-                            <h4 class="card-title">Grafik kriteria mitra</h4>
+                            <h4 class="card-title">Pendapatan Perbulan ({{ $currentMonth }})</h4>
+                            <span class="card-subtitle text-gray">Grafik Kriteria</span>
                         </div>
                         <div class="card-body">
-                            <div id="chart"></div>
+                            <div class="chart-container">
+                                <div id="chart"></div>
+                            </div>
+                            <div class="pagination-links">
+                                {{ $kriteriaData->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,81 +91,56 @@
 @endsection
 @section('scripts')
     <script>
-        var options = {
-            series: [{
-                name: 'Servings',
-                data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35]
-            }],
-            annotations: {
-                points: [{
-                    x: 'Bananas',
-                    seriesIndex: 0,
-                    label: {
-                        borderColor: '#775DD0',
-                        offsetY: 0,
-                        style: {
-                            color: '#fff',
-                            background: '#775DD0',
-                        },
-                        text: 'Bananas are good',
+        document.addEventListener('DOMContentLoaded', function () {
+            var options = {
+                series: [{
+                    name: 'Jumlah DUDI',
+                    data: @json($series)
+                }],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                    width: '100%'
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 10,
+                        columnWidth: '50%',
                     }
-                }]
-            },
-            chart: {
-                height: 350,
-                type: 'bar',
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 10,
-                    columnWidth: '50%',
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: @json($categories),
+                    labels: {
+                        rotate: -45
+                    },
+                    tickPlacement: 'on'
+                },
+                yaxis: {
+                    title: {
+                        text: 'Jumlah DUDI',
+                    },
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shade: 'light',
+                        type: "horizontal",
+                        shadeIntensity: 0.25,
+                        gradientToColors: undefined,
+                        inverseColors: true,
+                        opacityFrom: 0.85,
+                        opacityTo: 0.85,
+                        stops: [50, 0, 100]
+                    },
                 }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                width: 0
-            },
-            grid: {
-                row: {
-                    colors: ['#fff', '#f2f2f2']
-                }
-            },
-            xaxis: {
-                labels: {
-                    rotate: -45
-                },
-                categories: ['Apples', 'Oranges', 'Strawberries', 'Pineapples', 'Mangoes', 'Bananas',
-                    'Blackberries', 'Pears', 'Watermelons', 'Cherries', 'Pomegranates', 'Tangerines', 'Papayas'
-                ],
-                tickPlacement: 'on'
-            },
-            yaxis: {
-                title: {
-                    text: 'Servings',
-                },
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'light',
-                    type: "horizontal",
-                    shadeIntensity: 0.25,
-                    gradientToColors: undefined,
-                    inverseColors: true,
-                    opacityFrom: 0.85,
-                    opacityTo: 0.85,
-                    stops: [50, 0, 100]
-                },
-            }
-        };
+            };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-
-
-
-
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        });
+    </script>
     </script>
 @endsection

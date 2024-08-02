@@ -32,6 +32,7 @@ Route::get('/resetpassword', [AdminController::class, 'resetpassword'])->middlew
 
 Route::middleware('auth')->group(function () {
     Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
+    Route::get('/dashboard/chart', [AdminController::class, 'showChart'])->name('chart.index');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
 //     Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
