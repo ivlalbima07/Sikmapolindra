@@ -29,7 +29,7 @@
                                     <td class="align-top">{{ $item->jurusan }}</td>
                                     <td class="align-top">
                                         <div>
-                                            <button type="button" onclick="location.href='{{ route('isi.join.research', $item->id) }}'" class="btn btn-success btn-sm">
+                                            <button type="button" onclick="location.href='{{ route('isi-join-research.research', $item->id) }}'" class="btn btn-success btn-sm">
                                                 <i data-feather='book'></i> Isi Pelaksanaan
                                             </button>
                                         </div>

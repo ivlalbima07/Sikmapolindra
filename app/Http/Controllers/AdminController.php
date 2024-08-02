@@ -61,7 +61,7 @@ class AdminController extends Controller
         return view('admin.recap.index', compact('data'));
     }
 
-    public function showChart($page = 1)
+    public function dashboard($page = 1)
     {
         $perPage = 10; // jumlah item per halaman
         $currentMonth = Carbon::now()->format('F Y');
@@ -71,22 +71,6 @@ class AdminController extends Controller
         $series = $kriteriaData->pluck('dudis_count')->toArray();
 
         return view('admin.dashboard.index', compact('categories', 'series', 'currentMonth', 'kriteriaData'));
-    }
-
-    public function dashboard()
-    {
-        $kriterians = Kriteria::withCount('dudis')->get();
-    
-    $data = [];
-    foreach ($kriterians as $kriterian) {
-        $data[] = [
-            'kriterian' => $kriterian->nama, // asumsikan 'nama' adalah kolom nama di tabel kriterian
-            'jumlah_dudis' => $kriterian->dudis_count,
-        ];
-    }
-    
-
-        return view('admin.dashboard.index', compact('data'));
     }
 
 
