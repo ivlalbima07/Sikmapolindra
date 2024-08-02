@@ -61,9 +61,9 @@
                             </td>
                             <td class="align-top">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('pkl-mhs.edit', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
+                                    {{-- <a href="{{ route('pkl-mhs.edit', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
                                         <i data-feather="edit"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('pkl-mhs.show', $item->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
                                         <i data-feather="eye"></i>
                                     </a>
@@ -89,25 +89,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('pkl-mhs.store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="joinResearchForm" action="{{ route('pkl-mhs.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="item_kerjasama_id" value="{{ $itemKerjasamaId }}">
                         <div class="modal-body">
                             <!-- Nama Rombongan -->
                             <div class="col mb-3">
                                 <label for="namaRombongan" class="form-label">Nama Rombongan</label>
-                                <input type="text" id="namaRombongan" name="nama_rombongan" class="form-control"
-                                    placeholder="Enter Name" />
+                                <input type="text" id="namaRombongan" name="nama_rombongan" class="form-control" placeholder="Enter Name" required />
                             </div>
                             <!-- Tanggal Mulai dan Tanggal Selesai -->
                             <div class="row g-2 mb-3">
                                 <div class="col mb-0">
                                     <label for="tanggalMulai" class="form-label">Tanggal Mulai</label>
-                                    <input type="date" name="tanggal_mulai" class="form-control" />
+                                    <input type="date" name="tanggal_mulai" class="form-control" required />
                                 </div>
                                 <div class="col mb-0">
                                     <label for="tanggalSelesai" class="form-label">Tanggal Selesai</label>
-                                    <input type="date" name="tanggal_selesai" class="form-control" />
+                                    <input type="date" name="tanggal_selesai" class="form-control" required />
                                 </div>
                             </div>
                             <!-- Foto/Dokumen -->
@@ -120,9 +119,8 @@
                                 <hr>
                                 <div class="col mb-3">
                                     <label class="form-label" for="biayaPerMahasiswa">Biaya Per Mahasiswa</label>
-                                    <input type="number" class="form-control" name="biaya_per_mahasiswa" placeholder="10,000" />
+                                    <input type="number" class="form-control" name="biaya_per_mahasiswa" placeholder="10,000" required />
                                 </div>
-                                
                                 <div class="col mb-3">
                                     <label class="mb-1" for="biayaDuniaKerja">Nominal Biaya dari Dunia Kerja</label>
                                     <div class="input-group input-group-merge mb-2">
@@ -131,7 +129,6 @@
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            
                                 <div class="col mb-3">
                                     <label class="mb-1" for="biayaSatuanPendidikan">Nominal Biaya dari Satuan Pendidikan</label>
                                     <div class="input-group input-group-merge mb-2">
@@ -140,7 +137,6 @@
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            
                                 <div class="col mb-3">
                                     <label class="mb-1" for="biayaPemerintahDaerah">Nominal Biaya dari Pemerintah Daerah</label>
                                     <div class="input-group input-group-merge mb-2">
@@ -149,7 +145,6 @@
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            
                                 <div class="col mb-3">
                                     <label class="mb-1" for="biayaPemerintahPusat">Nominal Biaya dari Pemerintah Pusat</label>
                                     <div class="input-group input-group-merge mb-2">
@@ -158,7 +153,6 @@
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            
                                 <div class="col mb-3">
                                     <label class="mb-1" for="biayaCostSharing">Nominal Biaya dari Cost Sharing</label>
                                     <div class="input-group input-group-merge mb-2">
@@ -167,7 +161,7 @@
                                         <span class="input-group-text">.00</span>
                                     </div>
                                 </div>
-                            </div>                 
+                            </div>
                             <!-- Mahasiswa -->
                             <h4 class="mt-2 text-center">Mahasiswa</h4>
                             <hr>
@@ -178,21 +172,18 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswaNama">Nama</label>
-                                                    <input type="text" name="nama" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="mahasiswa[][nama]" class="form-control" placeholder="Masukan Nama" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswaNim">NIM</label>
-                                                    <input type="number" name="nim" class="form-control"
-                                                        placeholder="32" />
+                                                    <input type="text" name="mahasiswa[][nim]" class="form-control" placeholder="Masukan NIM" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50">
                                                 <div class="mb-1">
-                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                        data-repeater-delete type="button">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
                                                         <i data-feather="x" class="me-25"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -203,14 +194,13 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswaTempatLahir">Tempat Lahir</label>
-                                                    <input type="text" name="tempat_lahir" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="mahasiswa[][tempat_lahir]" class="form-control" placeholder="Masukan Tempat Lahir" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswaTanggalLahir">Tanggal Lahir</label>
-                                                    <input type="date" name="tanggal_lahir" class="form-control" />
+                                                    <input type="date" name="mahasiswa[][tanggal_lahir]" class="form-control" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50"></div>
@@ -219,7 +209,7 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswaGender">Jenis Kelamin</label>
-                                                    <select name="gender" class="form-select">
+                                                    <select name="mahasiswa[][gender]" class="form-select" required>
                                                         <option value="" hidden>Pilih Jenis Kelamin</option>
                                                         <option value="Laki-Laki">Laki-Laki</option>
                                                         <option value="Perempuan">Perempuan</option>
@@ -251,21 +241,18 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dosenNama">Nama</label>
-                                                    <input type="text" name="nama" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="dosen[][nama]" class="form-control" placeholder="Masukan Nama" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dosenNidn">NIDN</label>
-                                                    <input type="number" name="nidn" class="form-control"
-                                                        placeholder="32" />
+                                                    <input type="text" name="dosen[][nidn]" class="form-control" placeholder="Masukan NIDN" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50">
                                                 <div class="mb-1">
-                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                        data-repeater-delete type="button">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
                                                         <i data-feather="x" class="me-25"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -276,14 +263,13 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dosenTempatLahir">Tempat Lahir</label>
-                                                    <input type="text" name="tempat_lahir" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="dosen[][tempat_lahir]" class="form-control" placeholder="Masukan Tempat Lahir" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dosenTanggalLahir">Tanggal Lahir</label>
-                                                    <input type="date" name="tanggal_lahir" class="form-control" />
+                                                    <input type="date" name="dosen[][tanggal_lahir]" class="form-control" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50"></div>
@@ -292,7 +278,7 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dosenGender">Jenis Kelamin</label>
-                                                    <select name="gender" class="form-select">
+                                                    <select name="dosen[][gender]" class="form-select" required>
                                                         <option value="" hidden>Pilih Jenis Kelamin</option>
                                                         <option value="Laki-Laki">Laki-Laki</option>
                                                         <option value="Perempuan">Perempuan</option>
@@ -324,21 +310,18 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="instrukturNoId">No.ID</label>
-                                                    <input type="number" name="no_id" class="form-control"
-                                                        placeholder="32" />
+                                                    <input type="text" name="instruktur[][no_id]" class="form-control" placeholder="Masukan No.ID" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="instrukturNama">Nama</label>
-                                                    <input type="text" name="nama" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="instruktur[][nama]" class="form-control" placeholder="Masukan Nama" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50">
                                                 <div class="mb-1">
-                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                        data-repeater-delete type="button">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
                                                         <i data-feather="x" class="me-25"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -349,14 +332,13 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="instrukturJabatan">Jabatan</label>
-                                                    <input type="text" name="jabatan" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="instruktur[][jabatan]" class="form-control" placeholder="Masukan Jabatan" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="instrukturNoTelepon">No. Telepon</label>
-                                                    <input type="number" name="no_telepon" class="form-control" />
+                                                    <input type="text" name="instruktur[][no_telepon]" class="form-control" placeholder="Masukan No. Telepon" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50"></div>
@@ -365,8 +347,7 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="instrukturEmail">Email</label>
-                                                    <input type="email" name="email" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="email" name="instruktur[][email]" class="form-control" placeholder="Masukan Email" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12"></div>
@@ -394,21 +375,18 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dpjNama">Nama</label>
-                                                    <input type="text" name="nama" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="dosen_penanggung_jawab[][nama]" class="form-control" placeholder="Masukan Nama" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dpjNidn">NIDN</label>
-                                                    <input type="number" name="nidn" class="form-control"
-                                                        placeholder="32" />
+                                                    <input type="text" name="dosen_penanggung_jawab[][nidn]" class="form-control" placeholder="Masukan NIDN" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-12 mb-50">
                                                 <div class="mb-1">
-                                                    <button class="btn btn-outline-danger text-nowrap px-1"
-                                                        data-repeater-delete type="button">
+                                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
                                                         <i data-feather="x" class="me-25"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -419,8 +397,7 @@
                                             <div class="col-md-5 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="dpjProdi">Prodi</label>
-                                                    <input type="text" name="prodi" class="form-control"
-                                                        placeholder="Masukan Nama" />
+                                                    <input type="text" name="dosen_penanggung_jawab[][prodi]" class="form-control" placeholder="Masukan Prodi" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-12"></div>
@@ -439,12 +416,11 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>                    
             </div>
         </div>
 @endsection
@@ -463,6 +439,73 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+
+        $('#joinResearchForm').on('submit', function(e) {
+            e.preventDefault();
+            let form = $(this);
+            let actionUrl = form.attr('action');
+            let method = form.find('input[name="_method"]').val() || 'POST';
+
+            // Clear previous errors
+            $('.text-danger').html('');
+
+            $.ajax({
+                type: method,
+                url: actionUrl,
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: response.message,
+                            customClass: {
+                                confirmButton: 'btn btn-success'
+                            },
+                            buttonsStyling: false
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.message,
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        for (let key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                let errorField = key.replace(/\./g, '-');
+                                $('#error-' + errorField).html(errors[key][0]);
+                            }
+                        }
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Terjadi kesalahan saat mengirim data.',
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            },
+                            buttonsStyling: false
+                        });
+                    }
+                }
+            });
         });
 
         // Event listener for delete button

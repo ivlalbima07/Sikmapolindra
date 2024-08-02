@@ -21,7 +21,7 @@ class SaranaController extends Controller
 
     public function isiSarana($id)
     {
-        $SaranaPrasarana = SaranaPrasarana::with('penanggungJawab')->get();
+        $SaranaPrasarana = SaranaPrasarana::with('penanggungJawab')->where('item_kerjasama_id', $id)->get();
 
         $itemKerjasama = ItemKerjasama::with('pklMhs')->findOrFail($id);
 

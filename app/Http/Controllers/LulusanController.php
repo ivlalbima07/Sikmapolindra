@@ -23,7 +23,7 @@ class LulusanController extends Controller
 
     public function isiPenyerapan($id)
     {
-        $penyerapan = Penyerapan::with('mahasiswa', 'dosen', 'penanggungJawab')->get();
+        $penyerapan = Penyerapan::with('mahasiswa', 'dosen', 'penanggungJawab')->where('item_kerjasama_id', $id)->get();
 
         $itemKerjasama = ItemKerjasama::findOrFail($id);
 

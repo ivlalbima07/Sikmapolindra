@@ -93,13 +93,11 @@ Route::get('/DosenTamu/Pelaksanaan/edit/{id}', [DosenTamuController::class, 'edi
 Route::put('/DosenTamu/Pelaksanaan/update/{id}', [DosenTamuController::class, 'update'])->name('dosentamu.update');
 Route::delete('/DosenTamu/Pelaksanaan/{id}', [DosenTamuController::class, 'destroy'])->name('dosentamu.destroy');
 
-
-
- Route::get('/pkldosen', [PklDosenController::class, 'PklDosen'])->name('pkldosen.index');
-Route::get('/IsiDataTenagaPendidik/{id}', [PklDosenController::class, 'IsiDatapkldosen'])->name('pkldosen.isidata');
-Route::get('/pkldosen/{id}', [PklDosenController::class, 'show'])->name('pkldosen.show');
-Route::post('/pkldosen', [PklDosenController::class, 'store'])->name('pkldosen.store');
-Route::delete('/pkldosen/{id}', [PklDosenController::class, 'destroy'])->name('pkldosen.destroy');
+Route::get('/pkldosen', [PklDosenController::class, 'PklDosen'])->name('pkldosen.index');
+Route::get('/pkldosen/isiDataTenagaPendidikan/{id}', [PklDosenController::class, 'IsiDatapkldosen'])->name('pkldosen.isidata');
+Route::post('/pkldosen/isiDataTenagaPendidikan/store', [PklDosenController::class, 'store'])->name('pkldosen.store');
+Route::get('/pkldosen/isiDataTenagaPendidikan/show/{id}', [PklDosenController::class, 'show'])->name('pkldosen.show');
+Route::delete('/pkldosen/isiDataTenagaPendidikan/{id}', [PklDosenController::class, 'destroy'])->name('pkldosen.destroy');
 
 // Route::get('/Pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('Pkl_mahasiswa');
 Route::get('/pkl_mhs', [PklMhsController::class, 'Pkl_mahasiswa'])->name('pkl-mhs.index');

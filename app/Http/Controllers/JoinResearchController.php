@@ -23,7 +23,7 @@ class JoinResearchController extends Controller
 
     public function isiJoinResearch($id)
     {
-        $joinResets = JoinReset::withCount(['mahasiswa', 'dosen', 'penanggungJawab'])->get();
+        $joinResets = JoinReset::withCount(['mahasiswa', 'dosen', 'penanggungJawab'])->where('item_kerjasama_id', $id)->get();
 
         // Calculate durations and participants counts
         $itemKerjasama = ItemKerjasama::with('pklMhs')->findOrFail($id);

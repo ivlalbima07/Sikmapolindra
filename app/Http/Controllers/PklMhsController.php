@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\PklMhs;
 use App\Models\Mahasiswa;
-use App\Models\Dosen;
 use App\Models\Instruktur;
-use App\Models\DosenPenanggungJawab;
+use Illuminate\Http\Request;
 use App\Models\Datakerjasama;
 use App\Models\ItemKerjasama;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Models\DosenPenanggungJawab;
 
 class PklMhsController extends Controller
 {
@@ -19,7 +20,7 @@ class PklMhsController extends Controller
             $query->where('jenis_kerjasama', 'Praktek Kerja Lapangan (PKL) Mahasiswa');
         }])->get();
 
-        dd($datakerjasama);
+        // dd($datakerjasama);
         return view('admin.implementation.Pkl_Mahasiswa.index', compact('datakerjasama'));
 
 
@@ -28,7 +29,7 @@ class PklMhsController extends Controller
 public function isipelaksanaan($id)
 {
     $itemKerjasama = ItemKerjasama::with('pklMhs')->findOrFail($id);
-    $data = $itemKerjasama->pklMhs()->withCount(['mahasiswa', 'dosen', 'instruktur', 'dosenPenanggungJawab'])->get();
+    $data = $itemKerjasama->pklMhs()->withCount(['mahasiswa', 'dosen', 'instruktur', 'dosenPenanggungJawab'])->where('item_kerjasama_id', $id)->get();
 
     return view('admin.implementation.Pkl_Mahasiswa.isipelaksanaan', [
         'itemKerjasama' => $itemKerjasama,
@@ -52,8 +53,9 @@ public function show($id)
 
 
 
-    public function store(Request $request)
-    {
+public function store(Request $request)
+{
+    try {
         $validated = $request->validate([
             'nama_rombongan' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
@@ -86,30 +88,57 @@ public function show($id)
             'item_kerjasama_id' => 'required|exists:item_kerjasama,id'
         ]);
 
+        Log::info('Data validated successfully', ['validated' => $validated]);
+
         if ($request->hasFile('foto_dokumen')) {
             $fileName = time().'.'.$request->foto_dokumen->extension();
             $request->foto_dokumen->move(public_path('uploads'), $fileName);
             $validated['foto_dokumen'] = $fileName;
+            Log::info('Foto dokumen uploaded successfully', ['fileName' => $fileName]);
         }
 
+        Log::info('Before creating PKL MHS');
         $pklMhs = PklMhs::create($validated);
+        Log::info('PKL MHS created successfully', ['pklMhs' => $pklMhs]);
 
-        foreach ($request->mahasiswa as $mahasiswa) {
-            $pklMhs->mahasiswa()->create($mahasiswa);
+        if ($request->has('mahasiswa')) {
+            foreach ($request->mahasiswa as $mahasiswa) {
+                $pklMhs->mahasiswa()->create($mahasiswa);
+                Log::info('Mahasiswa created successfully', ['mahasiswa' => $mahasiswa]);
+            }
         }
 
-        foreach ($request->dosen as $dosen) {
-            $pklMhs->dosen()->create($dosen);
+        if ($request->has('dosen')) {
+            foreach ($request->dosen as $dosen) {
+                $pklMhs->dosen()->create($dosen);
+                Log::info('Dosen created successfully', ['dosen' => $dosen]);
+            }
         }
 
-        foreach ($request->instruktur as $instruktur) {
-            $pklMhs->instruktur()->create($instruktur);
+        if ($request->has('instruktur')) {
+            foreach ($request->instruktur as $instruktur) {
+                $pklMhs->instruktur()->create($instruktur);
+                Log::info('Instruktur created successfully', ['instruktur' => $instruktur]);
+            }
         }
 
-        foreach ($request->dosen_penanggung_jawab as $dosenPenanggungJawab) {
-            $pklMhs->dosenPenanggungJawab()->create($dosenPenanggungJawab);
+        if ($request->has('dosen_penanggung_jawab')) {
+            foreach ($request->dosen_penanggung_jawab as $dosenPenanggungJawab) {
+                $pklMhs->dosenPenanggungJawab()->create($dosenPenanggungJawab);
+                Log::info('Dosen Penanggung Jawab created successfully', ['dosenPenanggungJawab' => $dosenPenanggungJawab]);
+            }
         }
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+        Log::info('All related data created successfully');
+        return response()->json(['success' => true, 'message' => 'Data berhasil disimpan!']);
+    } catch (\Exception $e) {
+        Log::error('Error occurred while saving data: ' . $e->getMessage(), ['exception' => $e]);
+        return response()->json(['success' => false, 'message' => 'An error occurred while saving data: ' . $e->getMessage()]);
     }
+}
+
+
+
+
+
 }

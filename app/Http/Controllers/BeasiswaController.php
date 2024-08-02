@@ -22,7 +22,7 @@ class BeasiswaController extends Controller
 
     public function isiBeasiswa($id)
     {
-        $beasiswa = Beasiswa::with('mahasiswa', 'penanggungJawab')->get();
+        $beasiswa = Beasiswa::with('mahasiswa', 'penanggungJawab')->where('item_kerjasama_id', $id)->get();
 
         $itemKerjasama = ItemKerjasama::findOrFail($id);
 

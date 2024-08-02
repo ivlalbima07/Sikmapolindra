@@ -24,7 +24,7 @@ class RisetTerapanController extends Controller
 
     public function isiRisetTerapan($id)
     {
-        $researches = Research::withCount(['mahasiswa', 'dosen'])->get();
+        $researches = Research::withCount(['mahasiswa', 'dosen'])->where('item_kerjasama_id', $id)->get();
 
         $itemKerjasama = ItemKerjasama::findOrFail($id);
         return view('admin.implementation.RisetTerapan.isiRiset', [
