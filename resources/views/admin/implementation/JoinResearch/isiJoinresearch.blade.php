@@ -29,15 +29,15 @@
                 <table class="datatables table table-borderles table-striped dt-advanced-search table">
                     <thead>
                         <tr>
-                            <th>NO</th>
+                            {{-- <th>NO</th> --}}
                             <th>Nama Joint Research</th>
                             <th>Durasi</th>
                             <th>Jumlah Partisipan Peserta</th>
                             <th>Jumlah Partisipan Dosen</th>
-                            <th>Nominal Biaya Luar Negeri</th>
-                            <th>Nominal Biaya APBN</th>
-                            <th>Jumlah Total Biaya</th>
-                            <th>Dokumen</th>
+                            {{-- <th>Nominal Biaya Luar Negeri</th>
+                            <th>Nominal Biaya APBN</th> --}}
+                            {{-- <th>Jumlah Total Biaya</th> --}}
+                            {{-- <th>Dokumen</th> --}}
                             <th>Bidang Riset</th>
                             <th>Produk Riset</th>
                             <th>Aksi</th>
@@ -46,17 +46,17 @@
                     <tbody>
                         @foreach ($joinResets as $index => $joinReset)
                         <tr>
-                            <th class="align-top">{{ $index + 1 }}</th>
+                            {{-- <th class="align-top">{{ $index + 1 }}</th> --}}
                             <td class="align-top">{{ $joinReset->nama_joint_research }}</td>
                             <td class="align-top">{{ \Carbon\Carbon::parse($joinReset->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($joinReset->tanggal_selesai)) }} hari</td>
                             <td class="align-top">{{ $joinReset->mahasiswa_count }}</td> <!-- Menampilkan jumlah mahasiswa -->
                         <td class="align-top">{{ $joinReset->dosen_count }}</td> <!-- Menampilkan jumlah dosen -->
-                            <td class="align-top">{{ $joinReset->nominal_biaya_luar_negeri }}</td>
-                            <td class="align-top">{{ $joinReset->nominal_biaya_apbn }}</td>
-                            <td class="align-top">
+                            {{-- <td class="align-top">{{ $joinReset->nominal_biaya_luar_negeri }}</td>
+                            <td class="align-top">{{ $joinReset->nominal_biaya_apbn }}</td> --}}
+                            {{-- <td class="align-top">
                                 {{ $joinReset->nominal_biaya_luar_negeri + $joinReset->nominal_biaya_apbn }}
-                            </td>
-                            <td class="align-top">{{ $joinReset->dokumen }}</td>
+                            </td> --}}
+                            {{-- <td class="align-top">{{ $joinReset->dokumen }}</td> --}}
                             <td class="align-top">{{ $joinReset->bidang_riset }}</td>
                             <td class="align-top">{{ $joinReset->produk_riset }}</td>
                             <td class="align-top">
@@ -75,7 +75,7 @@
                 </table>
             </div>
         </div>
-             
+
     </div>
 
 

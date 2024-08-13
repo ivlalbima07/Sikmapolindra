@@ -35,37 +35,19 @@
                                             <td class="p-2">:</td>
                                             <td class="p-2">{{ $joinResearch->produk_riset }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="fw-bolder p-2">Dokumen</td>
                                             <td class="p-2">:</td>
                                             <td class="p-2">{{ $joinResearch->dokumen }}</td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-md-6">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-bolder">Sumber Biaya</td>
-                                            <td>:</td>
-                                            <td>{{ $joinResearch->sumber_biaya }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bolder">Nominal Biaya Luar Negeri</td>
-                                            <td>:</td>
-                                            <td>{{ $joinResearch->nominal_biaya_luar_negeri }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bolder">Nominal Biaya APBN</td>
-                                            <td>:</td>
-                                            <td>{{ $joinResearch->nominal_biaya_apbn }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <hr class="invoice-spacing" />
                     <h4 class="text-center">Data Penanggung Jawab</h4>
                     <hr class="invoice-spacing" />

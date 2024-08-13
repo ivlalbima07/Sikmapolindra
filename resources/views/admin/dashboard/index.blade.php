@@ -4,6 +4,7 @@
         width: 100%;
         overflow-x: auto;
     }
+
     #chart {
         width: 100%;
     }
@@ -19,45 +20,48 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-sm-6">
+        <div class="">
             <div class="card card-statistics px-0">
                 <div class="card-header d-block px-2">
                     <h4 class="card-title">Selamat Datang {{ Auth::user()->name ?? '' }}</h4>
-                    <span class="card-subtitle text-gray">Informasi Dashboard</span>
-
                 </div>
+            </div>
+            <div class="row match-height">
+                <!-- Medal Card -->
+                <div class="col-xl-4 col-md-6 col-12">
+                    <div class="card card-congratulation-medal">
+                        <div class="card-body">
+                            <img src="{{ asset('app-assets/images/logo/GSC.jpg') }}" style="width: 100%" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!--/ Medal Card -->
 
+                <!-- Statistics Card -->
+                <div class="col-xl-8 col-md-6 col-12">
+                    <div class="card card-statistics">
+                        <div class="card-header">
+                            <h4 class="card-title">Politeknik Negeri Indramayu</h4>
+                            <img src="{{ asset('app-assets/images/ico/logo.png') }}" style="width: 5%" alt="">
+                        </div>
+                        <div class="card-body statistics-body">
+                            <p>
+                                Politeknik Negeri Indramayu (Polindra) adalah institusi pendidikan tinggi vokasi di
+                                Kabupaten Indramayu, Jawa Barat, Indonesia. Polindra menawarkan berbagai program studi yang
+                                berfokus pada teknologi dan keterampilan praktis, termasuk bidang teknik, informatika, dan
+                                bisnis. Dilengkapi dengan fasilitas modern seperti laboratorium, workshop, dan perpustakaan,
+                                Polindra mendukung kegiatan belajar mengajar serta penelitian. Selain itu, Polindra menjalin
+                                kerjasama dengan industri dan institusi pendidikan lain, baik di dalam maupun luar negeri,
+                                untuk membantu mahasiswa mendapatkan pengalaman praktis melalui magang dan proyek
+                                kolaboratif.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Statistics Card -->
             </div>
         </div>
         <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body d-flex align-items-center justify-content-between">
-                    <div>
-                        <h3 class="fw-bolder mb-75">4,567</h3>
-                        <span>Jumlah Item Kerja Sama</span>
-                    </div>
-                    <div class="avatar bg-light-danger p-50">
-                        <span class="avatar-content">
-                            <i data-feather="user-plus" class="font-medium-4"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body d-flex align-items-center justify-content-between">
-                    <div>
-                        <h3 class="fw-bolder mb-75">19,860</h3>
-                        <span>Jumlah Program Studi Kerjasama</span>
-                    </div>
-                    <div class="avatar bg-light-success p-50">
-                        <span class="avatar-content">
-                            <i data-feather="user-check" class="font-medium-4"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="col-lg-3 col-sm-6">
         </div>
@@ -91,7 +95,7 @@
 @endsection
 @section('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var options = {
                 series: [{
                     name: 'Jumlah DUDI',

@@ -1,4 +1,4 @@
-@extends('admin.app')
+
 @extends('layouts.header')
 <style>
     .modal-body {
@@ -10,35 +10,23 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>DATA DUDI INTEGRASI</h4>
 
+
         <!-- Invoice List Table -->
         <div class="card p-2">
             <div class="card">
                 <div class="row">
                     <div class="col-md-9">
-                        <label class="form-label" for="basicSelect">Basic Select</label>
-                        <div class="input-group">
-                            <button class="btn btn-outline-primary" type="button">
-                                <i data-feather="search"></i>
-                            </button>
-                            <select class="form-select" id="basicSelect">
-                                <option value="" hidden>Pilih</option>
-                                <option>IT</option>
-                                <option>Blade Runner</option>
-                                <option>Thor Ragnarok</option>
-                            </select>
-                            <button class="btn btn-outline-primary" type="button">Search !</button>
-                        </div>
                     </div>
                     <div class="col-md-3 d-flex justify-content-end align-items-center">
                         <button type="button" class="btn btn-primary" id="tambahDudi" data-bs-toggle="modal" data-bs-target="#dudiModal">Buat DUDI</button>
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
             <div class="card-datatables table-responsive">
                 <table class="table table-borderless table-striped dt-advanced-search table">
                     <thead>
-                        <tr>    
+                        <tr>
                             <th>NO</th>
                             <th>NIB/NPSN</th>
                             <th>Tipe</th>
@@ -138,7 +126,7 @@
                                                             </tbody>
                                                         </table>
                                                         <div class="mt-1">
-                                                            <label class="fw-bolder">Klasifikasi Baku Lapangan Usaha (KBLI):</label>
+                                                            <label class="fw-bolder">Klasifikasi Lapangan Usaha (KBLI):</label>
                                                             <table class="table table-bordered" id="dudi-kbli">
                                                                 <thead>
                                                                     <tr>
@@ -200,7 +188,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <hr class="invoice-spacing" />
                                             <h4 class="text-center">Data Penanggung Jawab</h4>
                                             <hr class="invoice-spacing" />
@@ -231,7 +219,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="dudiModal" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -308,13 +296,13 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="form-label" for="select2-multiple">Klasifikasi Baku Lapangan Usaha (KBLI)</label>
+                                    <label class="form-label" for="select2-multiple">Klasifikasi Lapangan Usaha (KBLI)</label>
                                     <select class="select2 form-select" id="select2-multiple" name="klasifikasi_baku[]" multiple>
                                         @foreach ($kblis as $kbli)
                                             <option value="{{ $kbli->id }}">{{ $kbli->nama }}</option>
                                         @endforeach
                                     </select>
-                                </div>                                      
+                                </div>
                                 <div class="my-1">
                                     <label class="form-label" for="basicSelect1">Lingkup Kerjasama </label>
                                     <select name="lingkupkerjasama" class="form-select">
@@ -332,15 +320,15 @@
                                         @endforeach
                                     </select>
                                 </div>
-    
+
                                 <div class="my-1">
                                     <label class="form-label" for="basicSelect2">Klasifikasi</label>
                                     <select name="klasifikasi_id" id="basicSelect2" class="form-select">
                                         <option value="" hidden>Pilih Klasifikasi</option>
                                         <!-- Options will be populated dynamically -->
                                     </select>
-                                </div>                                                       
-                                
+                                </div>
+
                                 <hr>
                                 <h4 class="text-center">Data Penanggung Jawab</h4>
                                 <hr>
@@ -424,7 +412,7 @@
                                         </div>
                                     </div>
                                     <!-- /Invoice repeater -->
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -436,8 +424,8 @@
             </div>
         </div>
     </div>
-      
-    
+
+
 
     {{-- modal view --}}
 @endsection

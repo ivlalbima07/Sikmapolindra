@@ -32,35 +32,35 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="fw-bolder">Nominal Biaya dari DUDI</td>
-                                            <td>:</td>
-                                            <td>{{ $beasiswa->nominal_biaya_dudi }}</td>
+                                            <td class="fw-bolder p-2">Nominal Biaya dari DUDI</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">{{ $beasiswa->nominal_biaya_dudi }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="fw-bolder">Nominal Biaya dari Dunia Kerja</td>
-                                            <td>:</td>
-                                            <td>{{ $beasiswa->nominal_biaya_dunia_kerja }}</td>
+                                            <td class="fw-bolder p-2">Nominal Biaya dari Dunia Kerja</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">{{ $beasiswa->nominal_biaya_dunia_kerja }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="fw-bolder">Nominal Biaya dari Satuan Pendidikan</td>
-                                            <td>:</td>
-                                            <td>{{ $beasiswa->nominal_biaya_satuan_pendidikan }}</td>
+                                            <td class="fw-bolder p-2">Nominal Biaya dari Satuan Pendidikan</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">{{ $beasiswa->nominal_biaya_satuan_pendidikan }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="fw-bolder">Nominal Biaya dari Pemerintah Daerah</td>
-                                            <td>:</td>
-                                            <td>{{ $beasiswa->nominal_biaya_pemerintah_daerah }}</td>
+                                            <td class="fw-bolder p-2">Nominal Biaya dari Pemerintah Daerah</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">{{ $beasiswa->nominal_biaya_pemerintah_daerah }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="fw-bolder">Nominal Biaya dari Pemerintah Pusat</td>
-                                            <td>:</td>
-                                            <td>{{ $beasiswa->nominal_biaya_pemerintah_pusat }}</td>
+                                            <td class="fw-bolder p-2">Nominal Biaya dari Pemerintah Pusat</td>
+                                            <td class="p-2">:</td>
+                                            <td class="p-2">{{ $beasiswa->nominal_biaya_pemerintah_pusat }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <hr class="invoice-spacing" />
                     <h4 class="text-center">Data Penanggung Jawab</h4>
                     <hr class="invoice-spacing" />

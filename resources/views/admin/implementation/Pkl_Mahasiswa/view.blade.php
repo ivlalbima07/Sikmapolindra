@@ -13,7 +13,7 @@
                                         <tr>
                                             <td class="fw-bolder p-2">Nama</td>
                                             <td class="p-2">:</td>
-                                            <td class="p-2">{{ $pklMhs->nama }}</td>
+                                            <td class="p-2">{{ $pklMhs->nama_rombongan }}</td>
                                         </tr>
                                         <tr>
                                             <td class="fw-bolder p-2">Tanggal Mulai</td>
@@ -58,18 +58,13 @@
                                             <td>:</td>
                                             <td>{{ number_format($pklMhs->biaya_pemerintah_pusat, 2) }}</td>
                                         </tr>
-                                        <tr>
-                                            <td class="fw-bolder">Biaya Cost Sharing</td>
-                                            <td>:</td>
-                                            <td>{{ number_format($pklMhs->biaya_cost_sharing, 2) }}</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <hr class="invoice-spacing" />
-                    <h4 class="text-center">Data Penanggung Jawab</h4>
+                    <h4 class="text-center">Data Peserta</h4>
                     <hr class="invoice-spacing" />
                     <ul class="nav nav-pills d-flex justify-content-around">
                         <li class="nav-item row" style="height: 50%">

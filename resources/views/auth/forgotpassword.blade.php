@@ -20,30 +20,36 @@
                         <!-- Forgot password-->
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h2 class="card-title fw-bold mb-1">Forgot Password? 🔒</h2>
-                                <p class="card-text mb-2">Enter your email and we'll send you instructions to reset your
-                                    password</p>
-                                @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
+                                <div class="text-center p-3">
+                                    <img src="{{ asset('app-assets/images/ico/logo.png') }}" style="width: 30%"
+                                        alt="">
                                 </div>
+                                <h2 class="card-title fw-bold mb-1">Tidak ingat kata sandi? 🔒</h2>
+                                <p class="card-text mb-2">Masukkan email Anda dan kami akan mengirimkan instruksi untuk
+                                    mengatur ulang kata sandi Anda</p>
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
                                 @endif
                                 <form class="auth-forgot-password-form mt-2" action="{{ route('password.email') }}"
                                     method="POST">
                                     @csrf
                                     <div class="mb-1">
                                         <label class="form-label" for="forgot-password-email">Email</label>
-                                        <input class="form-control"type="text"
-                                        value="{{ old('email') }}" id="reset-password" name="email" placeholder="Email" 
+                                        <input class="form-control"type="text" value="{{ old('email') }}"
+                                            id="reset-password" name="email" placeholder="Email"
                                             aria-describedby="forgot-password-email" autofocus="" tabindex="1" />
                                     </div>
                                     @error('email')
-                                        <span class="text-danger">{{ $message }}</span> <!-- Tambahkan class text-danger untuk warna merah -->
+                                        <span class="text-danger">{{ $message }}</span>
+                                        <!-- Tambahkan class text-danger untuk warna merah -->
                                     @enderror
-                                    <button class="btn btn-primary w-100 mb-1" tabindex="2">Send reset link</button>
+                                    <button class="btn btn-primary w-100 mb-1" tabindex="2">Kirim tautan pengaturan
+                                        ulang</button>
                                 </form>
-                                <p class="text-center mt-2"><a href="{{ route('loginForm') }}"><i data-feather="chevron-left"></i> Back to
-                                        login</a></p>
+                                <p class="text-center mt-2"><a href="{{ route('loginForm') }}"><i
+                                            data-feather="chevron-left"></i> Balik Ke Login </a></p>
                             </div>
                         </div>
                     </div>

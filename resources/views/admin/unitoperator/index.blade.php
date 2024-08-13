@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-wrapper">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> OPERATOR SATUAN PENDIDIKAN</h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> Operator Satuan Pendidikan</h4>
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -95,7 +95,6 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>No Telefon</th>
-                                <th>Aktivitas</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -106,18 +105,6 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone_number }}</td>
-                                    <td>
-                                        <label class="form-check-label mb-50"
-                                            for="customSwitch{{ $user->id }}">aktif</label>
-                                        <div class="form-check form-switch form-check-info">
-                                            <input type="checkbox" class="form-check-input"
-                                                id="customSwitch{{ $user->id }}" checked />
-                                            <label class="form-check-label" for="customSwitch{{ $user->id }}">
-                                                <span class="switch-icon-left"><i data-feather="check"></i></span>
-                                                <span class="switch-icon-right"><i data-feather="x"></i></span>
-                                            </label>
-                                        </div>
-                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" data-bs-toggle="modal"

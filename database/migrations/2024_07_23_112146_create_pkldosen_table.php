@@ -13,7 +13,7 @@ class CreatePkldosenTable extends Migration
     {
         Schema::create('pkldosen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_kerjasama_id')->constrained('item_kerjasama');
+            $table->foreignId('item_kerjasama_id')->constrained('item_kerjasama')->onDelete('cascade');
             $table->string('nama_rombel');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');

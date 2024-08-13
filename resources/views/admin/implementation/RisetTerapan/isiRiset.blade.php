@@ -1,20 +1,6 @@
 @extends('layouts.header')
 @section('content')
-    <style>
-        #otherOrganizer {
-            display: none;
-        }
 
-        #otherOrganizer2 {
-            display: none;
-        }
-
-        .modal-dialog-scrollable .modal-body {
-            max-height: calc(100vh - 200px);
-            overflow-y: auto;
-        }
-
-    </style>
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>ISI DATA RISET TERAPAN - RUMAH SAKIT UMUM
@@ -43,9 +29,9 @@
                                 <th>Jumlah Mahasiswa</th>
                                 <th>Jumlah Dosen</th>
                                 <th>Nama Peserta Lain</th>
-                                <th>Luaran</th>
+
                                 <th>Tahun Pembiayaan</th>
-                                <th>Sumber Dana</th>
+                                {{-- <th>Sumber Dana</th> --}}
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -60,14 +46,14 @@
                                 <td class="align-top">{{ $research->mahasiswa_count }}</td>
                                 <td class="align-top">{{ $research->dosen_count }}</td>
                                 <td class="align-top">{{ $research->nama_peserta_lain }}</td>
-                                <td class="align-top">{{ implode(', ', json_decode($research->luaran, true)) }}</td>
+                                {{-- <td class="align-top">{{ implode(', ', json_decode($research->luaran, true)) }}</td> --}}
                                 <td class="align-top">{{ $research->tahun_pembiayaan }}</td>
-                                <td class="align-top">
+                                {{-- <td class="align-top">
                                     Dunia Kerja: {{ $research->nominal_biaya_dunia_kerja }}<br>
                                     Satuan Pendidikan: {{ $research->nominal_biaya_satuan_pendidikan }}<br>
                                     Pemerintah Daerah: {{ $research->nominal_biaya_pemerintah_daerah }}<br>
                                     Pemerintah Pusat: {{ $research->nominal_biaya_pemerintah_pusat }}
-                                </td>
+                                </td> --}}
                                 <td class="align-top">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('isiRisetTerapan.show', $research->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
@@ -81,7 +67,7 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>                    
+                    </table>
             </div>
         </div>
     </div>
@@ -401,7 +387,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
 
@@ -465,7 +451,7 @@
                 confirmButtonText: 'OK'
             });
         });
-    });    
+    });
 
     $('.btn-delete').on('click', function(e) {
         e.preventDefault();

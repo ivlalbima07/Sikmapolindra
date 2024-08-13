@@ -38,7 +38,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
         return redirect()->intended('dashboard');
         }
-        Session::flash('error','username atau password salah');
+        Session::flash('error','email atau kata sandi salah');
         return back()->withInput();
     }
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
             $token = $user->id . '-' . now()->format('Ymd') . '-' . Str::random(10);
             $expiredAt = Carbon::now()->addHours(24);
             $createdAt = Carbon::now();
-            
+
             // dd($expiredAt);
             // Update token atau buat token baru
             PasswordResetToken::updateOrCreate(
@@ -87,7 +87,7 @@ class AuthController extends Controller
         $email = PasswordResetToken::where('token', $token)->pluck('email')->first();
 
         $user = User::where('email', $email)->first();
-    
+
         return view('auth.changepassword', ['token' => $token, 'email' => $email]);
     }
 

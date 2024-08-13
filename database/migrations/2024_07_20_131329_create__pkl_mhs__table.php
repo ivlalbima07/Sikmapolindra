@@ -10,7 +10,7 @@ class CreatePklMhsTable extends Migration
     {
         Schema::create('pkl_mhs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_kerjasama_id')->constrained('item_kerjasama');
+            $table->foreignId('item_kerjasama_id')->constrained('item_kerjasama')->onDelete('cascade');
             $table->string('nama_rombongan');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');

@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\CompanionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\CooperationController;
@@ -48,7 +49,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/dashboard/chart', [AdminController::class, 'showChart'])->name('chart.index');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
-//     Route::get('/companion', [AdminController::class, 'companion'])->name('companion');
+
 
     // operator
 
@@ -173,18 +174,15 @@ Route::get('/isi-pelatihan/{id}', [PelatihanController::class, 'isiPelatihan'])-
 
  Route::get('/DataDocument', [CooperationController::class, 'DataDocument'])->name('DataDocument');
  Route::post('/itemkerjasama/store', [CooperationController::class, 'storeItemKerjasama'])->name('itemkerjasama.store');
- 
+
  Route::get('/cooperation', [CooperationController::class, 'cooperation'])->name('cooperation');
  Route::post('/cooperation/store', [CooperationController::class, 'store'])->name('cooperation.store');
  Route::get('/cooperation/{id}/edit', [CooperationController::class, 'edit'])->name('cooperation.edit');
  Route::put('/cooperation/{id}', [CooperationController::class, 'update'])->name('cooperation.update');
  Route::delete('/cooperation/{id}', [CooperationController::class, 'destroy'])->name('cooperation.destroy');
- 
+
  //companion
  Route::resource('companions', CompanionController::class);
- Route::prefix('admin')->name('admin.')->group(function () {
-Route::resource('companion', CompanionController::class);
- });
- 
+Route::get('/companions/{companion}/edit', [CompanionController::class, 'edit'])->name('companions.edit');
 Route::resource('users', UserController::class);
 });

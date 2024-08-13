@@ -10,8 +10,8 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span>ISI DATA TENAGA PENDIDIK/TENAGA AHLI DARI DUNIA KERJA (TENAGA PENDIDIK TAMU)</h4>
-<button class="btn btn-secondary mb-3" onclick="window.history.back()"> <i data-feather='arrow-left'></i>Kembali</button>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span>Dosen/Tenaga Ahli dari Dunia Kerja (Dosen
+            Tamu)</h4>
     <!-- Invoice List Table -->
     <div class="card p-2">
         <div class="card-datatables table-responsive">
@@ -45,9 +45,7 @@
                         <td class="align-top">{{ $dosenTamu->mataKuliah->count() }}</td>
                         <td class="align-top">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button class="btn btn-primary btn-sm editButton" data-id="{{ $dosenTamu->id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit data">
-                                    <i data-feather="edit"></i>
-                                </button>
+
                                 <a href="{{ route('dosentamu.show', $dosenTamu->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Show data">
                                     <i data-feather="eye"></i>
                                 </a>
@@ -480,6 +478,6 @@ $(document).ready(function() {
 
 
     </script>
-    
+
 
 @endsection

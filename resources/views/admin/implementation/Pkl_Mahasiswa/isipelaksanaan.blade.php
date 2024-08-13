@@ -1,6 +1,6 @@
 @extends('layouts.header')
 
-@section('title', 'Instruktur/Pendamping DUDI')
+@section('title', 'pelaksaan kerjasama ')
 
 <style>
     .card-body {
@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span> INSTRUKTUR/PENDAMPING DUDI</h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Invoice /</span> pelaksaan kerjasama </h4>
 
         <!-- Invoice List Table -->
         <div class="card p-2">
@@ -71,7 +71,7 @@
                                         <i data-feather="trash-2"></i>
                                     </a>
                                 </div>
-                            </td>                            
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -420,7 +420,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
-                    </form>                    
+                    </form>
             </div>
         </div>
 @endsection

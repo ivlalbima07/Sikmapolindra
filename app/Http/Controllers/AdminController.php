@@ -24,20 +24,20 @@ class AdminController extends Controller
             'Sarana',
             'Joint Research',
         ];
-    
+
         $data = [];
         foreach ($jenisKerjasama as $jenis) {
             $dudis = Dudi::with(['dataKerjasama.itemKerjasama' => function ($query) use ($jenis) {
                 $query->where('jenis_kerjasama', $jenis);
             }])->get();
-    
+
             // Menghitung jumlah dudi unik
             $jumlahMitraDudi = $dudis->filter(function($dudi) use ($jenis) {
                 return $dudi->dataKerjasama->filter(function($kerjasama) use ($jenis) {
                     return $kerjasama->itemKerjasama->where('jenis_kerjasama', $jenis)->count() > 0;
                 })->count() > 0;
             })->count();
-    
+
             // Menghitung jumlah jurusan unik dalam setiap dudi meskipun sama tapi beda DUDI
             $jurusanUnik = collect();
             foreach ($dudis as $dudi) {
@@ -50,14 +50,14 @@ class AdminController extends Controller
                 }
             }
             $jumlahProgramStudi = $jurusanUnik->unique()->count();
-    
+
             $data[] = [
                 'jenis_kerjasama' => $jenis,
                 'jumlah_mitra_dudi' => $jumlahMitraDudi,
                 'jumlah_program_studi' => $jumlahProgramStudi,
             ];
         }
-    
+
         return view('admin.recap.index', compact('data'));
     }
 
@@ -80,10 +80,10 @@ class AdminController extends Controller
         return view('admin.implementation.index');
     }
 
-    public function companion()
-    {
-        return view('admin.companion.index');
-    }
+    // public function companion()
+    // {
+    //     return view('admin.companion.index');
+    // }
 
 
     public function resetpassword()

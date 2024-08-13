@@ -4,7 +4,7 @@
         <div class="content-header-left col-md-12 col-12 mb-2">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h3 class="content-header-title float-start mb-0">SIKERMA | </span> Rekap Pelaksanaan Kerjasama</h3>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> Rekap Pelaksanaan Kerjasama</h4>
                 </div>
             </div>
         </div>
@@ -48,6 +48,6 @@
                 @endforeach
             </div>
         </div>
-    </div>    
-    
+    </div>
+
     @endsection

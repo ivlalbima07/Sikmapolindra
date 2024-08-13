@@ -26,6 +26,7 @@
                             <th>dudi</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
+                            <th>Dokumen</th>
                             <th>Item Kerjasama</th> <!-- Kolom baru -->
                             <th>Aksi</th>
                         </tr>
@@ -38,6 +39,18 @@
                                 <td class="">{{ $kerjasama->dudi->nama_perseroan }}</td>
                                 <td class="">{{ $kerjasama->tanggal_mulai }}</td>
                                 <td class="">{{ $kerjasama->tanggal_selesai }}</td>
+                                <td>
+                                    @if ($kerjasama->lampiran_bukti)
+                                        <a href="{{ Storage::url('lampiran/' . $kerjasama->lampiran_bukti) }}"
+                                            class="btn btn-primary btn-sm" target="_blank">
+                                            <i data-feather="file"></i>
+                                        </a>
+                                    @else
+                                        -
+                                    @endif
+
+                                </td>
+
                                 <td class="">
                                     @foreach ($kerjasama->itemKerjasama as $item)
                                         <div>{{ $item->jurusan }} - {{ $item->jenis_kerjasama }}</div>
@@ -45,10 +58,7 @@
                                 </td>
                                 <td class="">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-success btn-sm"
-                                            onclick="location.href='/DataDocument'" title="document">
-                                            <i data-feather='file'></i>
-                                        </button>
+
                                         <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $kerjasama->id }}"
                                             title="update data nota kesepakatan">
@@ -108,7 +118,8 @@
                                                 </div>
                                                 <div class="row g-2 mb-1">
                                                     <div class="col mb-0">
-                                                        <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+                                                        <label for="tanggal_mulai" class="form-label">Tanggal
+                                                            Mulai</label>
                                                         <input type="date" id="tanggal_mulai{{ $kerjasama->id }}"
                                                             name="tanggal_mulai" class="form-control"
                                                             value="{{ $kerjasama->tanggal_mulai }}" required />
@@ -122,7 +133,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col mb-2">
-                                                    <label for="lampiran_bukti" class="form-label">Lampiran Bukti</label>
+                                                    <label for="lampiran_bukti" class="form-label">upload dokumen</label>
                                                     <input class="form-control" type="file"
                                                         id="lampiran_bukti{{ $kerjasama->id }}" name="lampiran_bukti" />
                                                     @if ($kerjasama->lampiran_bukti)
@@ -150,65 +161,82 @@
 
 
 
-@foreach ($datakerjasama as $index => $kerjasama)
-    <!-- Modal tambah item kerjasama -->
-    <div class="modal fade text-start" id="itemkerjasama{{ $kerjasama->id }}" tabindex="-1" aria-labelledby="myModalLabel18" data-bs-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h4 class="modal-title" id="myModalLabel18">Form Tambah Item Kerja Sama</h4>
-                        <br>
-                        <p class="text-primary">{{ $kerjasama->dudi->nama_perseroan }}</p>
+    @foreach ($datakerjasama as $index => $kerjasama)
+        <!-- Modal tambah item kerjasama -->
+        <div class="modal fade text-start" id="itemkerjasama{{ $kerjasama->id }}" tabindex="-1"
+            aria-labelledby="myModalLabel18" data-bs-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <h4 class="modal-title" id="myModalLabel18">Form Tambah Item Kerja Sama</h4>
+                            <br>
+                            <p class="text-primary">{{ $kerjasama->dudi->nama_perseroan }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('itemkerjasama.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="kerjasama_id" value="{{ $kerjasama->id }}">
-                        <div class="row g-3 mb-1">
-                            <div class="col mb-0">
-                                <label class="form-label" for="jurusan">Program studi</label>
-                                <select class="form-select" id="jurusan" name="jurusan" required>
-                                    <option value="" hidden>Pilih Jurusan</option>
-                                    <option value="D3 Teknik Informatika">D3 Teknik Informatika</option>
-                                    <option value="D4 Perancangan Manufaktur">D4 Perancangan Manufaktur</option>
-                                    <option value="D3 Teknik Informatika">D3 Teknik Informatika</option>
-                                </select>
+                    <div class="modal-body">
+                        <form action="{{ route('itemkerjasama.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="kerjasama_id" value="{{ $kerjasama->id }}">
+                            <div class="row g-3 mb-1">
+                                <div class="col mb-0">
+                                    <label class="form-label" for="jurusan">Program studi</label>
+                                    <select class="form-select" id="jurusan" name="jurusan" required>
+                                        <option value="" hidden>Pilih program studi</option>
+                                        <option value="D3 Teknik Informatika">D3 Teknik Informatika</option>
+                                        <option value="D4 Rekayasa Perangkat Lunak">D4 Rekayasa Perangkat Lunak</option>
+                                        <option value="D3 Teknik Mesin">D3 Teknik Mesin</option>
+                                        <option value="D4 Teknik Perancangan Manufaktur">D4 Teknik Perancangan Manufaktur</option>
+                                        <option value="D3 Teknik Pendingin dan Tata Udara">D3 Teknik Pendingin dan Tata Udara</option>
+                                        <option value="D4 Sistem Informasi Kota Cerdas">D4 Sistem Informasi Kota Cerdas</option>
+                                        <option value="D3 Keperawatan">D3 Keperawatan</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-0">
+                                    <label class="form-label" for="jenis_kerjasama">Jenis Kerjasama</label>
+                                    <select class="form-select" id="jenis_kerjasama" name="jenis_kerjasama" required>
+                                        <option value="" hidden>Pilih Jenis Kerjasama</option>
+                                        <option value="Dosen/Tenaga Ahli dari Dunia Kerja (Dosen Tamu)">Dosen/Tenaga Ahli
+                                            dari Dunia Kerja (Dosen Tamu)</option>
+                                        <option value="Praktek Kerja Lapangan (PKL) Mahasiswa">Praktek Kerja Lapangan (PKL)
+                                            Mahasiswa</option>
+                                        <option value="Praktek Kerja Lapangan (PKL) Dosen">Praktek Kerja Lapangan (PKL)
+                                            Dosen</option>
+                                        <option value="Sertifikasi Kompetensi">Sertifikasi Kompetensi</option>
+                                        <option value="Riset Terapan">Riset Terapan</option>
+                                        <option value="Penyerapan Lulusan">Penyerapan Lulusan</option>
+                                        <option value="Beasiswa/Ikatan Dinas">Beasiswa/Ikatan Dinas</option>
+                                        <option value="Sarana">Sarana</option>
+                                        <option value="Joint Research">Joint Research</option>
+                                        <option value="Pelatihan Kepada dunia kerja">Pelatihan Kepada dunia kerja</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-0">
+                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete
+                                        type="button">
+                                        <i data-feather="x" class="me-25"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col mb-0">
-                                <label class="form-label" for="jenis_kerjasama">Jenis Kerjasama</label>
-                                <select class="form-select" id="jenis_kerjasama" name="jenis_kerjasama" required>
-                                    <option value="" hidden>Pilih Jenis Kerjasama</option>
-                                    <option value="Dosen/Tenaga Ahli dari Dunia Kerja (Dosen Tamu)">Dosen/Tenaga Ahli dari Dunia Kerja (Dosen Tamu)</option>
-                                    <option value="Praktek Kerja Lapangan (PKL) Mahasiswa">Praktek Kerja Lapangan (PKL) Mahasiswa</option>
-                                    <option value="Praktek Kerja Lapangan (PKL) Dosen">Praktek Kerja Lapangan (PKL) Dosen</option>
-                                    <option value="Sertifikasi Kompetensi">Sertifikasi Kompetensi</option>
-                                    <option value="Riset Terapan">Riset Terapan</option>
-                                    <option value="Penyerapan Lulusan">Penyerapan Lulusan</option>
-                                    <option value="Beasiswa/Ikatan Dinas">Beasiswa/Ikatan Dinas</option>
-                                    <option value="Sarana">Sarana</option>
-                                    <option value="Joint Research">Joint Research</option>
-                                    <option value="Pelatihan Kepada dunia kerja">Pelatihan Kepada dunia kerja</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                        <i data-feather="plus" class="me-25"></i>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col mb-0">
-                                <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
-                                    <i data-feather="x" class="me-25"></i>
-                                    <span>Delete</span>
-                                </button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 
 
 
@@ -216,82 +244,77 @@
 
 
 
-                            <!-- Modal tambah -->
-                            <div class="modal fade" id="tambah" data-bs-backdrop="static" data-bs-keyboard="false"
-                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <form action="{{ route('cooperation.store') }}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Data
-                                                    Perusahaan</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col mb-1">
-                                                        <label for="dudi_id" class="form-label">Dudi</label>
-                                                        <select class="select2 form-select" name="dudi_id" id="dudi_id"
-                                                            required>
-                                                            <option value="" hidden>Pilih dudi</option>
-                                                            @foreach ($dudi as $dudis)
-                                                                <option value="{{ $dudis->id }}">
-                                                                    {{ $dudis->nama_perseroan }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col mb-1">
-                                                        <label for="nomor_pks" class="form-label">Nomor PKS*</label>
-                                                        <input type="text" id="nomor_pks" name="nomor_pks"
-                                                            class="form-control" placeholder="Enter Nomor PKS" required />
-                                                    </div>
-                                                </div>
-                                                <div class="row g-2">
-                                                    <div class="col mb-0">
-                                                        <label for="tanggal_pks" class="form-label">Tanggal PKS</label>
-                                                        <input type="date" id="tanggal_pks" name="tanggal_pks"
-                                                            class="form-control invoice-edit-input date-picker" required />
-                                                    </div>
-                                                </div>
-                                                <div class="row g-2 mb-1">
-                                                    <div class="col mb-0">
-                                                        <label for="tanggal_mulai" class="form-label">Tanggal
-                                                            Mulai</label>
-                                                        <input type="date" id="tanggal_mulai" name="tanggal_mulai"
-                                                            class="form-control invoice-edit-input date-picker" required />
-                                                    </div>
-                                                    <div class="col mb-0">
-                                                        <label for="tanggal_selesai" class="form-label">Tanggal
-                                                            Selesai</label>
-                                                        <input type="date" id="tanggal_selesai" name="tanggal_selesai"
-                                                            class="form-control invoice-edit-input date-picker" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col mb-2">
-                                                    <label for="lampiran_bukti" class="form-label">Lampiran Bukti</label>
-                                                    <input class="form-control" type="file" id="lampiran_bukti"
-                                                        name="lampiran_bukti" />
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Tutup</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+    <!-- Modal tambah -->
+    <div class="modal fade" id="tambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form action="{{ route('cooperation.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Data
+                            Perusahaan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label for="dudi_id" class="form-label">Dudi</label>
+                                <select class="select2 form-select" name="dudi_id" id="dudi_id" required>
+                                    <option value="" hidden>Pilih dudi</option>
+                                    @foreach ($dudi as $dudis)
+                                        <option value="{{ $dudis->id }}">
+                                            {{ $dudis->nama_perseroan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        @endsection
-                        @section('scripts')
-                            <script>
-                                $(document).ready(function() {
-                                    if (!$.fn.DataTable.isDataTable('.datatables')) {
-                                        $('.datatables').DataTable();
-                                    }
-                                });
-                            </script>
-                        @endsection
+                            <div class="col mb-1">
+                                <label for="nomor_pks" class="form-label">Nomor PKS*</label>
+                                <input type="text" id="nomor_pks" name="nomor_pks" class="form-control"
+                                    placeholder="Enter Nomor PKS" required />
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-0">
+                                <label for="tanggal_pks" class="form-label">Tanggal PKS</label>
+                                <input type="date" id="tanggal_pks" name="tanggal_pks"
+                                    class="form-control invoice-edit-input date-picker" required />
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-1">
+                            <div class="col mb-0">
+                                <label for="tanggal_mulai" class="form-label">Tanggal
+                                    Mulai</label>
+                                <input type="date" id="tanggal_mulai" name="tanggal_mulai"
+                                    class="form-control invoice-edit-input date-picker" required />
+                            </div>
+                            <div class="col mb-0">
+                                <label for="tanggal_selesai" class="form-label">Tanggal
+                                    Selesai</label>
+                                <input type="date" id="tanggal_selesai" name="tanggal_selesai"
+                                    class="form-control invoice-edit-input date-picker" required />
+                            </div>
+                        </div>
+                        <div class="col mb-2">
+                            <label for="lampiran_bukti" class="form-label">upload dokumen</label>
+                            <input class="form-control" type="file" id="lampiran_bukti" name="lampiran_bukti" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            if (!$.fn.DataTable.isDataTable('.datatables')) {
+                $('.datatables').DataTable();
+            }
+        });
+    </script>
+@endsection

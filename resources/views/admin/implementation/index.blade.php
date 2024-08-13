@@ -115,7 +115,7 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold  mb-4">SIKMA | PELAKSANAAN KERJASAMA</h4>
+        <h4 class="fw-bold mb-4"><span class="text-muted fw-light">Sikma |</span> Pelaksanaan Kerjasama</h4>
             <div class="row">
 
                 <div class="col-xl-3 col-sm-6" data-filter-item
