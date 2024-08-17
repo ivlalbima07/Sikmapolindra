@@ -29,7 +29,7 @@
         </a>
     </li>
 
-
+@if(auth()->user()->hasRole('superadmin'))
     <li class=" nav-item "><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
                 class="menu-title text-truncate" data-i18n="Invoice">Klasifikasi Dan Kriteria</span></a>
         <ul class="menu-content">
@@ -50,6 +50,7 @@
             </li>
         </ul>
     </li>
+    @endif
 
     <li class="nav-item {{ request()->is('companions') ? 'active' : '' }}">
         <a class="d-flex align-items-center" href="{{ url('companions') }}">

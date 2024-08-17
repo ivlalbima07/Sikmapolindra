@@ -29,7 +29,9 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('gues
 Route::post('/loginProses', [AuthController::class, 'login'])->middleware('guest')->name('ceklogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::group(['middleware' => ['auth', 'super-admin']], function () {
+    Route::get('super-admin/dashboard', [AuthController::class, 'index'])->name('super-admin.dashboard');
+});
 Route::get('/forgot-password', function (){
     return view('auth.forgotpassword');
 })->name('forgot-password');
@@ -45,10 +47,10 @@ Route::get('/email', function (){
 })->name('reset-password');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
-    // Route::get('/dashboard/chart', [AdminController::class, 'showChart'])->name('chart.index');
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
+Route::get('/recap', [AdminController::class, 'recap'])->name('recap');
+// Route::get('/dashboard/chart', [AdminController::class, 'showChart'])->name('chart.index');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('/implementation', [AdminController::class, 'implementation'])->name('implementation');
 
 
     // operator

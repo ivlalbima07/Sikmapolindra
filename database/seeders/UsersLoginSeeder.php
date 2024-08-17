@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class UsersLoginSeeder extends Seeder
 {
@@ -31,6 +34,13 @@ class UsersLoginSeeder extends Seeder
                 'email' => 'ivlal2@gmail.com',
                 'phone_number' => '1234567890',
                 'password' => Hash::make('password'),
+            ],
+                [
+                'name' => 'Super Admin',
+                'email' => 'superadmin@example.com',
+                'phone_number' => '0987654321',
+                'password' => Hash::make('superadminpassword'),
+                'role' => 'super-admin',
             ],
         ];
 

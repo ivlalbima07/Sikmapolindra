@@ -62,7 +62,10 @@ class AdminController extends Controller
     }
 
     public function dashboard($page = 1)
+
     {
+        // dd(auth()->user()->getRoleNames());
+
         $perPage = 10; // jumlah item per halaman
         $currentMonth = Carbon::now()->format('F Y');
         $kriteriaData = Kriteria::withCount('dudis')->paginate($perPage, ['*'], 'page', $page);
